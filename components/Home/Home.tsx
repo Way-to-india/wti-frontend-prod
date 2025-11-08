@@ -1,9 +1,13 @@
+import Footer from '../comman/Footer'
+import FeaturedTours from './FeaturedTours'
 import Hero from './Hero'
 
 const Home = () => {
   return (
     <div>
-        <Hero/>
+      <Hero />
+      <FeaturedTours />
+      <Footer />
     </div>
   )
 }

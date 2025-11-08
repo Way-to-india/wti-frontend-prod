@@ -4,12 +4,12 @@
   /* Base colors */
   --background: #ffffff;
   --foreground: #171717;
-  
+
   /* White scale */
   --white-100: #ffffff;
   --white-200: #fafafa;
   --white-300: #f5f5f5;
-  
+
   /* Orange scale */
   --orange-100: #ffedd5;
   --orange-200: #fed7aa;
@@ -20,22 +20,25 @@
   --orange-700: #c2410c;
   --orange-800: #9a3412;
   --orange-900: #7c2d12;
-  
+
+  /* custom */
+  --orange-custom: #ff8b02;
+
   /* Custom brand colors */
   --brand-gold: #c3a27d;
   --brand-dark: #2d2f37;
-  
+
   /* Auth colors */
   --auth-bg: #ffffff;
   --auth-divider: #d1d5db;
   --auth-divider-text: #6b7280;
-  
+
   /* Skeleton colors */
   --skeleton: #e5e7eb;
   --skeleton-card: #ffffff;
   --skeleton-section: #f9fafb;
   --skeleton-cta: rgba(249, 115, 22, 0.3);
-  
+
   /* Form colors */
   --form-label: #374151;
   --form-input-border: #d1d5db;
@@ -56,12 +59,12 @@
   /* Base colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  
+
   /* White scale */
   --color-white-100: var(--white-100);
   --color-white-200: var(--white-200);
   --color-white-300: var(--white-300);
-  
+
   /* Orange scale */
   --color-orange-100: var(--orange-100);
   --color-orange-200: var(--orange-200);
@@ -72,22 +75,25 @@
   --color-orange-700: var(--orange-700);
   --color-orange-800: var(--orange-800);
   --color-orange-900: var(--orange-900);
-  
+
+  /* custom colors */
+  --color-orange-custom: var(--orange-custom);
+
   /* Custom brand colors */
   --color-brand-gold: var(--brand-gold);
   --color-brand-dark: var(--brand-dark);
-  
+
   /* Auth colors */
   --color-auth-bg: var(--auth-bg);
   --color-auth-divider: var(--auth-divider);
   --color-auth-divider-text: var(--auth-divider-text);
-  
+
   /* Skeleton colors */
   --color-skeleton: var(--skeleton);
   --color-skeleton-card: var(--skeleton-card);
   --color-skeleton-section: var(--skeleton-section);
   --color-skeleton-cta: var(--skeleton-cta);
-  
+
   /* Form colors */
   --color-form-label: var(--form-label);
   --color-form-input-border: var(--form-input-border);
@@ -102,7 +108,7 @@
   --color-form-error-border: var(--form-error-border);
   --color-form-error-text: var(--form-error-text);
   --color-form-secondary-text: var(--form-secondary-text);
-  
+
   /* Fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -116,12 +122,12 @@
     --foreground: #ededed;
 
     /* border gray */
-    
+
     /* White scale - darker in dark mode */
     --white-100: #1f2937;
     --white-200: #374151;
     --white-300: #4b5563;
-    
+
     /* Orange scale stays the same */
     --orange-100: #ffedd5;
     --orange-200: #fed7aa;
@@ -132,22 +138,22 @@
     --orange-700: #c2410c;
     --orange-800: #9a3412;
     --orange-900: #7c2d12;
-    
+
     /* Custom brand colors - adjusted for dark mode */
     --brand-gold: #d4b896;
     --brand-dark: #e5e7eb;
-    
+
     /* Auth colors */
     --auth-bg: #1f2937;
     --auth-divider: #4b5563;
     --auth-divider-text: #9ca3af;
-    
+
     /* Skeleton colors */
     --skeleton: #374151;
     --skeleton-card: #1f2937;
     --skeleton-section: #111827;
     --skeleton-cta: rgba(249, 115, 22, 0.2);
-    
+
     /* Form colors */
     --form-label: #e5e7eb;
     --form-input-border: #4b5563;
