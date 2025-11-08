@@ -1,9 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  cacheComponents : true,
+  cacheComponents: true,
   images: {
-    domains: ['lh3.googleusercontent.com', 'dbagut2mvh0lo.cloudfront.net'],
+    domains: ['lh3.googleusercontent.com', 'dbagut2mvh0lo.cloudfront.net', 'images.unsplash.com'],
   },
 };
 

@@ -131,3 +131,38 @@ export interface TourReviewImage {
   url: string;
   thumbnail: string;
 }
+
+
+// travel-guide
+
+export interface TravelGuideOverview {
+  id : string; 
+  name : string;
+  cityCount : number;
+  cities : TravelGuideCity[]
+}
+
+export interface TravelGuideCity {
+  id : string;
+  name : string;
+  citySlug : string;
+}
+export interface TravelGuideCityDetails {
+  id: string;
+  city: string;
+  state: string;
+  citySlug: string;
+  stateSlug: string;
+  introduction: string;
+  facts: string;
+  foodAndDining: string;
+  shopping: string;
+  nearbyPlaces: string;
+  placesToSeeTop: string;
+  placesToSeeBottom: string;
+  gettingAround: string;
+  otherDetails: string;
+  bestTimeToVisit: string;
+  cityImage: string;
+  isActive: boolean;
+}

@@ -13,7 +13,6 @@ interface BookingPolicyProps {
 }
 
 const BookingPolicy: React.FC<BookingPolicyProps> = ({
-    title,
     cancellationPolicies,
     termsAndConditions,
 }) => {

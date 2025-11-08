@@ -16,6 +16,10 @@ export const endPoints = {
     reviews: {
       getReview: `${BASE_URL}${USER_PATH}/review/tours/:tourId/reviews`,
     },
-    similarTour : `${BASE_URL}/tour/similar-tour/:tourId?limit=${6}`
+    similarTour: `${BASE_URL}/tour/similar-tour/:tourId?limit=${6}`,
+  },
+  travelGuide: {
+    getAll: `${BASE_URL}/travel-guide/states`,
+    getData: `${BASE_URL}/travel-guide/cities/slug/:city`,
   },
 };

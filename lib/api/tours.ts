@@ -40,7 +40,6 @@ export async function getSimilarTours(slug: string) {
 
   try {
     const url = endPoints.tour.similarTour.replace(':tourId', slug);
-    console.log(url);
     const response = await fetch(url, {
       headers: {
         'Content-Type': 'application/json',
@@ -58,6 +57,3 @@ export async function getSimilarTours(slug: string) {
     throw error;
   }
 }
-
-// create for get similar tour
-// endPoints.tour.similarTour
