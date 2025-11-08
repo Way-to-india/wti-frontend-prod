@@ -1,4 +1,4 @@
-// app/travel-guide/[state]/[city]/page.tsx
+import Loader from '@/components/skeleton/Loader';
 import TravelGuideCityDataClient from '@/components/travel-guide/TravelGuideCityDataClient';
 import { getTravelGuideData } from '@/lib/api/travel-guide';
 import { Suspense } from 'react';
@@ -16,7 +16,7 @@ const TravelGuideCityData = async ({ params }: Props) => {
 }
 
 function TravelGuideLoading() {
-    return <div>Loading travel guide...</div>; 
+    return <Loader/>; 
 }
 
 export default function Page({ params }: Props) {
