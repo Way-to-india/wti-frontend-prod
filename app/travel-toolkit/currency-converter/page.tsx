@@ -1,12 +1,9 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useTheme } from '@/context/ThemeContext';
-import { ArrowsDownUp } from '@phosphor-icons/react';
 
 const CurrencyConverter: React.FC = () => {
   const router = useRouter();
-  const theme = useTheme();
   const [amount, setAmount] = useState<string>('1');
   const [fromCurrency, setFromCurrency] = useState<string>('USD');
   const [toCurrency, setToCurrency] = useState<string>('INR');
@@ -80,16 +77,16 @@ const CurrencyConverter: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Orange Header Bar */}
+
       <div className="w-full h-2 bg-orange-500"></div>
 
-      {/* Content Container */}
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Breadcrumb */}
+
         <div className="mb-6">
           <p
             className="text-sm text-gray-600"
-            style={{ fontFamily: theme.typography.fontFamily.regular }}
+
           >
             <button
               onClick={() => router.push('/')}
@@ -105,7 +102,6 @@ const CurrencyConverter: React.FC = () => {
         {/* Page Title */}
         <h1
           className="text-4xl font-bold text-gray-900 mb-8"
-          style={{ fontFamily: theme.typography.fontFamily.bold }}
         >
           Currency Converter
         </h1>
@@ -117,7 +113,7 @@ const CurrencyConverter: React.FC = () => {
             <div>
               <label
                 className="block text-sm font-medium text-gray-700 mb-2"
-                style={{ fontFamily: theme.typography.fontFamily.regular }}
+
               >
                 Amount
               </label>
@@ -126,7 +122,7 @@ const CurrencyConverter: React.FC = () => {
                 value={amount}
                 onChange={e => setAmount(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                style={{ fontFamily: theme.typography.fontFamily.regular }}
+
                 placeholder="Enter amount"
               />
             </div>
@@ -135,7 +131,7 @@ const CurrencyConverter: React.FC = () => {
             <div>
               <label
                 className="block text-sm font-medium text-gray-700 mb-2"
-                style={{ fontFamily: theme.typography.fontFamily.regular }}
+
               >
                 From
               </label>
@@ -143,7 +139,7 @@ const CurrencyConverter: React.FC = () => {
                 value={fromCurrency}
                 onChange={e => setFromCurrency(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white"
-                style={{ fontFamily: theme.typography.fontFamily.regular }}
+
               >
                 {currencies.map(currency => (
                   <option key={currency.code} value={currency.code}>
@@ -153,21 +149,21 @@ const CurrencyConverter: React.FC = () => {
               </select>
             </div>
 
-            {/* Swap Button */}
+
             <div className="flex justify-center">
               <button
                 onClick={handleSwap}
                 className="p-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors"
               >
-                <ArrowsDownUp size={24} weight="bold" />
+                {/* <ArrowsDownUp size={24} weight="bold" /> */}
               </button>
             </div>
 
-            {/* To Currency */}
+
             <div>
               <label
                 className="block text-sm font-medium text-gray-700 mb-2"
-                style={{ fontFamily: theme.typography.fontFamily.regular }}
+
               >
                 To
               </label>
@@ -175,7 +171,7 @@ const CurrencyConverter: React.FC = () => {
                 value={toCurrency}
                 onChange={e => setToCurrency(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white"
-                style={{ fontFamily: theme.typography.fontFamily.regular }}
+
               >
                 {currencies.map(currency => (
                   <option key={currency.code} value={currency.code}>
@@ -185,21 +181,19 @@ const CurrencyConverter: React.FC = () => {
               </select>
             </div>
 
-            {/* Convert Button */}
+
             <button
               onClick={handleConvert}
               className="w-full py-3 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition-colors"
-              style={{ fontFamily: theme.typography.fontFamily.bold }}
             >
               Convert
             </button>
 
-            {/* Result */}
+
             {result && (
               <div className="mt-6 p-4 bg-white border border-gray-200 rounded-lg">
                 <p
                   className="text-lg text-gray-900 text-center font-medium"
-                  style={{ fontFamily: theme.typography.fontFamily.bold }}
                 >
                   {result}
                 </p>
@@ -207,11 +201,11 @@ const CurrencyConverter: React.FC = () => {
             )}
           </div>
 
-          {/* Disclaimer */}
+
           <div className="mt-8 pt-6 border-t border-gray-200">
             <p
               className="text-xs text-gray-500 text-center"
-              style={{ fontFamily: theme.typography.fontFamily.regular }}
+
             >
               Exchange rates are approximate and for reference only. Please check with your bank or
               financial institution for actual rates.
