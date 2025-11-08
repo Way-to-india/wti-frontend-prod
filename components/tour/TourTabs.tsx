@@ -38,64 +38,83 @@ export default function TourTabs({
 
   return (
     <div className="w-full">
-     
       <div className="sticky top-0 z-10 bg-gray-50 border-b border-gray-200 shadow-sm">
         <div className="container mx-auto px-4">
-          <div className="flex items-center gap-3 overflow-x-auto py-4 scrollbar-hide">
+          <nav aria-label="Tour information tabs" className="flex items-center gap-3 overflow-x-auto py-4 scrollbar-hide">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActive(tab.id)}
-                className={`px-5 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap transition cursor-pointer
+                className={`px-5 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2
                   ${active === tab.id
-                    ? 'bg-orange-500 text-white shadow-md'
-                    : 'bg-white text-gray-700 border border-gray-200 shadow-sm hover:bg-gray-50'
+                    ? 'bg-orange-600 text-white shadow-md focus:ring-orange-500'
+                    : 'bg-white text-gray-800 border border-gray-300 shadow-sm hover:bg-gray-100 focus:ring-gray-400'
                   }`}
+                role="tab"
+                aria-selected={active === tab.id}
+                aria-controls={`${tab.id}-panel`}
               >
                 {tab.label}
               </button>
             ))}
 
-           
             <Link
               href="https://wa.me/your-number"
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-auto bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold flex items-center gap-2 transition whitespace-nowrap"
+              className="ml-auto bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-full text-sm font-semibold flex items-center gap-2 transition whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+              aria-label="Contact us on WhatsApp"
             >
-              <FaWhatsapp className="w-5 h-5" />
-              WhatsApp
+              <FaWhatsapp className="w-5 h-5" aria-hidden="true" />
+              <span>WhatsApp</span>
             </Link>
-          </div>
+          </nav>
         </div>
       </div>
 
-     
       <div className="container mx-auto px-4 py-8">
         {active === 'overview' && (
-          <TourOverview
-            overview={overview}
-            highlights={highlights}
-            description={description}
-          />
+          <div role="tabpanel" id="overview-panel" aria-labelledby="overview-tab">
+            <TourOverview
+              overview={overview}
+              highlights={highlights}
+              description={description}
+            />
+          </div>
         )}
 
         {active === 'itinerary' && (
-          <TourItinerary itinerary={formattedItinerary} />
+          <div role="tabpanel" id="itinerary-panel" aria-labelledby="itinerary-tab">
+            <TourItinerary itinerary={formattedItinerary} />
+          </div>
         )}
 
         {active === 'inclusions' && (
-          <TourInclusions
-            inclusions={inclusions}
-            exclusions={exclusions}
-          />
+          <div role="tabpanel" id="inclusions-panel" aria-labelledby="inclusions-tab">
+            <TourInclusions
+              inclusions={inclusions}
+              exclusions={exclusions}
+            />
+          </div>
         )}
 
-        {active === 'tips' && <TourTips tips={travel_tips} />}
+        {active === 'tips' && (
+          <div role="tabpanel" id="tips-panel" aria-labelledby="tips-tab">
+            <TourTips tips={travel_tips} />
+          </div>
+        )}
 
-        {active === 'reviews' && reviewsComponent}
+        {active === 'reviews' && (
+          <div role="tabpanel" id="reviews-panel" aria-labelledby="reviews-tab">
+            {reviewsComponent}
+          </div>
+        )}
 
-        {active === 'faq' && <TourFAQ faq={faq?.faqs || []} />}
+        {active === 'faq' && (
+          <div role="tabpanel" id="faq-panel" aria-labelledby="faq-tab">
+            <TourFAQ faq={faq?.faqs || []} />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import { FaqQuestion } from '@/types/comman';
 type Props = {
   faq: FaqQuestion[];
 };
-
+  
 export default function TourFAQ({ faq }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 

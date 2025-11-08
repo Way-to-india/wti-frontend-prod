@@ -26,8 +26,6 @@ const TourContent = (tour: TourContentProps) => {
 
   return (
     <div className="mt-4">
-
-
       <div className="flex items-start justify-between mb-3">
         <div>
           <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-2">
@@ -35,44 +33,54 @@ const TourContent = (tour: TourContentProps) => {
           </h1>
 
           <div className="flex items-center gap-2">
-            <div className="flex items-center text-yellow-500">
+            <div className="flex items-center text-yellow-500" role="img" aria-label="4 out of 5 stars">
               {[1, 2, 3, 4].map((star) => (
-                <FaStar key={star} className="w-4 h-4" />
+                <FaStar key={star} className="w-4 h-4" aria-hidden="true" />
               ))}
-              <FaStar className="w-4 h-4 text-gray-300" />
+              <FaStar className="w-4 h-4 text-gray-300" aria-hidden="true" />
             </div>
-            <span className="text-sm text-gray-600">4 Ratings</span>
+            <span className="text-sm text-gray-600">(4 Ratings)</span>
           </div>
         </div>
 
-        <button className="bg-orange-500 text-white p-2 rounded-full hover:bg-orange-600 transition">
-          <FiShare2 className="w-4 h-4" />
+        <button
+          className="bg-orange-600 text-white p-2 rounded-full hover:bg-orange-700 transition focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+          aria-label="Share this tour"
+          title="Share this tour"
+        >
+          <FiShare2 className="w-4 h-4" aria-hidden="true" />
         </button>
       </div>
 
-
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-6">
-
         <InfoCard icon={<FiClock className="w-4 h-4" />} label="Duration" value={durationText} />
         <InfoCard icon={<FiMapPin className="w-4 h-4" />} label="Starting From" value={startingPoint} />
         <InfoCard icon={<FiClock className="w-4 h-4" />} label="Best Time" value={bestTime} />
         <InfoCard icon={<FiUsers className="w-4 h-4" />} label="Ideal For" value={idealFor} />
 
-
+        {/* Destination Covered Card */}
         <div className="border border-gray-200 bg-white rounded-xl p-3 flex items-start gap-3">
           <div className="bg-orange-100 p-1.5 rounded-lg">
-            <FiHome className="w-4 h-4 text-orange-500" />
+            <FiHome className="w-4 h-4 text-orange-600" aria-hidden="true" />
           </div>
           <div className="flex-1">
-            <p className="text-xs text-gray-500 mb-1">Destination Covered</p>
-            <div className="flex flex-wrap gap-1.5">
+            <p className="text-xs text-gray-600 mb-1 font-medium">Destination Covered</p>
+            <div className="flex flex-wrap gap-1.5" role="list" aria-label="Destinations covered">
               {destinations?.slice(0, 4).map((name, idx) => (
-                <span key={idx} className="bg-orange-100 text-orange-600 px-2 py-1 rounded-full text-xs">
+                <span
+                  key={idx}
+                  className="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs font-medium"
+                  role="listitem"
+                >
                   {name}
                 </span>
               ))}
               {destinations && destinations.length > 4 && (
-                <span className="bg-orange-500 text-white px-3 py-1 rounded-full text-xs">
+                <span
+                  className="bg-orange-600 text-white px-3 py-1 rounded-full text-xs font-semibold"
+                  role="listitem"
+                  aria-label={`${destinations.length - 4} more destinations`}
+                >
                   +{destinations.length - 4} More
                 </span>
               )}
@@ -83,35 +91,37 @@ const TourContent = (tour: TourContentProps) => {
         <InfoCard icon={<FiHome className="w-4 h-4" />} label="Themes" value={theme} />
       </div>
 
-
-      <div>
-        <h2 className="text-lg font-semibold text-orange-500 mb-2">
+      <section aria-labelledby="tour-highlights">
+        <h2 id="tour-highlights" className="text-lg font-semibold text-orange-700 mb-2">
           Highlights Of {tour.title}:
         </h2>
 
         <ul className="space-y-1">
           {tour.highlights?.map((hl, idx) => (
             <li key={idx} className="text-gray-700 text-sm flex items-start gap-2">
-              <span className="text-orange-500 mt-0.5">•</span>{hl}
+              <span className="text-orange-600 mt-0.5" aria-hidden="true">•</span>
+              {hl}
             </li>
           ))}
         </ul>
 
         <div className='mt-5'>
-          <h3 className='font-medium mb-3'>Description</h3>
+          <h3 className='font-medium mb-3 text-gray-900'>Description</h3>
           <TourDescription description={tour.description} />
         </div>
-      </div>
+      </section>
     </div>
   )
 }
 
 const InfoCard = ({ icon, label, value }: { icon: React.ReactNode; label: string; value: string | null }) => (
   <div className="border border-gray-200 bg-white rounded-xl p-3 flex items-start gap-3">
-    <div className="bg-orange-100 p-1.5 rounded-lg">{icon}</div>
+    <div className="bg-orange-100 p-1.5 rounded-lg" aria-hidden="true">
+      {icon}
+    </div>
     <div>
-      <p className="text-xs text-gray-500 mb-0.5">{label}</p>
-      <p className="text-sm font-medium text-gray-800">{value}</p>
+      <p className="text-xs text-gray-600 mb-0.5 font-medium">{label}</p>
+      <p className="text-sm font-medium text-gray-900">{value || 'N/A'}</p>
     </div>
   </div>
 )
