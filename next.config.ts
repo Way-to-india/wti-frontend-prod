@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  cacheComponents : true,
+  images: {
+    domains: ['lh3.googleusercontent.com', 'dbagut2mvh0lo.cloudfront.net'],
+  },
 };
 
 export default nextConfig;
