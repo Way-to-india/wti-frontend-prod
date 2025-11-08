@@ -12,7 +12,7 @@ type LoaderProps = {
 const Loader = ({
     className,
     iconClassName,
-    size = 24,
+    size = 30,
     color = '#ff8b02'
 }: LoaderProps) => {
     return (

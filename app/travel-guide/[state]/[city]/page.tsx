@@ -16,7 +16,7 @@ const TravelGuideCityData = async ({ params }: Props) => {
 }
 
 function TravelGuideLoading() {
-    return <Loader/>; 
+    return <Loader className='mt-5'/>; 
 }
 
 export default function Page({ params }: Props) {
