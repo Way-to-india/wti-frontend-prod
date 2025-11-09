@@ -13,9 +13,9 @@ export const metadata: Metadata = {
 export default function HotelsPage() {
   return (
     <main className="min-h-screen">
-      {/* Hero Section with Search */}
+      
       <section className="relative min-h-[600px] flex items-center justify-center overflow-hidden">
-        {/* Background Image with Overlay */}
+        
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2000"
@@ -28,9 +28,9 @@ export default function HotelsPage() {
           <div className="absolute inset-0 bg-linear-to-b from-blue-900/70 via-blue-800/60 to-blue-900/80" />
         </div>
 
-        {/* Content */}
+        
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          {/* Top Banner */}
+          
           <div className="text-center mb-8">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-5 py-2.5 rounded-full text-sm font-medium mb-6 shadow-lg">
               <span className="text-lg">🏨</span>
@@ -45,17 +45,17 @@ export default function HotelsPage() {
             </div>
           </div>
 
-          {/* Search Card */}
+          
           <div className="bg-white rounded-3xl shadow-2xl p-6 sm:p-8 max-w-5xl mx-auto border border-gray-100">
             <HotelSearchForm />
           </div>
         </div>
 
-        {/* Decorative Elements */}
+        
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-white to-transparent z-5" />
       </section>
 
-      {/* Introduction Section */}
+      
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-white to-orange-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
@@ -70,7 +70,7 @@ export default function HotelsPage() {
             </p>
           </div>
 
-          {/* Amenities Grid */}
+          
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <AmenityCard
               image="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800"
@@ -104,7 +104,7 @@ export default function HotelsPage() {
         </div>
       </section>
 
-      {/* Featured Destinations */}
+      
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
@@ -139,7 +139,7 @@ export default function HotelsPage() {
         </div>
       </section>
 
-      {/* Why Choose Us */}
+      
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-orange-50 to-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
@@ -194,7 +194,7 @@ function AmenityCard({
 
   return (
     <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 h-[400px]">
-      {/* Background Image */}
+      
       <div className="absolute inset-0">
         <Image
           src={image}
@@ -206,7 +206,7 @@ function AmenityCard({
         <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent" />
       </div>
 
-      {/* Content */}
+      
       <div className="relative h-full flex flex-col justify-end p-6 text-white">
         <div className={`inline-flex items-center justify-center w-14 h-14 rounded-full bg-linear-to-br ${colorClasses} shadow-lg mb-4`}>
           {icon}

@@ -63,7 +63,7 @@ export default function HotelSearchForm() {
         <form onSubmit={handleSubmit} className="space-y-5">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
-                {/* Location */}
+
                 <div className="relative">
                     <label className="block text-xs text-gray-500 mb-2 font-medium">
                         City, Property Name Or Location
@@ -87,7 +87,7 @@ export default function HotelSearchForm() {
                     <p className="text-xs text-gray-500 mt-1">India</p>
                 </div>
 
-                {/* Check-In */}
+
                 <div>
                     <label className="block text-xs text-gray-500 mb-2 font-medium">
                         Check-In 📅
@@ -112,7 +112,7 @@ export default function HotelSearchForm() {
                     </button>
                 </div>
 
-                {/* Check-Out */}
+
                 <div>
                     <label className="block text-xs text-gray-500 mb-2 font-medium">
                         Check-Out 📅
@@ -138,7 +138,7 @@ export default function HotelSearchForm() {
                     </button>
                 </div>
 
-                {/* Rooms & Guests */}
+
                 <div className="relative">
                     <label className="block text-xs text-gray-500 mb-2 font-medium">
                         Rooms & Guests 👥
@@ -188,7 +188,7 @@ export default function HotelSearchForm() {
                 </div>
             </div>
 
-            {/* Price */}
+
             <div className="flex justify-end items-center">
                 <label className="text-sm mr-3">Price Per Night</label>
                 <select
