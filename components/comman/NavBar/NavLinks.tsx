@@ -15,7 +15,7 @@ const navLinks = [
     redirect: "/tourist",
     hasDropdown: true,
     submenu: [
-      { name: "Destination", redirect: "/destination" },
+      { name: "Destination", redirect: "/destinations" },
       { name: "Travel Guide", redirect: "/travel-guide" },
       { name: "Travel Tips", redirect: "/travel-tips" },
       { name: "Travel Toolkit", redirect: "/travel-toolkit" },

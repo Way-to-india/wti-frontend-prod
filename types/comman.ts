@@ -132,20 +132,18 @@ export interface TourReviewImage {
   thumbnail: string;
 }
 
-
 // travel-guide
-
 export interface TravelGuideOverview {
-  id : string; 
-  name : string;
-  cityCount : number;
-  cities : TravelGuideCity[]
+  id: string;
+  name: string;
+  cityCount: number;
+  cities: TravelGuideCity[];
 }
 
 export interface TravelGuideCity {
-  id : string;
-  name : string;
-  citySlug : string;
+  id: string;
+  name: string;
+  citySlug: string;
 }
 export interface TravelGuideCityDetails {
   id: string;
@@ -165,4 +163,126 @@ export interface TravelGuideCityDetails {
   bestTimeToVisit: string;
   cityImage: string;
   isActive: boolean;
+}
+
+// destination
+
+export interface HomepageData {
+  statistics: Statistics;
+  states: DestinationState[];
+  categories: DestinationCategory[];
+}
+
+export interface Statistics {
+  totalStates: number;
+  totalCities: number;
+  totalMonuments: number;
+  totalCategories: number;
+}
+
+export interface DestinationState {
+  id: string;
+  slug: string;
+  name: string;
+  monumentCount: number;
+  cityCount: number;
+  createdAt: string;
+  updatedAt: string;
+  cities?: DestinationCity[];
+}
+
+export interface DestinationCity {
+  id: string;
+  slug: string;
+  name: string;
+  state: string;
+  stateId: string;
+  stateSlug: string;
+  monumentCount: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface DestinationCategory {
+  slug: string;
+  name: string;
+  monumentCount: number;
+}
+
+export interface Monument {
+  id: string;
+  slug: string;
+  monumentName: string;
+  cityId: string;
+  city: string;
+  citySlug: string;
+  state: string;
+  stateSlug: string;
+  typeofPlace: string;
+  description?: string;
+  besttime?: string;
+  rating?: number;
+  totalRatings?: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CityMonumentsType {
+    cityName: string;
+    citySlug: string;
+    stateName: string;
+    stateSlug: string;
+    monuments: Monument[];
+    count: number;
+    total: number;
+    hasMore: boolean;
+}
+
+export interface MonumentDetails {
+  id: string;
+  slug: string;
+  monumentName: string;
+  description: string;
+  typeofPlace: string;
+  besttime: string;
+  rating: number;
+  totalRatings: number;
+  cityId: string;
+  city: string;
+  citySlug: string;
+  state: string;
+  stateSlug: string;
+  openingtime: string;
+  clossingtime: string;
+  weeklyoff: string;
+  entryFees: {
+    indianAdult: number;
+    indianChild: number;
+    foreignAdult: number;
+    foreignChild: number;
+    indianCamera: number;
+    foreignCamera: number;
+    indianVideoCamera: number;
+    foreignVideoCamera: number;
+  };
+  weather: {
+    temperature: string;
+    humiditySummer: number;
+    humidityWinter: number;
+    humidityMonsoon: number;
+  };
+  connectivity: {
+    air: string;
+    rail: string;
+    road: string;
+  };
+  location: {
+    latitude: number;
+    longitude: number;
+    googleMapUrl: string;
+  };
+  website: string | null;
+  phone: string | null;
+  createdAt: string;
+  updatedAt: string;
 }

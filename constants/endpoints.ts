@@ -18,8 +18,16 @@ export const endPoints = {
     },
     similarTour: `${BASE_URL}/tour/similar-tour/:tourId?limit=${6}`,
   },
+
   travelGuide: {
     getAll: `${BASE_URL}/travel-guide/states`,
     getData: `${BASE_URL}/travel-guide/cities/slug/:city`,
+  },
+
+  destination: {
+    getHomePageData: `${BASE_URL}/places-of-interest/homepage`,
+    getCityDestination: (state: string, city: string) =>
+      `${BASE_URL}/places-of-interest/states/${state}/cities/${city}/monuments`,
+    getMonument: (monument : string) => `${BASE_URL}/places-of-interest/monuments/${monument}`,
   },
 };
