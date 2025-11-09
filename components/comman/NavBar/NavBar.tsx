@@ -11,11 +11,11 @@ const NavBar = () => {
         <div className="flex items-center justify-between h-16 lg:h-20">
           <Logo />
 
-          <Suspense fallback={<Loader/>}>
+          <Suspense fallback={<Loader className='mt-30' />}>
             <NavLinks />
           </Suspense>
 
-          <Suspense fallback={<Loader/>}>
+          <Suspense fallback={<Loader className='mt-30' />}>
             <UserAuth />
           </Suspense>
         </div>

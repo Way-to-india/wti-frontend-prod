@@ -17,7 +17,7 @@ const MonumentDetailComponent = async ({ params }: Props) => {
 
 const Monument = ({ params }: Props) => {
     return (
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<Loader className='mt-30' />}>
             <MonumentDetailComponent params={params} />
         </Suspense>
     )

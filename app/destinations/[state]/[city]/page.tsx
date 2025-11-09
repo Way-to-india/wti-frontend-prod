@@ -15,7 +15,7 @@ const CityDestinationInfo = async ({ params }: Props) => {
     const { state, city } = await params;
     const destinationInfo = await getCityDestination(state,city);
     const parsedData = destinationInfo?.payload as CityMonumentsType;
-    if(!parsedData) return <Loader/>
+    if(!parsedData) return <Loader className='mt-30'/>
     return (
       <div className="lg:mx-[7%] mx-[4%] font-sans space-y-8 pb-12">
         <Link
@@ -56,7 +56,7 @@ const CityDestinationInfo = async ({ params }: Props) => {
 
 export default function CityDestination({ params }: Props) {
     return (
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<Loader className='mt-30' />}>
             <CityDestinationInfo params={params} />
         </Suspense>
     );
