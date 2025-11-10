@@ -12,9 +12,9 @@ export const metadata: Metadata = {
 export default function TransportationPage() {
   return (
     <main className="min-h-screen">
-      {/* Hero Section with Search */}
+      
       <section className="relative min-h-[650px] flex items-center justify-center overflow-hidden">
-        {/* Background Image with Overlay */}
+        
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=2000"
@@ -27,19 +27,19 @@ export default function TransportationPage() {
           <div className="absolute inset-0 bg-linear-to-b from-gray-900/80 via-gray-800/70 to-gray-900/85" />
         </div>
 
-        {/* Content */}
+        
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          {/* Search Card */}
+          
           <div className="bg-white rounded-3xl shadow-2xl p-6 sm:p-8 max-w-5xl mx-auto border border-gray-100">
             <TransportSearchForm />
           </div>
         </div>
 
-        {/* Decorative Elements */}
+        
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-white to-transparent z-5" />
       </section>
 
-      {/* Explore Section */}
+      
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-white to-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
@@ -54,7 +54,7 @@ export default function TransportationPage() {
             </p>
           </div>
 
-          {/* Vehicle Grid */}
+          
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <VehicleCard
               image="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=800"
@@ -88,7 +88,7 @@ export default function TransportationPage() {
         </div>
       </section>
 
-      {/* Features Section */}
+      
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
@@ -129,7 +129,7 @@ export default function TransportationPage() {
         </div>
       </section>
 
-      {/* Popular Routes */}
+      
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
@@ -167,7 +167,7 @@ export default function TransportationPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-orange-500 to-orange-600">
         <div className="max-w-4xl mx-auto text-center text-white">
           <h2 className="text-4xl sm:text-5xl font-bold mb-6">
@@ -193,7 +193,7 @@ export default function TransportationPage() {
         </div>
       </section>
 
-      {/* Trust Indicators */}
+      
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-white border-t border-gray-200">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -231,7 +231,7 @@ function VehicleCard({
 
   return (
     <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white">
-      {/* Image */}
+      
       <div className="relative h-56 overflow-hidden">
         <Image
           src={image}
@@ -242,7 +242,7 @@ function VehicleCard({
         />
         <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent" />
 
-        {/* Badge */}
+        
         <div className="absolute top-4 right-4">
           <span className={`px-3 py-1 rounded-full text-xs font-semibold ${badgeColors}`}>
             {badge}
@@ -250,7 +250,7 @@ function VehicleCard({
         </div>
       </div>
 
-      {/* Content */}
+      
       <div className="p-6">
         <h3 className="text-xl font-bold text-gray-900 mb-2">{title}</h3>
         <p className="text-gray-600 text-sm">{description}</p>

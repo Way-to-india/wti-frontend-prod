@@ -24,10 +24,12 @@ const cities = [
   'Goa', 'Agra', 'Mysore', 'Udaipur', 'Kerala'
 ];
 
-const getTodayDate = () => {
-  if (typeof window === 'undefined') return '';
-  return new Date().toISOString().split('T')[0];
+const getTomorrow = () => {
+  const d = new Date();
+  d.setDate(d.getDate() + 1);
+  return d.toISOString().split('T')[0];
 };
+
 
 export default function TransportSearchForm() {
   const router = useRouter();
@@ -36,7 +38,7 @@ export default function TransportSearchForm() {
   const [formData, setFormData] = useState<FormData>({
     from: 'Mumbai',
     to: 'Pune',
-    departure: '2025-11-09',
+    departure: getTomorrow(),
     return: '',
     pickupTime: '10:00',
     timeFormat: 'AM',
@@ -144,8 +146,22 @@ export default function TransportSearchForm() {
   };
 
   const handleChange = (field: keyof FormData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData(prev => {
+      const updated = { ...prev, [field]: value };
+
+      // If departure changes & return becomes earlier => reset return
+      if (field === 'departure' && updated.return) {
+        const dep = new Date(updated.departure);
+        const ret = new Date(updated.return);
+        if (ret < dep) {
+          updated.return = '';
+        }
+      }
+
+      return updated;
+    });
   };
+
 
   const swapLocations = () => {
     setFormData(prev => ({
@@ -261,8 +277,8 @@ export default function TransportSearchForm() {
             value={formData.departure}
             onChange={(e) => handleChange('departure', e.target.value)}
             disabled={isSubmitting}
-            tabIndex={-1}
-            className="sr-only"
+            className="hidden"
+            min={getTomorrow()}   
           />
           <button
             type="button"
@@ -296,8 +312,8 @@ export default function TransportSearchForm() {
             value={formData.return}
             onChange={(e) => handleChange('return', e.target.value)}
             disabled={isSubmitting}
-            tabIndex={-1}
-            className="sr-only"
+            className="hidden"
+            min={formData.departure} 
           />
           <button
             type="button"

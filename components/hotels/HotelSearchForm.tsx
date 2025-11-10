@@ -19,10 +19,16 @@ type FormData = {
     priceRange: string;
 };
 
-// Helper function to get today's date
-const getTodayDate = () => {
-    if (typeof window === 'undefined') return ''; // Return empty on server
-    return new Date().toISOString().split('T')[0];
+const getTomorrow = () => {
+    const d = new Date();
+    d.setDate(d.getDate() + 1);
+    return d.toISOString().split('T')[0];
+};
+
+const getDayAfterTomorrow = () => {
+    const d = new Date();
+    d.setDate(d.getDate() + 2);
+    return d.toISOString().split('T')[0];
 };
 
 export default function HotelSearchForm() {
@@ -31,8 +37,8 @@ export default function HotelSearchForm() {
 
     const [formData, setFormData] = useState<FormData>({
         location: 'Goa',
-        checkIn: '2025-11-08',
-        checkOut: '2025-11-09',
+        checkIn: getTomorrow(),
+        checkOut: getDayAfterTomorrow(),
         rooms: 1,
         guests: 2,
         priceRange: 'all',
@@ -126,8 +132,23 @@ export default function HotelSearchForm() {
     };
 
     const handleChange = (field: keyof FormData, value: string | number) => {
-        setFormData(prev => ({ ...prev, [field]: value }));
+        setFormData(prev => {
+            const newData = { ...prev, [field]: value };
+
+            if (field === 'checkIn') {
+                const newCheckIn = new Date(value as string);
+                const newCheckOut = new Date(newData.checkOut);
+
+                if (newCheckOut <= newCheckIn) {
+                    newCheckOut.setDate(newCheckIn.getDate() + 1);
+                    newData.checkOut = newCheckOut.toISOString().split('T')[0];
+                }
+            }
+
+            return newData;
+        });
     };
+
 
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);

@@ -1,5 +1,7 @@
 import Image from "next/image";
 import HeroImage from "@/assets/hero.jpeg";
+import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 const Hero = () => {
   return (
@@ -39,6 +41,17 @@ const Hero = () => {
             aria-label="Search options"
           >
           </div>
+          <Link href={"/india-tour-packages"}>
+            <button
+              type="submit"
+              className={cn(
+                "px-12 py-4 bg-orange-600 text-white font-bold rounded-full transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed text-lg",
+                "hover:bg-orange-700 hover:shadow-xl transform hover:scale-105 active:scale-95 cursor-pointer"
+              )}
+            >
+              Explore Tours
+            </button>
+          </Link>
         </div>
       </div>
     </div>

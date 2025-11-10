@@ -7,7 +7,6 @@ import ToursContent from '@/components/tours/TourContent';
 import { getTourCities, getTourThemes } from '@/lib/api/tours';
 import { TourSkeleton } from '@/components/skeleton';
 
-
 interface PageProps {
   searchParams: Promise<{
     city?: string;
@@ -26,7 +25,7 @@ async function FiltersWrapper({ searchParams }: { searchParams: PageProps['searc
   return <ToursFilters cities={cities} themes={themes} currentCity={params.city} currentTheme={params.theme} />;
 }
 
-async function SearchWrapper({ searchParams }: { searchParams: PageProps['searchParams'] }) {
+async function SearchWrapper() {
   const [cities, themes] = await Promise.all([
     getTourCities(),
     getTourThemes(),
@@ -41,11 +40,13 @@ async function ContentWrapper({ searchParams }: { searchParams: PageProps['searc
 }
 
 export default async function ToursPage({ searchParams }: PageProps) {
+  const params = await searchParams;
+  const searchKey = `${params.city || 'all'}-${params.theme || 'all'}-${params.page || '1'}`;
+
   return (
     <div className="min-h-screen bg-gray-50">
-
       <Suspense fallback={<div className="h-64 bg-linear-to-r from-orange-500 to-orange-600 animate-pulse" />}>
-        <SearchWrapper searchParams={searchParams} />
+        <SearchWrapper />
       </Suspense>
 
       <div className="bg-white border-b border-gray-200">
@@ -63,13 +64,13 @@ export default async function ToursPage({ searchParams }: PageProps) {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           <div className="lg:col-span-1">
-            <Suspense fallback={<div className="h-64 bg-white rounded-lg animate-pulse" />}>
+            <Suspense key={`filters-${searchKey}`} fallback={<div className="h-64 bg-white rounded-lg animate-pulse" />}>
               <FiltersWrapper searchParams={searchParams} />
             </Suspense>
           </div>
 
           <div className="lg:col-span-3">
-            <Suspense fallback={<TourSkeleton />}>
+            <Suspense key={`content-${searchKey}`} fallback={<TourSkeleton />}>
               <ContentWrapper searchParams={searchParams} />
             </Suspense>
           </div>
@@ -78,3 +79,6 @@ export default async function ToursPage({ searchParams }: PageProps) {
     </div>
   );
 }
+
+// export const dynamic = 'force-dynamic';
+// export const revalidate = 0;

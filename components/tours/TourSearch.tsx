@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { MapPin, Palette, Search } from 'lucide-react';
 import { ThemeItem, CityItem } from '@/types/comman';
@@ -14,13 +14,16 @@ export default function TourSearch({ cities, themes }: TourSearchProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // Derive state directly from URL params - no useState needed for URL-synced values
   const currentCity = searchParams.get('city') || '';
   const currentTheme = searchParams.get('theme') || '';
 
-  // Local state only for temporary selections before search
   const [selectedCity, setSelectedCity] = useState(currentCity);
   const [selectedTheme, setSelectedTheme] = useState(currentTheme);
+
+  // useEffect(() => {
+  //   setSelectedCity(currentCity);
+  //   setSelectedTheme(currentTheme);
+  // }, [currentCity, currentTheme]);
 
   const handleSearch = () => {
     const params = new URLSearchParams();
@@ -39,19 +42,18 @@ export default function TourSearch({ cities, themes }: TourSearchProps) {
   };
 
   const handleRemoveFilter = (field: 'city' | 'theme') => {
+    const params = new URLSearchParams(searchParams.toString());
+
     if (field === 'city') {
       setSelectedCity('');
-      const params = new URLSearchParams(searchParams.toString());
       params.delete('city');
-      params.set('page', '1');
-      router.push(`/india-tour-packages?${params.toString()}`);
     } else {
       setSelectedTheme('');
-      const params = new URLSearchParams(searchParams.toString());
       params.delete('theme');
-      params.set('page', '1');
-      router.push(`/india-tour-packages?${params.toString()}`);
     }
+
+    params.set('page', '1');
+    router.push(`/india-tour-packages?${params.toString()}`);
   };
 
   const hasActiveFilters = currentCity || currentTheme;
