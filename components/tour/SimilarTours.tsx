@@ -34,7 +34,7 @@ const SimilarTours = async ({ tourId }: { tourId: string }) => {
                 {tours.length >= 6 && (
                     <div className="text-center mt-12">
                         <Link
-                            href="/tours"
+                            href="/india-tour-packages"
                             className="inline-flex items-center gap-2 text-orange-600 hover:text-orange-700 font-semibold text-lg transition-colors"
                         >
                             View All Tours

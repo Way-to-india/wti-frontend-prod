@@ -1,4 +1,3 @@
-// app/transportation/page.tsx (Server Component - 95%)
 import { Metadata } from 'next';
 import Image from 'next/image';
 import TransportSearchForm from '@/components/transportation/TransportSearchForm';
@@ -37,7 +36,7 @@ export default function TransportationPage() {
         </div>
 
         {/* Decorative Elements */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-white to-transparent z-[5]" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-white to-transparent z-5" />
       </section>
 
       {/* Explore Section */}

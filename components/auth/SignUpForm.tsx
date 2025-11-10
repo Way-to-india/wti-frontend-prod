@@ -7,8 +7,11 @@ import { Eye, EyeOff } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import axios from "axios";
+import { useAuthStore } from '@/store/AuthStore';
 
 const SignUpForm = () => {
+  const router = useRouter();
+  const login = useAuthStore((state) => state.login);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -16,7 +19,6 @@ const SignUpForm = () => {
     password: '',
   });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -30,15 +32,19 @@ const SignUpForm = () => {
       return response.data;
     },
     onSuccess: (res) => {
+      // Login user after successful signup with token
+      login(res.payload.user, res.payload.token);
       toast.success(res.message || "Signup Successful");
-      router.push("/");
       console.log("Signup Successful");
+      router.push("/");
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
         toast.error(error.response?.data.message || "Something Went Wrong");
+        setErrorMessage(error.response?.data.message || "Something went wrong");
+      } else {
+        setErrorMessage('Something went wrong');
       }
-      setErrorMessage('Something went wrong');
     },
   });
 
@@ -51,7 +57,6 @@ const SignUpForm = () => {
 
   return (
     <div className="w-full max-w-md">
-
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-form-label mb-1">
@@ -98,6 +103,7 @@ const SignUpForm = () => {
               placeholder="Enter your password (min. 8 characters)"
               className="w-full p-3 pr-10 border border-form-input-border bg-form-input-bg text-form-input-text placeholder:text-form-placeholder rounded-lg focus:outline-none focus:ring-2 focus:ring-form-focus-ring focus:border-transparent"
               required
+              minLength={8}
               disabled={isLoading}
             />
             <button

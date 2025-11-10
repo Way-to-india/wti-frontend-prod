@@ -25,7 +25,7 @@ const FeaturedTours: React.FC = () => {
 
       <div className="text-center mt-10 sm:mt-12 lg:mt-16">
         <Link
-          href={"/tours"}
+          href={"/india-tour-packages"}
           className="inline-block px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg border-2 border-orange-500 text-orange-500 font-medium hover:bg-brand-gold hover:text-white hover:border-brand-gold transition-all duration-300 text-sm sm:text-base"
         >
           View All Tours

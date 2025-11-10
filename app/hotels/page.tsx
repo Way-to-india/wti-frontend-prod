@@ -1,9 +1,9 @@
-// app/hotels/page.tsx (Server Component - 95%)
 import { Metadata } from 'next';
 import Image from 'next/image';
 import HotelSearchForm from '@/components/hotels/HotelSearchForm';
 import { FiCoffee, FiActivity, FiSun, FiHeart } from 'react-icons/fi';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: 'Book Hotels - Domestic & International Properties | Way to India',
@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function HotelsPage() {
+
   return (
     <main className="min-h-screen">
       
@@ -47,7 +48,13 @@ export default function HotelsPage() {
 
           
           <div className="bg-white rounded-3xl shadow-2xl p-6 sm:p-8 max-w-5xl mx-auto border border-gray-100">
-            <HotelSearchForm />
+            <Suspense fallback={
+              <div className="flex items-center justify-center py-12">
+                <div className="w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
+              </div>
+            }>
+              <HotelSearchForm />
+            </Suspense>
           </div>
         </div>
 

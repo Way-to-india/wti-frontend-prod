@@ -1,13 +1,14 @@
+// components/layout/UserAuth.tsx
 'use client';
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/AuthStore';
-import { 
-  User, 
-  LogOut, 
-  Settings, 
-  ChevronDown 
+import {
+  User,
+  LogOut,
+  Settings,
+  ChevronDown
 } from 'lucide-react';
 import Image from 'next/image';
 
@@ -50,12 +51,12 @@ const UserAuth: React.FC = () => {
 
   if (!isAuthenticated || !user) {
     return (
-      <div className="flex items-center gap-3">
+      <div className="flex items-center">
         <Link
           href="/login"
-          className="px-5 py-2 text-sm font-medium text-form-button-text bg-form-button-bg hover:bg-form-button-hover transition-colors rounded-lg shadow-sm"
+          className="px-4 py-2 text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 transition-colors rounded-lg shadow-sm whitespace-nowrap"
         >
-          Login/Sign Up
+          Login
         </Link>
       </div>
     );
@@ -65,46 +66,48 @@ const UserAuth: React.FC = () => {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setShowDropdown(!showDropdown)}
-        className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-orange-100 transition-colors"
+        className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-orange-50 transition-colors"
+        aria-label="User menu"
       >
         <div className="relative">
           {user.avatar ? (
             <Image
               src={user.avatar}
               alt={user.name}
+              width={36}
+              height={36}
               className="w-9 h-9 rounded-full object-cover border-2 border-orange-500"
             />
           ) : (
-            <div className="w-9 h-9 rounded-full bg-orange-500 text-white-100 flex items-center justify-center font-semibold text-sm border-2 border-orange-500">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white flex items-center justify-center font-semibold text-sm border-2 border-orange-500">
               {getUserInitials()}
             </div>
           )}
-          <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white-100 rounded-full"></span>
+          <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
         </div>
 
-        <div className="hidden md:flex flex-col items-start">
-          <span className="text-sm font-medium text-form-label">
+        <div className="hidden xl:flex flex-col items-start">
+          <span className="text-sm font-medium text-gray-700 max-w-[120px] truncate">
             {user.name}
           </span>
-          <span className="text-xs text-form-secondary-text">
+          <span className="text-xs text-gray-500">
             My Account
           </span>
         </div>
 
         <ChevronDown
-          className={`w-4 h-4 text-form-secondary-text transition-transform ${
-            showDropdown ? 'rotate-180' : ''
-          }`}
+          className={`hidden xl:block w-4 h-4 text-gray-500 transition-transform ${showDropdown ? 'rotate-180' : ''
+            }`}
         />
       </button>
 
       {showDropdown && (
-        <div className="absolute right-0 top-full mt-2 w-64 bg-white-100 border border-form-input-border rounded-xl shadow-xl z-50 overflow-hidden">
-          <div className="px-4 py-3 border-b border-form-input-border bg-orange-50">
-            <p className="text-sm font-semibold text-form-label">
+        <div className="absolute right-0 top-full mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-xl z-50 overflow-hidden">
+          <div className="px-4 py-3 border-b border-gray-200 bg-orange-50">
+            <p className="text-sm font-semibold text-gray-800 truncate">
               {user.name}
             </p>
-            <p className="text-xs text-form-secondary-text mt-0.5">
+            <p className="text-xs text-gray-600 mt-0.5 truncate">
               {user.email}
             </p>
           </div>
@@ -112,7 +115,7 @@ const UserAuth: React.FC = () => {
           <div className="py-2">
             <Link
               href="/profile"
-              className="flex items-center gap-3 px-4 py-2.5 text-sm text-form-label hover:bg-orange-100 hover:text-orange-500 transition-colors"
+              className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-500 transition-colors"
               onClick={() => setShowDropdown(false)}
             >
               <User className="w-4 h-4" />
@@ -121,7 +124,7 @@ const UserAuth: React.FC = () => {
 
             <Link
               href="/settings"
-              className="flex items-center gap-3 px-4 py-2.5 text-sm text-form-label hover:bg-orange-100 hover:text-orange-500 transition-colors"
+              className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-500 transition-colors"
               onClick={() => setShowDropdown(false)}
             >
               <Settings className="w-4 h-4" />
@@ -129,7 +132,7 @@ const UserAuth: React.FC = () => {
             </Link>
           </div>
 
-          <div className="border-t border-form-input-border py-2">
+          <div className="border-t border-gray-200 py-2">
             <button
               onClick={handleLogout}
               className="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors"

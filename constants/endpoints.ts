@@ -28,6 +28,20 @@ export const endPoints = {
     getHomePageData: `${BASE_URL}/places-of-interest/homepage`,
     getCityDestination: (state: string, city: string) =>
       `${BASE_URL}/places-of-interest/states/${state}/cities/${city}/monuments`,
-    getMonument: (monument : string) => `${BASE_URL}/places-of-interest/monuments/${monument}`,
+    getMonument: (monument: string) => `${BASE_URL}/places-of-interest/monuments/${monument}`,
   },
+
+  hotelQuery: {
+    create: `${BASE_URL}${USER_PATH}/hotel-query`,
+  },
+
+  transportQuery: {
+    create: `${BASE_URL}${USER_PATH}/transport-query`,
+  },
+
+  contactUsQuery : {
+    create : `${BASE_URL}/${USER_PATH}/contact-us-query`
+  }
+
+  
 };

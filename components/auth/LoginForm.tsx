@@ -30,8 +30,7 @@ const LoginForm = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      login(res.payload.user);
-      console.log("Login Successful");
+      login(res.payload.user, res.payload.token);
       toast.success(res.message || "Login Successful");
       router.push("/");
     },

@@ -3,6 +3,12 @@
 import { useState } from 'react';
 import { FiMapPin, FiRepeat } from 'react-icons/fi';
 import { cn } from '@/lib/utils';
+import { endPoints } from '@/constants/endpoints';
+import { useAuthStore } from '@/store/AuthStore';
+import { useMutation } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 type FormData = {
   from: string;
@@ -14,11 +20,19 @@ type FormData = {
 };
 
 const cities = [
-  'Mumbai', 'Delhi', 'Bangalore', 'Pune', 'Jaipur', 
+  'Mumbai', 'Delhi', 'Bangalore', 'Pune', 'Jaipur',
   'Goa', 'Agra', 'Mysore', 'Udaipur', 'Kerala'
 ];
 
+const getTodayDate = () => {
+  if (typeof window === 'undefined') return '';
+  return new Date().toISOString().split('T')[0];
+};
+
 export default function TransportSearchForm() {
+  const router = useRouter();
+  const { token, isAuthenticated } = useAuthStore();
+
   const [formData, setFormData] = useState<FormData>({
     from: 'Mumbai',
     to: 'Pune',
@@ -28,21 +42,105 @@ export default function TransportSearchForm() {
     timeFormat: 'AM',
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const createQueryMutation = useMutation({
+    mutationFn: async (data: FormData) => {
+      if (!token) {
+        throw new Error('Authentication required');
+      }
+
+      
+      let hour = parseInt(data.pickupTime.split(':')[0]);
+      const minute = data.pickupTime.split(':')[1];
+
+      if (data.timeFormat === 'PM' && hour !== 12) {
+        hour += 12;
+      } else if (data.timeFormat === 'AM' && hour === 12) {
+        hour = 0;
+      }
+
+      const pickupTime24 = `${hour.toString().padStart(2, '0')}:${minute}`;
+
+      
+      const payload = {
+        from: data.from,
+        to: data.to,
+        departureDate: data.departure,
+        returnDate: data.return || null,
+        pickupTime: pickupTime24,
+      };
+
+      const response = await axios.post(
+        endPoints.transportQuery.create,
+        payload,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      toast.success(res.message || 'Transport query sent successfully!');
+      console.log('Transport query created:', res);
+      
+      
+    },
+    onError: (error) => {
+      if (axios.isAxiosError(error)) {
+        const errorMessage = error.response?.data?.message || 'Failed to send query';
+        toast.error(errorMessage);
+
+        
+        if (error.response?.status === 401) {
+          toast.error('Please login to continue');
+          router.push('/login');
+        }
+      } else {
+        toast.error('Something went wrong');
+      }
+      console.error('Error creating transport query:', error);
+    },
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
 
-    try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      console.log('Transport search query:', formData);
-      // Redirect to results or show results
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setIsSubmitting(false);
+    
+    if (!isAuthenticated) {
+      toast.error('Please login to search transport');
+      router.push('/login');
+      return;
     }
+
+    
+    if (formData.from === formData.to) {
+      toast.error('From and To locations cannot be the same');
+      return;
+    }
+
+    
+    const departure = new Date(formData.departure);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (departure < today) {
+      toast.error('Departure date cannot be in the past');
+      return;
+    }
+
+    
+    if (formData.return) {
+      const returnDate = new Date(formData.return);
+      if (returnDate < departure) {
+        toast.error('Return date must be after departure date');
+        return;
+      }
+    }
+
+    
+    createQueryMutation.mutate(formData);
   };
 
   const handleChange = (field: keyof FormData, value: string) => {
@@ -57,7 +155,7 @@ export default function TransportSearchForm() {
     }));
   };
 
-  // Format date display
+  
   const formatDate = (dateString: string) => {
     if (!dateString) return null;
     const date = new Date(dateString);
@@ -71,6 +169,7 @@ export default function TransportSearchForm() {
 
   const departureDate = formatDate(formData.departure);
   const returnDate = formData.return ? formatDate(formData.return) : null;
+  const isSubmitting = createQueryMutation.isPending;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -87,7 +186,8 @@ export default function TransportSearchForm() {
               id="from"
               value={formData.from}
               onChange={(e) => handleChange('from', e.target.value)}
-              className="w-full pl-12 pr-4 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition appearance-none bg-white text-2xl font-bold text-gray-900 cursor-pointer"
+              disabled={isSubmitting}
+              className="w-full pl-12 pr-4 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition appearance-none bg-white text-2xl font-bold text-gray-900 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {cities.map(city => (
                 <option key={city} value={city}>{city}</option>
@@ -101,7 +201,8 @@ export default function TransportSearchForm() {
           <button
             type="button"
             onClick={swapLocations}
-            className="p-3 rounded-full bg-orange-100 text-orange-600 hover:bg-orange-200 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500"
+            disabled={isSubmitting}
+            className="p-3 rounded-full bg-orange-100 text-orange-600 hover:bg-orange-200 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 disabled:opacity-50"
             aria-label="Swap locations"
             title="Swap from and to"
           >
@@ -120,7 +221,8 @@ export default function TransportSearchForm() {
               id="to"
               value={formData.to}
               onChange={(e) => handleChange('to', e.target.value)}
-              className="w-full pl-12 pr-4 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition appearance-none bg-white text-2xl font-bold text-gray-900 cursor-pointer"
+              disabled={isSubmitting}
+              className="w-full pl-12 pr-4 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition appearance-none bg-white text-2xl font-bold text-gray-900 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {cities.map(city => (
                 <option key={city} value={city}>{city}</option>
@@ -134,7 +236,8 @@ export default function TransportSearchForm() {
       <div>
         <button
           type="button"
-          className="inline-flex items-center gap-2 text-sm text-orange-600 hover:text-orange-700 font-medium transition"
+          disabled={isSubmitting}
+          className="inline-flex items-center gap-2 text-sm text-orange-600 hover:text-orange-700 font-medium transition disabled:opacity-50"
         >
           <span className="text-lg">+</span>
           <span>Add Stops</span>
@@ -154,14 +257,18 @@ export default function TransportSearchForm() {
           <input
             type="date"
             id="departure"
+            name="departure"
             value={formData.departure}
             onChange={(e) => handleChange('departure', e.target.value)}
-            className="hidden"
+            disabled={isSubmitting}
+            tabIndex={-1}
+            className="sr-only"
           />
           <button
             type="button"
             onClick={() => (document.getElementById('departure') as HTMLInputElement)?.showPicker?.()}
-            className="w-full text-left px-4 py-4 border-2 border-gray-300 rounded-xl hover:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500 transition bg-white"
+            disabled={isSubmitting}
+            className="w-full text-left px-4 py-4 border-2 border-gray-300 rounded-xl hover:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500 transition bg-white disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {departureDate && (
               <>
@@ -185,15 +292,18 @@ export default function TransportSearchForm() {
           <input
             type="date"
             id="return"
+            name="return"
             value={formData.return}
             onChange={(e) => handleChange('return', e.target.value)}
-            min={formData.departure}
-            className="hidden"
+            disabled={isSubmitting}
+            tabIndex={-1}
+            className="sr-only"
           />
           <button
             type="button"
             onClick={() => (document.getElementById('return') as HTMLInputElement)?.showPicker?.()}
-            className="w-full text-left px-4 py-4 border-2 border-gray-300 rounded-xl hover:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500 transition bg-white"
+            disabled={isSubmitting}
+            className="w-full text-left px-4 py-4 border-2 border-gray-300 rounded-xl hover:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500 transition bg-white disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {returnDate ? (
               <>
@@ -222,14 +332,16 @@ export default function TransportSearchForm() {
               id="pickupTime"
               value={formData.pickupTime}
               onChange={(e) => handleChange('pickupTime', e.target.value)}
-              className="flex-1 px-4 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 transition text-2xl font-bold text-gray-900"
+              disabled={isSubmitting}
+              className="flex-1 px-4 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 transition text-2xl font-bold text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
             />
             <div className="flex flex-col gap-1">
               <button
                 type="button"
                 onClick={() => handleChange('timeFormat', 'AM')}
+                disabled={isSubmitting}
                 className={cn(
-                  'px-4 py-2 rounded-lg text-sm font-semibold transition',
+                  'px-4 py-2 rounded-lg text-sm font-semibold transition disabled:opacity-50',
                   formData.timeFormat === 'AM'
                     ? 'bg-orange-600 text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -240,8 +352,9 @@ export default function TransportSearchForm() {
               <button
                 type="button"
                 onClick={() => handleChange('timeFormat', 'PM')}
+                disabled={isSubmitting}
                 className={cn(
-                  'px-4 py-2 rounded-lg text-sm font-semibold transition',
+                  'px-4 py-2 rounded-lg text-sm font-semibold transition disabled:opacity-50',
                   formData.timeFormat === 'PM'
                     ? 'bg-orange-600 text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -268,7 +381,7 @@ export default function TransportSearchForm() {
           {isSubmitting ? (
             <span className="flex items-center gap-3">
               <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-              Searching...
+              Sending Query...
             </span>
           ) : (
             'SEND QUERY'

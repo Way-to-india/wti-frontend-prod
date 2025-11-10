@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Logo from "./Logo";
 import NavLinks from "./NavLinks";
 import UserAuth from "./UserAuth";
+import MobileMenu from "./MobileMenu";
 import Loader from '@/components/skeleton/Loader';
 
 const NavBar = () => {
@@ -11,13 +12,23 @@ const NavBar = () => {
         <div className="flex items-center justify-between h-16 lg:h-20">
           <Logo />
 
-          <Suspense fallback={<Loader className='mt-30' />}>
-            <NavLinks />
-          </Suspense>
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-6">
+            <Suspense fallback={<Loader className='mt-30' />}>
+              <NavLinks />
+            </Suspense>
 
-          <Suspense fallback={<Loader className='mt-30' />}>
-            <UserAuth />
-          </Suspense>
+            <Suspense fallback={<Loader className='mt-30' />}>
+              <UserAuth />
+            </Suspense>
+          </div>
+
+          {/* Mobile Menu */}
+          <div className="lg:hidden">
+            <Suspense fallback={<Loader className='mt-30' />}>
+              <MobileMenu />
+            </Suspense>
+          </div>
         </div>
       </div>
     </nav>
