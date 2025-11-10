@@ -1,227 +1,187 @@
 'use client';
-import React, { useState } from 'react';
-import { Calendar, MapPin, Users, Palette, Search } from 'lucide-react';
 
-type TourSearchProps = {
-  onSearch?: (params: {
-    destination: string;
-    startDate: string;
-    endDate: string;
-    theme: string;
-    guests: number;
-  }) => void;
-};
+import { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { MapPin, Palette, Search } from 'lucide-react';
+import { ThemeItem, CityItem } from '@/types/comman';
 
-const TourSearch: React.FC<TourSearchProps> = ({ onSearch }) => {
-  const [destination, setDestination] = useState('');
-  const [startDate, setStartDate] = useState('2025-11-08');
-  const [endDate, setEndDate] = useState('2025-11-15');
-  const [theme, setTheme] = useState('');
-  const [guests, setGuests] = useState(1);
-  const [showDatePicker, setShowDatePicker] = useState(false);
+interface TourSearchProps {
+  cities: CityItem[];
+  themes: ThemeItem[];
+}
+
+export default function TourSearch({ cities, themes }: TourSearchProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Derive state directly from URL params - no useState needed for URL-synced values
+  const currentCity = searchParams.get('city') || '';
+  const currentTheme = searchParams.get('theme') || '';
+
+  // Local state only for temporary selections before search
+  const [selectedCity, setSelectedCity] = useState(currentCity);
+  const [selectedTheme, setSelectedTheme] = useState(currentTheme);
 
   const handleSearch = () => {
-    onSearch?.({
-      destination,
-      startDate,
-      endDate,
-      theme,
-      guests,
-    });
+    const params = new URLSearchParams();
+
+    if (selectedCity) params.set('city', selectedCity);
+    if (selectedTheme) params.set('theme', selectedTheme);
+    params.set('page', '1');
+
+    router.push(`/india-tour-packages?${params.toString()}`);
   };
 
-  
-  const formatDateRange = () => {
-    if (!startDate && !endDate) return 'Select Dates';
-    if (startDate && endDate) {
-      const start = new Date(startDate).toLocaleDateString('en-US', { 
-        month: 'numeric', 
-        day: 'numeric', 
-        year: 'numeric' 
-      });
-      const end = new Date(endDate).toLocaleDateString('en-US', { 
-        month: 'numeric', 
-        day: 'numeric', 
-        year: 'numeric' 
-      });
-      return `${start} - ${end}`;
-    }
-    return 'Select Dates';
+  const handleClearAll = () => {
+    setSelectedCity('');
+    setSelectedTheme('');
+    router.push('/india-tour-packages');
   };
+
+  const handleRemoveFilter = (field: 'city' | 'theme') => {
+    if (field === 'city') {
+      setSelectedCity('');
+      const params = new URLSearchParams(searchParams.toString());
+      params.delete('city');
+      params.set('page', '1');
+      router.push(`/india-tour-packages?${params.toString()}`);
+    } else {
+      setSelectedTheme('');
+      const params = new URLSearchParams(searchParams.toString());
+      params.delete('theme');
+      params.set('page', '1');
+      router.push(`/india-tour-packages?${params.toString()}`);
+    }
+  };
+
+  const hasActiveFilters = currentCity || currentTheme;
+
+  // Ensure cities and themes are arrays
+  const citiesArray = Array.isArray(cities) ? cities : [];
+  const themesArray = Array.isArray(themes) ? themes : [];
 
   return (
-    <div className="w-full bg-orange-500 py-8 px-4">
+    <div className="w-full bg-linear-to-r from-orange-500 to-orange-600 py-8 px-4">
       <div className="max-w-7xl mx-auto">
-        
-        <h2 className="text-white-100 text-3xl md:text-4xl font-semibold mb-6">
-          Find Your Perfect Tour
-        </h2>
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-white text-3xl md:text-4xl font-semibold">
+            Find Your Perfect Tour
+          </h2>
+          {hasActiveFilters && (
+            <button
+              onClick={handleClearAll}
+              className="text-white/90 hover:text-white text-sm underline transition-colors"
+            >
+              Clear All
+            </button>
+          )}
+        </div>
 
-        
-        <div className="bg-white-100 rounded-2xl p-4 md:p-6 shadow-lg">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4 items-end">
-            
-            
+        {/* Search Form */}
+        <div className="bg-white rounded-2xl p-4 md:p-6 shadow-xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-end">
+
+            {/* DESTINATION DROPDOWN */}
             <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium text-form-label flex items-center gap-2">
-                <MapPin className="w-5 h-5 text-orange-500" />
+              <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-orange-500" />
                 Destination
               </label>
               <select
-                value={destination}
-                onChange={(e) => setDestination(e.target.value)}
-                className="w-full px-4 py-3 border border-form-input-border rounded-lg text-sm text-form-input-text bg-form-input-bg focus:outline-none focus:border-form-focus-ring focus:ring-2 focus:ring-form-focus-ring/10 transition-all appearance-none cursor-pointer"
+                value={selectedCity}
+                onChange={(e) => setSelectedCity(e.target.value)}
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-sm text-gray-900 bg-white focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition-all appearance-none cursor-pointer hover:border-orange-300"
                 style={{
-                  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-                  backgroundPosition: 'right 0.5rem center',
+                  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23f97316' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                  backgroundPosition: 'right 0.75rem center',
                   backgroundRepeat: 'no-repeat',
-                  backgroundSize: '1.5rem 1.5rem',
-                  paddingRight: '2.5rem'
+                  backgroundSize: '1.25rem 1.25rem',
+                  paddingRight: '3rem'
                 }}
               >
-                <option value="">Select Destination</option>
-                <option value="paris">Paris, France</option>
-                <option value="tokyo">Tokyo, Japan</option>
-                <option value="new-york">New York, USA</option>
-                <option value="london">London, UK</option>
-                <option value="dubai">Dubai, UAE</option>
+                <option value="">All Destinations</option>
+                {citiesArray.map((city) => (
+                  <option key={city.id} value={city.slug}>
+                    {city.name}
+                  </option>
+                ))}
               </select>
             </div>
 
-            
+            {/* TOUR THEME DROPDOWN */}
             <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium text-form-label flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-orange-500" />
-                Travel Dates
-              </label>
-              <div className="relative">
-                <button
-                  type="button"
-                  onClick={() => setShowDatePicker(!showDatePicker)}
-                  className="w-full px-4 py-3 border border-form-input-border rounded-lg text-sm text-form-input-text bg-form-input-bg focus:outline-none focus:border-form-focus-ring focus:ring-2 focus:ring-form-focus-ring/10 transition-all text-left"
-                >
-                  {formatDateRange()}
-                </button>
-                
-                
-                {showDatePicker && (
-                  <div className="absolute top-full left-0 mt-2 p-4 bg-white-100 border border-form-input-border rounded-lg shadow-xl z-50 min-w-[280px]">
-                    <div className="space-y-3">
-                      <div>
-                        <label className="text-xs text-form-secondary-text mb-1 block">
-                          Start Date
-                        </label>
-                        <input
-                          type="date"
-                          value={startDate}
-                          onChange={(e) => setStartDate(e.target.value)}
-                          className="w-full px-3 py-2 border border-form-input-border rounded text-sm text-form-input-text bg-form-input-bg focus:outline-none focus:border-form-focus-ring focus:ring-2 focus:ring-form-focus-ring/10"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-xs text-form-secondary-text mb-1 block">
-                          End Date
-                        </label>
-                        <input
-                          type="date"
-                          value={endDate}
-                          onChange={(e) => setEndDate(e.target.value)}
-                          className="w-full px-3 py-2 border border-form-input-border rounded text-sm text-form-input-text bg-form-input-bg focus:outline-none focus:border-form-focus-ring focus:ring-2 focus:ring-form-focus-ring/10"
-                        />
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => setShowDatePicker(false)}
-                        className="w-full px-3 py-2 bg-form-button-bg text-form-button-text rounded text-sm font-medium hover:bg-form-button-hover transition-colors"
-                      >
-                        Done
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium text-form-label flex items-center gap-2">
-                <Palette className="w-5 h-5 text-orange-500" />
+              <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+                <Palette className="w-4 h-4 text-orange-500" />
                 Tour Theme
               </label>
               <select
-                value={theme}
-                onChange={(e) => setTheme(e.target.value)}
-                className="w-full px-4 py-3 border border-form-input-border rounded-lg text-sm text-form-input-text bg-form-input-bg focus:outline-none focus:border-form-focus-ring focus:ring-2 focus:ring-form-focus-ring/10 transition-all appearance-none cursor-pointer"
+                value={selectedTheme}
+                onChange={(e) => setSelectedTheme(e.target.value)}
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-sm text-gray-900 bg-white focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition-all appearance-none cursor-pointer hover:border-orange-300"
                 style={{
-                  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-                  backgroundPosition: 'right 0.5rem center',
+                  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23f97316' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                  backgroundPosition: 'right 0.75rem center',
                   backgroundRepeat: 'no-repeat',
-                  backgroundSize: '1.5rem 1.5rem',
-                  paddingRight: '2.5rem'
+                  backgroundSize: '1.25rem 1.25rem',
+                  paddingRight: '3rem'
                 }}
               >
-                <option value="">Select Theme</option>
-                <option value="adventure">Adventure</option>
-                <option value="cultural">Cultural</option>
-                <option value="relaxation">Relaxation</option>
-                <option value="wildlife">Wildlife</option>
-                <option value="food">Food & Wine</option>
+                <option value="">All Themes</option>
+                {themesArray.map((theme) => (
+                  <option key={theme.id} value={theme.slug}>
+                    {theme.name}
+                  </option>
+                ))}
               </select>
             </div>
 
-            
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium text-form-label flex items-center gap-2">
-                <Users className="w-5 h-5 text-orange-500" />
-                Guests
-              </label>
-              <div className="relative">
-                <input
-                  type="number"
-                  min="1"
-                  max="20"
-                  value={guests}
-                  onChange={(e) => setGuests(parseInt(e.target.value) || 1)}
-                  className="w-full px-4 py-3 border border-form-input-border rounded-lg text-sm text-form-input-text bg-form-input-bg focus:outline-none focus:border-form-focus-ring focus:ring-2 focus:ring-form-focus-ring/10 transition-all"
-                />
-                <span className="absolute right-12 top-1/2 -translate-y-1/2 text-xs text-form-secondary-text">
-                  Guest{guests !== 1 ? 's' : ''}
-                </span>
-              </div>
-            </div>
-
-            
-            <div className="hidden lg:flex items-center justify-center">
-              <div className="w-12 h-12 rounded-full border-2 border-orange-500 flex items-center justify-center">
-                <Calendar className="w-6 h-6 text-orange-500" />
-              </div>
-            </div>
-
-            
-            <div className="sm:col-span-2 md:col-span-3 lg:col-span-5 xl:col-span-1">
+            <div>
               <button
                 type="button"
                 onClick={handleSearch}
-                className="w-full px-6 py-3 bg-form-button-bg text-form-button-text rounded-lg font-medium text-sm hover:bg-form-button-hover focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
+                className="w-full px-6 py-3 bg-linear-to-r from-orange-600 to-orange-700 text-white rounded-xl font-semibold text-sm hover:from-orange-700 hover:to-orange-800 focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]"
               >
                 <Search className="w-5 h-5" />
                 Search Tours
               </button>
             </div>
           </div>
-        </div>
 
-        
-        <div className="mt-4 text-white-100 text-sm md:text-base">
-          We have found <span className="font-semibold">317 options</span> matching your search.{' '}
-          <a href="#" className="underline hover:text-white-300 transition-colors font-medium">
-            Enquiry now
-          </a>{' '}
-          to get customised option
+          {/* Active Filters Display */}
+          {hasActiveFilters && (
+            <div className="mt-4 pt-4 border-t border-gray-100">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-sm text-gray-600 font-medium">Active filters:</span>
+                {currentCity && (
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-medium">
+                    📍 {citiesArray.find(c => c.slug === currentCity)?.name || currentCity}
+                    <button
+                      onClick={() => handleRemoveFilter('city')}
+                      className="ml-1 hover:text-orange-900"
+                      aria-label="Remove city filter"
+                    >
+                      ×
+                    </button>
+                  </span>
+                )}
+                {currentTheme && (
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-medium">
+                    🎨 {themesArray.find(t => t.slug === currentTheme)?.name || currentTheme}
+                    <button
+                      onClick={() => handleRemoveFilter('theme')}
+                      className="ml-1 hover:text-orange-900"
+                      aria-label="Remove theme filter"
+                    >
+                      ×
+                    </button>
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
-};
-
-export default TourSearch;
+}

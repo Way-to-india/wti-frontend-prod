@@ -1,0 +1,157 @@
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Star, MapPin, Calendar, Tag } from 'lucide-react';
+
+interface Duration {
+  days?: number;
+  nights?: number;
+}
+
+interface City {
+  id: string;
+  name: string;
+  label: string;
+  slug: string;
+}
+
+interface Theme {
+  id: string;
+  name: string;
+  label: string;
+  slug: string;
+}
+
+interface TourCardProps {
+  id?: string;
+  imageUrls: string[];
+  title: string;
+  description?: string;
+  overview?: string;
+  price: number | string;
+  rating?: number;
+  duration?: Duration;
+  cities?: City[];
+  themes?: Theme[];
+  best_time?: string | null;
+}
+
+const TourCard: React.FC<TourCardProps> = ({
+  id,
+  imageUrls,
+  title,
+  description,
+  overview,
+  rating = 0,
+  duration,
+  cities,
+  themes,
+}) => {
+  const imageUrl = imageUrls?.[0] || '/placeholder-image.jpg';
+  const displayText = description || overview || '';
+  const cardLink = id ? `/${id}` : '#';
+
+  return (
+    <Link href={cardLink} className="block h-full">
+      <article className="group relative bg-white rounded-xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl shadow-md h-full flex flex-col border border-gray-100">
+
+        <div className="relative h-48 w-full overflow-hidden shrink-0">
+          <Image
+            src={imageUrl}
+            alt={title}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-110"
+            priority={false}
+            quality={75}
+          />
+
+
+          <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
+
+
+          {rating > 0 && (
+            <div className="absolute top-3 right-3 bg-yellow-400 text-gray-900 px-2.5 py-1 rounded-full flex items-center gap-1 font-bold text-xs shadow-md z-10">
+              <Star className="w-3.5 h-3.5 fill-gray-900" />
+              <span>{rating}</span>
+            </div>
+          )}
+
+
+          <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
+            <h3 className="text-white text-lg font-bold leading-tight line-clamp-2 drop-shadow-lg">
+              {title}
+            </h3>
+          </div>
+        </div>
+
+
+        <div className="p-4 space-y-3 flex-1 flex flex-col bg-white">
+
+          <p className="text-gray-600 text-xs leading-relaxed line-clamp-2">
+            {displayText}
+          </p>
+
+
+          {duration?.days && (
+            <div className="inline-flex items-center gap-1.5 bg-orange-50 border border-orange-200 text-orange-600 px-3 py-1.5 rounded-lg w-fit">
+              <Calendar className="w-3.5 h-3.5" />
+              <span className="font-semibold text-xs">
+                {duration.days}D / {duration.nights}N
+              </span>
+            </div>
+          )}
+
+
+          {themes && themes.length > 0 && (
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-1.5 text-gray-500">
+                <Tag className="w-3.5 h-3.5" />
+                <span className="font-semibold text-[10px] uppercase tracking-wider">Theme</span>
+              </div>
+              <div className="inline-block bg-orange-50 border border-orange-200 text-orange-600 px-2.5 py-1 rounded-md">
+                <span className="text-xs font-medium">{themes[0].label}</span>
+              </div>
+            </div>
+          )}
+
+
+          {cities && cities.length > 0 && (
+            <div className="space-y-1.5 flex-1">
+              <div className="flex items-center gap-1.5 text-gray-500">
+                <MapPin className="w-3.5 h-3.5" />
+                <span className="font-semibold text-[10px] uppercase tracking-wider">Destinations</span>
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {cities.slice(0, 4).map((city) => (
+                  <div
+                    key={city.id}
+                    className="bg-gray-50 border border-gray-200 text-gray-700 px-2.5 py-1 rounded-md text-xs"
+                  >
+                    {city.name}
+                  </div>
+                ))}
+                {cities.length > 4 && (
+                  <div className="bg-gray-50 border border-gray-200 text-gray-500 px-2.5 py-1 rounded-md text-xs">
+                    +{cities.length - 4} more
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+
+          <div className="pt-3 mt-auto border-t border-gray-100">
+            <div className="flex items-end justify-between gap-3">
+              <span className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200 text-xs whitespace-nowrap">
+                View Details
+              </span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </Link>
+  );
+};
+
+export default TourCard;

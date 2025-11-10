@@ -189,7 +189,7 @@ export default function TransportSearchForm() {
               disabled={isSubmitting}
               className="w-full pl-12 pr-4 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition appearance-none bg-white text-2xl font-bold text-gray-900 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {cities.map(city => (
+              {cities?.map(city => (
                 <option key={city} value={city}>{city}</option>
               ))}
             </select>

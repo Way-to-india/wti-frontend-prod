@@ -5,7 +5,7 @@ import { getTravelGuide } from '@/lib/api/travel-guide';
 const TravelGuide = async () => {
   const travelGuideData = await getTravelGuide();
   const parsedData = travelGuideData?.payload;
-  console.log(JSON.stringify(parsedData));
+  // console.log(JSON.stringify(parsedData));
   return (
     <div className='max-w-7xl mx-auto'>
       <div className="text-sm text-gray-600 lg:mb-8 mb-4 md:mt-6 mt-3">

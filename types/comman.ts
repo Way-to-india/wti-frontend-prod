@@ -54,6 +54,8 @@ export interface CityItem {
   name: string;
   label: string;
   slug: string;
+  state_id: string | null;
+  country_id: string | null;
 }
 
 export interface PlanOfAction {

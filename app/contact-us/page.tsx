@@ -56,7 +56,7 @@ export default function ContactForm() {
     },
     onSuccess: (res) => {
       toast.success(res.message || 'Message sent successfully! We will contact you soon.');
-      console.log('Contact query created:', res);
+      // console.log('Contact query created:', res);
 
       // Reset form
       setFormData({

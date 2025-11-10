@@ -66,7 +66,7 @@ const AccordionItem = ({ state }: Props) => {
         <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
           {state.cities && state.cities.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {state.cities.map((city) => (
+              {state?.cities.map((city) => (
                 <Link
                   key={city.id}
                   href={`/destinations/${state.slug}/${city.slug}`}

@@ -8,23 +8,21 @@ export default function AuthProvider({
 }: { 
   children: React.ReactNode 
 }) {
-  const { login, logout, setLoading, isAuthenticated } = useAuthStore();
+  const { logout, setLoading, isAuthenticated } = useAuthStore();
   
   useEffect(() => {
-    const verifyAuth = async () => {
+      const verifyAuth = async () => {
       if (!isAuthenticated) {
         setLoading(false);
         return;
       }
-      
       try {
         const response = await fetch(endPoints.user.profile, {
           credentials: 'include',
-        });
-        
+        }); 
         if (response.ok) {
-          const userData = await response.json();
-          login(userData);
+          // const userData = await response.json();
+          // login(userData);
         } else {
           logout();
         }
