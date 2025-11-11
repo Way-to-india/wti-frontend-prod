@@ -8,11 +8,11 @@ import type { CityItem, ThemeItem } from '@/types/comman';
 interface ToursFiltersProps {
   cities: CityItem[];
   themes: ThemeItem[];
-  currentCity?: string;
-  currentTheme?: string;
+  currentCityId?: string;
+  currentThemeId?: string;
 }
 
-export default function ToursFilters({ cities, themes, currentCity, currentTheme }: ToursFiltersProps) {
+export default function ToursFilters({ cities, themes, currentCityId, currentThemeId }: ToursFiltersProps) {
   const router = useRouter();
 
   const [showAllThemes, setShowAllThemes] = useState(false);
@@ -46,7 +46,7 @@ export default function ToursFilters({ cities, themes, currentCity, currentTheme
   const displayedThemes = showAllThemes ? themesArray : themesArray.slice(0, 5);
   const displayedCities = showAllCities ? citiesArray : citiesArray.slice(0, 5);
 
-  const hasActiveFilters = currentTheme || currentCity;
+  const hasActiveFilters = currentThemeId || currentCityId;
 
   return (
     <aside className="bg-white rounded-lg border border-gray-200 p-6 sticky top-4">
@@ -79,8 +79,8 @@ export default function ToursFilters({ cities, themes, currentCity, currentTheme
               <label key={theme.id} className="flex items-center gap-2 cursor-pointer group">
                 <input
                   type="checkbox"
-                  checked={currentTheme === theme.slug}
-                  onChange={() => updateFilter('theme', theme.slug)}
+                  checked={currentThemeId === theme.id}
+                  onChange={() => updateFilter('themeId', theme.id)}
                   className="w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
                 />
                 <span className="text-sm text-gray-700 group-hover:text-orange-600 transition-colors">
@@ -117,8 +117,8 @@ export default function ToursFilters({ cities, themes, currentCity, currentTheme
               <label key={city.id} className="flex items-center gap-2 cursor-pointer group">
                 <input
                   type="checkbox"
-                  checked={currentCity === city.slug}
-                  onChange={() => updateFilter('city', city.slug)}
+                  checked={currentCityId === city.id}
+                  onChange={() => updateFilter('cityId', city.id)}
                   className="w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
                 />
                 <span className="text-sm text-gray-700 group-hover:text-orange-600 transition-colors">
@@ -145,14 +145,14 @@ export default function ToursFilters({ cities, themes, currentCity, currentTheme
         <div className="pt-4 border-t border-gray-200">
           <p className="text-sm font-semibold text-gray-700 mb-2">Active Filters:</p>
           <div className="space-y-1">
-            {currentTheme && (
+            {currentThemeId && (
               <div className="text-xs text-gray-600">
-                Theme: {themesArray.find(t => t.slug === currentTheme)?.name || currentTheme}
+                Theme: {themesArray.find(t => t.id === currentThemeId)?.name || currentThemeId}
               </div>
             )}
-            {currentCity && (
+            {currentCityId && (
               <div className="text-xs text-gray-600">
-                City: {citiesArray.find(c => c.slug === currentCity)?.name || currentCity}
+                City: {citiesArray.find(c => c.id === currentCityId)?.name || currentCityId}
               </div>
             )}
           </div>

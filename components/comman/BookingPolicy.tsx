@@ -127,17 +127,6 @@ const BookingPolicy: React.FC<BookingPolicyProps> = ({
                     </div>
                 </div>
             </div>
-
-            <div className="bg-linear-to-r from-gray-50 to-gray-100 rounded-lg p-6 border border-gray-200">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                    <div>
-                        <h4 className="font-semibold text-gray-900 mb-1">Need Help with Your Booking?</h4>
-                        <p className="text-sm text-gray-600">
-                            Our support team is available 24/7 to assist you with any questions or concerns.
-                        </p>
-                    </div>
-                </div>
-            </div>
         </div>
     );
 };

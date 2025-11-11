@@ -13,7 +13,7 @@ type Props = {
 export default function TourInclusions({ inclusions, exclusions }: Props) {
   return (
     <div className="flex flex-col gap-8">
-      
+
       <div className="bg-white rounded-2xl shadow-md p-6">
         <h3 className="text-2xl font-bold text-green-700 mb-5">Inclusions</h3>
 
@@ -29,9 +29,9 @@ export default function TourInclusions({ inclusions, exclusions }: Props) {
                   <p className="font-semibold text-gray-900 leading-snug">
                     {inc.title}
                   </p>
-                  <p className="text-gray-600 text-sm mt-0.5">
+                  {/* <p className="text-gray-600 text-sm mt-0.5">
                     {inc.description}
-                  </p>
+                  </p> */}
                 </div>
               </li>
             ))}
@@ -41,7 +41,7 @@ export default function TourInclusions({ inclusions, exclusions }: Props) {
         )}
       </div>
 
-      
+
       <div className="bg-white rounded-2xl shadow-md p-6">
         <h3 className="text-2xl font-bold text-red-600 mb-5">Exclusions</h3>
 
@@ -57,9 +57,9 @@ export default function TourInclusions({ inclusions, exclusions }: Props) {
                   <p className="font-semibold text-gray-900 leading-snug">
                     {exc.title}
                   </p>
-                  <p className="text-gray-600 text-sm mt-0.5">
+                  {/* <p className="text-gray-600 text-sm mt-0.5">
                     {exc.description}
-                  </p>
+                  </p> */}
                 </div>
               </li>
             ))}

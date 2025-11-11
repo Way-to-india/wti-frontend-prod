@@ -9,8 +9,8 @@ import { TourSkeleton } from '@/components/skeleton';
 
 interface PageProps {
   searchParams: Promise<{
-    city?: string;
-    theme?: string;
+    cityId?: string;
+    themeId?: string;
     page?: string;
   }>;
 }
@@ -22,7 +22,14 @@ async function FiltersWrapper({ searchParams }: { searchParams: PageProps['searc
     getTourThemes(),
   ]);
 
-  return <ToursFilters cities={cities} themes={themes} currentCity={params.city} currentTheme={params.theme} />;
+  return (
+    <ToursFilters
+      cities={cities}
+      themes={themes}
+      currentCityId={params.cityId}
+      currentThemeId={params.themeId}
+    />
+  );
 }
 
 async function SearchWrapper() {
@@ -41,11 +48,11 @@ async function ContentWrapper({ searchParams }: { searchParams: PageProps['searc
 
 export default async function ToursPage({ searchParams }: PageProps) {
   const params = await searchParams;
-  const searchKey = `${params.city || 'all'}-${params.theme || 'all'}-${params.page || '1'}`;
+  const searchKey = `${params.cityId || 'all'}-${params.themeId || 'all'}-${params.page || '1'}`;
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Suspense fallback={<div className="h-64 bg-linear-to-r from-orange-500 to-orange-600 animate-pulse" />}>
+      <Suspense fallback={<div className="h-64 bg-gradient-to-r from-orange-500 to-orange-600 animate-pulse" />}>
         <SearchWrapper />
       </Suspense>
 
@@ -79,6 +86,3 @@ export default async function ToursPage({ searchParams }: PageProps) {
     </div>
   );
 }
-
-// export const dynamic = 'force-dynamic';
-// export const revalidate = 0;

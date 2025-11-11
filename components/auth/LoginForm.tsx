@@ -17,37 +17,64 @@ const LoginForm = () => {
     email: '',
     password: '',
   });
-  const [error, setError] = useState<string | "">("");
+  const [error, setError] = useState<string>("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    if (error) setError("");
   };
 
-  const signupMutation = useMutation({
+  const loginMutation = useMutation({
     mutationFn: async () => {
-      const response = await axios.post(endPoints.auth.login, formData);
+      const response = await axios.post(endPoints.auth.login, formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
       return response.data;
     },
     onSuccess: (res) => {
-      login(res.payload.user, res.payload.token);
-      toast.success(res.message || "Login Successful");
-      router.push("/");
+      console.log("Login response:", res);
+
+      const user = res.payload?.user || res.user;
+      const token = res.payload?.token || res.token;
+
+      if (user && token) {
+        login(user, token);
+        toast.success(res.message || "Login Successful");
+        console.log("User logged in, redirecting...");
+
+        // Small delay to ensure state is persisted
+        setTimeout(() => {
+          router.push("/");
+        }, 100);
+      } else {
+        toast.error("Invalid response from server");
+        console.error("Missing user or token in response:", res);
+      }
     },
     onError: (error) => {
+      console.error("Login error:", error);
       if (axios.isAxiosError(error)) {
-        toast.error(error.response?.data.message || "Something Went Wrong");
+        const message = error.response?.data?.message || "Something Went Wrong";
+        toast.error(message);
+        setError(message);
+      } else {
+        const message = 'Something went wrong';
+        toast.error(message);
+        setError(message);
       }
-      setError('Something went wrong');
     },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    signupMutation.mutate();
+    setError("");
+    loginMutation.mutate();
   };
 
-  const isLoading = signupMutation.isPending;
+  const isLoading = loginMutation.isPending;
 
   return (
     <div>
@@ -90,7 +117,7 @@ const LoginForm = () => {
               onClick={() => setShowPassword(!showPassword)}
               className="absolute right-3 top-1/2 transform -translate-y-1/2 text-form-secondary-text hover:text-form-label transition-colors cursor-pointer"
             >
-              {showPassword ? <EyeOff /> : <Eye />}
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
         </div>

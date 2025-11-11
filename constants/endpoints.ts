@@ -8,7 +8,7 @@ export const endPoints = {
   },
 
   user: {
-    profile: `${BASE_URL}${USER_PATH}/profile`,
+    profile: `${BASE_URL}${USER_PATH}/user/profile`,
   },
 
   tour: {
@@ -43,6 +43,10 @@ export const endPoints = {
   },
 
   contactUsQuery: {
-    create: `${BASE_URL}/${USER_PATH}/contact-us-query`,
+    create: `${BASE_URL}${USER_PATH}/contact-us-query`,
   },
+
+  tourQuery : {
+    create : `${BASE_URL}${USER_PATH}/tour-query`
+  }
 };

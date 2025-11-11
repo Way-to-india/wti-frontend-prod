@@ -2,6 +2,7 @@ import { FiClock, FiMapPin, FiUsers, FiHome, FiShare2 } from 'react-icons/fi'
 import { FaStar } from 'react-icons/fa'
 import { CityItem, ThemeItem, Tour } from '@/types/comman';
 import TourDescription from './TourDescription';
+import TourQuery from './TourQuery';
 
 type TourContentProps = {
   title: string;
@@ -104,6 +105,8 @@ const TourContent = (tour: TourContentProps) => {
             </li>
           ))}
         </ul>
+
+        <TourQuery />
 
         <div className='mt-5'>
           <h3 className='font-medium mb-3 text-gray-900'>Description</h3>

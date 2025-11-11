@@ -148,7 +148,10 @@ export async function getTourThemes() {
 }
 
 export async function searchTours(params: {
-  city: string; theme: string; page: number
+  cityId?: string;
+  themeId?: string;
+  page: number;
+  limit?: number;
 }) {
   'use cache';
   cacheTag('tours', `search-${JSON.stringify(params)}`);
@@ -157,12 +160,15 @@ export async function searchTours(params: {
   try {
     const queryParams = new URLSearchParams();
 
-    if (params.city) queryParams.append('city', params.city);
-    if (params.theme) queryParams.append('theme', params.theme);
+    // Backend expects cityId and themeId (not city/theme slugs)
+    if (params.cityId) queryParams.append('cityId', params.cityId);
+    if (params.themeId) queryParams.append('themeId', params.themeId);
     queryParams.append('page', (params.page || 1).toString());
-    // queryParams.append('limit',  12.toString());
+    queryParams.append('limit', (params.limit || 9).toString());
 
     const url = `${endPoints.tour.search}?${queryParams.toString()}`;
+
+    console.log('Fetching tours from:', url); // Debug log
 
     const response = await fetch(url, {
       headers: { 'Content-Type': 'application/json' },

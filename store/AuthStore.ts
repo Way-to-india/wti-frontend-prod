@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
 type User = {
   id: string;
@@ -10,45 +10,56 @@ type User = {
 
 type AuthState = {
   user: User | null;
-  token: string | null; // Add token
+  token: string | null;
   isAuthenticated: boolean;
-  isLoading: boolean; 
-  login: (user: User, token: string) => void; // Update to accept token
+  isLoading: boolean;
+  isHydrated: boolean; 
+  login: (user: User, token: string) => void;
   logout: () => void;
   setLoading: (loading: boolean) => void;
+  setHydrated: () => void;
 };
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set) => ({
+    set => ({
       user: null,
-      token: null, 
+      token: null,
       isAuthenticated: false,
-      isLoading: true, 
-      
-      login: (user, token) => set({ 
-        user, 
-        token,
-        isAuthenticated: true,
-        isLoading: false 
-      }),
-      
-      logout: () => set({ 
-        user: null, 
-        token: null, 
-        isAuthenticated: false,
-        isLoading: false 
-      }),
-      
-      setLoading: (loading) => set({ isLoading: loading }),
+      isLoading: true,
+      isHydrated: false,
+
+      login: (user, token) =>
+        set({
+          user,
+          token,
+          isAuthenticated: true,
+          isLoading: false,
+        }),
+
+      logout: () =>
+        set({
+          user: null,
+          token: null,
+          isAuthenticated: false,
+          isLoading: false,
+        }),
+
+      setLoading: loading => set({ isLoading: loading }),
+
+      setHydrated: () => set({ isHydrated: true }),
     }),
     {
       name: 'auth-storage',
-      partialize: (state) => ({
+      storage: createJSONStorage(() => localStorage),
+      partialize: state => ({
         user: state.user,
-        token: state.token, 
+        token: state.token,
         isAuthenticated: state.isAuthenticated,
       }),
+      onRehydrateStorage: () => state => {
+        state?.setHydrated();
+      },
     }
   )
 );

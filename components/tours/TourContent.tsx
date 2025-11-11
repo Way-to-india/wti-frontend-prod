@@ -5,8 +5,8 @@ import type { CityItem } from '@/types/comman';
 
 interface ToursContentProps {
     searchParams: Promise<{
-        city?: string;
-        theme?: string;
+        cityId?: string;
+        themeId?: string;
         page?: string;
     }>;
     cities: CityItem[];
@@ -20,10 +20,10 @@ export default async function ToursContent({ searchParams, cities }: ToursConten
 
     try {
         const res = await searchTours({
-            city: params.city || "",
-            theme: params.theme || "",
+            cityId: params.cityId || undefined,
+            themeId: params.themeId || undefined,
             page: validPage,
-            // limit: 12,
+            limit: 9,
         });
 
         // Extract data with fallbacks
@@ -52,14 +52,14 @@ export default async function ToursContent({ searchParams, cities }: ToursConten
                             : 'No tours found'
                         }
                     </h1>
-                    {params.city && Array.isArray(cities) && cities.length > 0 && (
+                    {params.cityId && Array.isArray(cities) && cities.length > 0 && (
                         <p className="text-gray-600 mt-1">
-                            in {cities.find(c => c.slug === params.city)?.name || params.city}
+                            in {cities.find(c => c.id === params.cityId)?.name || params.cityId}
                         </p>
                     )}
-                    {params.theme && (
+                    {params.themeId && (
                         <p className="text-gray-600 mt-1">
-                            Theme: {params.theme}
+                            Theme: {params.themeId}
                         </p>
                     )}
                 </div>

@@ -28,28 +28,50 @@ const SignUpForm = () => {
 
   const signupMutation = useMutation({
     mutationFn: async () => {
-      const response = await axios.post(endPoints.auth.signup, formData);
+      const response = await axios.post(endPoints.auth.signup, formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
       return response.data;
     },
     onSuccess: (res) => {
+      console.log("Signup response:", res);
+
       // Login user after successful signup with token
-      login(res.payload.user, res.payload.token);
-      toast.success(res.message || "Signup Successful");
-      console.log("Signup Successful");
-      router.push("/");
+      const user = res.payload?.user || res.user;
+      const token = res.payload?.token || res.token;
+
+      if (user && token) {
+        login(user, token);
+        toast.success(res.message || "Signup Successful");
+        console.log("User logged in, redirecting...");
+
+        // Small delay to ensure state is persisted
+        setTimeout(() => {
+          router.push("/");
+        }, 100);
+      } else {
+        toast.error("Invalid response from server");
+        console.error("Missing user or token in response:", res);
+      }
     },
     onError: (error) => {
+      console.error("Signup error:", error);
       if (axios.isAxiosError(error)) {
-        toast.error(error.response?.data.message || "Something Went Wrong");
-        setErrorMessage(error.response?.data.message || "Something went wrong");
+        const message = error.response?.data?.message || "Something Went Wrong";
+        toast.error(message);
+        setErrorMessage(message);
       } else {
         setErrorMessage('Something went wrong');
+        toast.error('Something went wrong');
       }
     },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage(null);
     signupMutation.mutate();
   };
 
