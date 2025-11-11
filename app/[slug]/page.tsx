@@ -1,29 +1,47 @@
 import React, { Suspense } from 'react'
 import { TourSkeleton } from '@/components/skeleton'
 import TourContent, { Props } from './Tour'
+import { getMetaData } from '@/constants/MetaData'
+import { Metadata } from 'next'
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  
+  const { slug } = await params
+  const metaData = getMetaData(slug)
+
+  return {
+    title: metaData.title,
+    description: metaData.description,
+    keywords: metaData.keywords,
+    alternates: {
+      canonical: `https://www.waytoindia.com${metaData.canonicalPath}`
+    },
+    openGraph: {
+      title: metaData.title,
+      description: metaData.description,
+      url: `https://www.waytoindia.com${metaData.canonicalPath}`,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: metaData.title,
+      description: metaData.description,
+    }
+  }
+}
 
 export default async function Tour({ params }: Props) {
   return (
-    <Suspense fallback={<TourSkeleton/>}>
+    <Suspense fallback={<TourSkeleton />}>
       <TourContent params={params} />
     </Suspense>
   )
 }
 
-// // Generate static params for popular tours (optional but recommended)
 // export async function generateStaticParams() {
-//   'use cache'
-//   cacheLife('days')
-  
-//   try {
-//     const response = await fetch(`${endPoints.tour.id}`)
-//     const tours = await response.json()
-    
-//     return tours.map((tour: { slug: string }) => ({
-//       slug: tour.slug,
-//     }))
-//   } catch (error) {
-//     console.error('Error generating static params:', error)
-//     return []
-//   }
+//   const slugs = getAllTourSlugs()
+
+//   return slugs.map((slug) => ({
+//     slug: slug,
+//   }))
 // }

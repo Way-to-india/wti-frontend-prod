@@ -16,7 +16,6 @@ import {
   ChevronDown,
   User,
   LogOut,
-  Settings
 } from 'lucide-react';
 import Image from 'next/image';
 
@@ -258,14 +257,6 @@ const MobileMenu: React.FC = () => {
                 <span>My Profile</span>
               </Link>
 
-              <Link
-                href="/settings"
-                className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                <Settings className="w-5 h-5" />
-                <span>Settings</span>
-              </Link>
 
               <button
                 onClick={handleLogout}

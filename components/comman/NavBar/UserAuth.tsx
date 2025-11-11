@@ -7,7 +7,6 @@ import { useAuthStore } from '@/store/AuthStore';
 import {
   User,
   LogOut,
-  Settings,
   ChevronDown
 } from 'lucide-react';
 import Image from 'next/image';
@@ -122,14 +121,6 @@ const UserAuth: React.FC = () => {
               <span>My Profile</span>
             </Link>
 
-            <Link
-              href="/settings"
-              className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-500 transition-colors"
-              onClick={() => setShowDropdown(false)}
-            >
-              <Settings className="w-4 h-4" />
-              <span>Settings</span>
-            </Link>
           </div>
 
           <div className="border-t border-gray-200 py-2">
