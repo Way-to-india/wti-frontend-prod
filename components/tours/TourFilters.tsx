@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { ChevronDown, ChevronUp, X } from 'lucide-react';
 import type { CityItem, ThemeItem } from '@/types/comman';
+import { ChevronDown, ChevronUp, X } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 interface ToursFiltersProps {
   cities: CityItem[];
@@ -50,9 +50,9 @@ export default function ToursFilters({ cities, themes, currentCityId, currentThe
 
   return (
     <aside className="bg-white rounded-lg border border-gray-200 p-6 sticky top-4">
-      {/* Header with Clear All */}
+     
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-lg font-bold text-gray-900">Refine Your Search</h2>
+        <h2 className="text-lg font-bold text-gray-900"></h2>
         {hasActiveFilters && (
           <button
             onClick={clearAllFilters}
@@ -64,7 +64,7 @@ export default function ToursFilters({ cities, themes, currentCityId, currentThe
         )}
       </div>
 
-      {/* Tour Theme */}
+     
       <div className="mb-6">
         <button
           onClick={() => setShowAllThemes(!showAllThemes)}
@@ -102,7 +102,7 @@ export default function ToursFilters({ cities, themes, currentCityId, currentThe
         )}
       </div>
 
-      {/* Destination */}
+     
       <div className="mb-6">
         <button
           onClick={() => setShowAllCities(!showAllCities)}
@@ -140,7 +140,7 @@ export default function ToursFilters({ cities, themes, currentCityId, currentThe
         )}
       </div>
 
-      {/* Active Filters Summary */}
+     
       {hasActiveFilters && (
         <div className="pt-4 border-t border-gray-200">
           <p className="text-sm font-semibold text-gray-700 mb-2">Active Filters:</p>
