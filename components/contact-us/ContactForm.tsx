@@ -2,6 +2,12 @@
 
 import { useState } from 'react';
 import { FiSend } from 'react-icons/fi';
+import { useMutation } from '@tanstack/react-query';
+import { useAuthStore } from '@/store/AuthStore';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
+import axios from 'axios';
+import { endPoints } from '@/constants/endpoints';
 
 type FormData = {
   fullName: string;
@@ -16,17 +22,68 @@ type FormErrors = {
 };
 
 export default function ContactForm() {
+  const router = useRouter();
+  const { token, isAuthenticated, user } = useAuthStore();
+
   const [formData, setFormData] = useState<FormData>({
-    fullName: '',
-    email: '',
+    fullName: user?.name || '',
+    email: user?.email || '',
     phone: '',
     subject: '',
     message: '',
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  // Mutation for creating contact query
+  const createContactMutation = useMutation({
+    mutationFn: async (data: FormData) => {
+      if (!token) {
+        throw new Error('Authentication required');
+      }
+
+      const response = await axios.post(
+        endPoints.contactUsQuery.create,
+        data,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      toast.success(res.message || 'Message sent successfully! We will contact you soon.');
+      // console.log('Contact query created:', res);
+
+      // Reset form
+      setFormData({
+        fullName: user?.name || '',
+        email: user?.email || '',
+        phone: '',
+        subject: '',
+        message: '',
+      });
+      setErrors({});
+    },
+    onError: (error) => {
+      if (axios.isAxiosError(error)) {
+        const errorMessage = error.response?.data?.message || 'Failed to send message';
+        toast.error(errorMessage);
+
+        // If unauthorized, redirect to login
+        if (error.response?.status === 401) {
+          toast.error('Please login to continue');
+          router.push('/login');
+        }
+      } else {
+        toast.error('Something went wrong');
+      }
+      console.error('Error creating contact query:', error);
+    },
+  });
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -63,38 +120,18 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
+    // Check if user is authenticated
+    if (!isAuthenticated) {
+      toast.error('Please login to send a message');
+      router.push('/login');
+      return;
+    }
+
     if (!validateForm()) return;
 
-    setIsSubmitting(true);
-    
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Here you would normally send the data to your API
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData),
-      // });
-
-      setSubmitSuccess(true);
-      setFormData({
-        fullName: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: '',
-      });
-      
-      // Reset success message after 5 seconds
-      setTimeout(() => setSubmitSuccess(false), 5000);
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Submit the query
+    createContactMutation.mutate(formData);
   };
 
   const handleChange = (
@@ -102,12 +139,14 @@ export default function ContactForm() {
   ) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    
+
     // Clear error when user starts typing
     if (errors[name as keyof FormData]) {
       setErrors(prev => ({ ...prev, [name]: undefined }));
     }
   };
+
+  const isSubmitting = createContactMutation.isPending;
 
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border border-gray-100">
@@ -122,22 +161,13 @@ export default function ContactForm() {
         </p>
       </div>
 
-      {/* Success Message */}
-      {submitSuccess && (
-        <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-          <p className="text-green-800 font-medium">
-            ✅ Message sent successfully! We&apos;ll get back to you soon.
-          </p>
-        </div>
-      )}
-
       {/* Form */}
       <form onSubmit={handleSubmit} className="space-y-5" noValidate>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {/* Full Name */}
           <div>
-            <label 
-              htmlFor="fullName" 
+            <label
+              htmlFor="fullName"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
               Full Name <span className="text-red-500">*</span>
@@ -149,9 +179,9 @@ export default function ContactForm() {
               value={formData.fullName}
               onChange={handleChange}
               placeholder="Rajesh Kumar"
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition ${
-                errors.fullName ? 'border-red-500' : 'border-gray-300'
-              }`}
+              disabled={isSubmitting}
+              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition disabled:opacity-50 disabled:cursor-not-allowed ${errors.fullName ? 'border-red-500' : 'border-gray-300'
+                }`}
               aria-invalid={!!errors.fullName}
               aria-describedby={errors.fullName ? 'fullName-error' : undefined}
             />
@@ -164,8 +194,8 @@ export default function ContactForm() {
 
           {/* Email */}
           <div>
-            <label 
-              htmlFor="email" 
+            <label
+              htmlFor="email"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
               Email Address <span className="text-red-500">*</span>
@@ -177,9 +207,9 @@ export default function ContactForm() {
               value={formData.email}
               onChange={handleChange}
               placeholder="john@example.com"
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition ${
-                errors.email ? 'border-red-500' : 'border-gray-300'
-              }`}
+              disabled={isSubmitting}
+              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition disabled:opacity-50 disabled:cursor-not-allowed ${errors.email ? 'border-red-500' : 'border-gray-300'
+                }`}
               aria-invalid={!!errors.email}
               aria-describedby={errors.email ? 'email-error' : undefined}
             />
@@ -194,8 +224,8 @@ export default function ContactForm() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {/* Phone */}
           <div>
-            <label 
-              htmlFor="phone" 
+            <label
+              htmlFor="phone"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
               Phone Number <span className="text-red-500">*</span>
@@ -207,9 +237,9 @@ export default function ContactForm() {
               value={formData.phone}
               onChange={handleChange}
               placeholder="+91 98765 43210"
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition ${
-                errors.phone ? 'border-red-500' : 'border-gray-300'
-              }`}
+              disabled={isSubmitting}
+              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition disabled:opacity-50 disabled:cursor-not-allowed ${errors.phone ? 'border-red-500' : 'border-gray-300'
+                }`}
               aria-invalid={!!errors.phone}
               aria-describedby={errors.phone ? 'phone-error' : undefined}
             />
@@ -222,8 +252,8 @@ export default function ContactForm() {
 
           {/* Subject */}
           <div>
-            <label 
-              htmlFor="subject" 
+            <label
+              htmlFor="subject"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
               Subject <span className="text-red-500">*</span>
@@ -233,9 +263,9 @@ export default function ContactForm() {
               name="subject"
               value={formData.subject}
               onChange={handleChange}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition appearance-none bg-white ${
-                errors.subject ? 'border-red-500' : 'border-gray-300'
-              }`}
+              disabled={isSubmitting}
+              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition appearance-none bg-white disabled:opacity-50 disabled:cursor-not-allowed ${errors.subject ? 'border-red-500' : 'border-gray-300'
+                }`}
               aria-invalid={!!errors.subject}
               aria-describedby={errors.subject ? 'subject-error' : undefined}
             >
@@ -257,8 +287,8 @@ export default function ContactForm() {
 
         {/* Message */}
         <div>
-          <label 
-            htmlFor="message" 
+          <label
+            htmlFor="message"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
             Your Message <span className="text-red-500">*</span>
@@ -270,9 +300,9 @@ export default function ContactForm() {
             onChange={handleChange}
             rows={5}
             placeholder="Tell us about your travel plans, questions, or how we can help you..."
-            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition resize-none ${
-              errors.message ? 'border-red-500' : 'border-gray-300'
-            }`}
+            disabled={isSubmitting}
+            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition resize-none disabled:opacity-50 disabled:cursor-not-allowed ${errors.message ? 'border-red-500' : 'border-gray-300'
+              }`}
             aria-invalid={!!errors.message}
             aria-describedby={errors.message ? 'message-error' : undefined}
           />

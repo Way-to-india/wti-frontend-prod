@@ -6,6 +6,7 @@ import ToursFilters from '@/components/tours/TourFilters';
 import ToursContent from '@/components/tours/TourContent';
 import { getTourCities, getTourThemes } from '@/lib/api/tours';
 import { TourSkeleton } from '@/components/skeleton';
+import Loader from '@/components/skeleton/Loader';
 
 interface PageProps {
   searchParams: Promise<{
@@ -52,7 +53,8 @@ export default async function ToursPage({ searchParams }: PageProps) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Suspense fallback={<div className="h-64 bg-gradient-to-r from-orange-500 to-orange-600 animate-pulse" />}>
+      
+      <Suspense fallback={<Loader />}>
         <SearchWrapper />
       </Suspense>
 
@@ -71,7 +73,7 @@ export default async function ToursPage({ searchParams }: PageProps) {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           <div className="lg:col-span-1">
-            <Suspense key={`filters-${searchKey}`} fallback={<div className="h-64 bg-white rounded-lg animate-pulse" />}>
+            <Suspense key={`filters-${searchKey}`} fallback={<Loader />}>
               <FiltersWrapper searchParams={searchParams} />
             </Suspense>
           </div>

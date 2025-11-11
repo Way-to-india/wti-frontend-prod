@@ -66,6 +66,7 @@ export async function getTourCities() {
 
   try {
     const url = endPoints.tour.getCities;
+    console.log(url);
     const response = await fetch(url, {
       headers: {
         'Content-Type': 'application/json',
@@ -147,6 +148,8 @@ export async function getTourThemes() {
   }
 }
 
+
+
 export async function searchTours(params: {
   cityId?: string;
   themeId?: string;
@@ -160,7 +163,7 @@ export async function searchTours(params: {
   try {
     const queryParams = new URLSearchParams();
 
-    // Backend expects cityId and themeId (not city/theme slugs)
+    
     if (params.cityId) queryParams.append('cityId', params.cityId);
     if (params.themeId) queryParams.append('themeId', params.themeId);
     queryParams.append('page', (params.page || 1).toString());
@@ -168,7 +171,7 @@ export async function searchTours(params: {
 
     const url = `${endPoints.tour.search}?${queryParams.toString()}`;
 
-    console.log('Fetching tours from:', url); // Debug log
+    console.log('Fetching tours from:', url); 
 
     const response = await fetch(url, {
       headers: { 'Content-Type': 'application/json' },
@@ -194,5 +197,39 @@ export async function searchTours(params: {
         },
       },
     };
+  }
+}
+
+
+// Tour FAQSchema
+
+export async function getTourFAQSchema(tourId: string) {
+  'use cache';
+  cacheTag('tours', `faq-schema-${tourId}`);
+  cacheLife('hours');
+
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tour/faq/schema/${tourId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      next: {
+        revalidate: 3600, 
+        tags: [`faq-${tourId}`],
+      },
+    });
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        console.log(`No FAQ schema found for tour: ${tourId}`);
+        return null;
+      }
+      throw new Error(`Failed to fetch FAQ schema: ${response.statusText}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching FAQ schema:', error);
+    return null; 
   }
 }

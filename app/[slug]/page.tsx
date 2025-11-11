@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import { TourSkeleton } from '@/components/skeleton'
 import TourContent, { Props } from './Tour'
 
-export default function Tour({ params }: Props) {
+export default async function Tour({ params }: Props) {
   return (
     <Suspense fallback={<TourSkeleton/>}>
       <TourContent params={params} />

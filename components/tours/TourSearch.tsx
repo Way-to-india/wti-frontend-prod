@@ -13,14 +13,13 @@ export default function TourSearch({ cities, themes }: TourSearchProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // Derive state directly from URL - no local state needed
   const selectedCityId = searchParams.get('cityId') || '';
   const selectedThemeId = searchParams.get('themeId') || '';
 
   const handleSearch = () => {
     const params = new URLSearchParams();
 
-    // Backend expects cityId and themeId
+    
     if (selectedCityId) params.set('cityId', selectedCityId);
     if (selectedThemeId) params.set('themeId', selectedThemeId);
     params.set('page', '1');
@@ -73,7 +72,7 @@ export default function TourSearch({ cities, themes }: TourSearchProps) {
 
   const hasActiveFilters = selectedCityId || selectedThemeId;
 
-  // Ensure cities and themes are arrays
+  
   const citiesArray = Array.isArray(cities) ? cities : [];
   const themesArray = Array.isArray(themes) ? themes : [];
 

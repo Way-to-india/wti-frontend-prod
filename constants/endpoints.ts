@@ -13,13 +13,24 @@ export const endPoints = {
 
   tour: {
     id: `${BASE_URL}/tour`,
+
     reviews: {
       getReview: `${BASE_URL}${USER_PATH}/review/tours/:tourId/reviews`,
     },
+
     similarTour: `${BASE_URL}/tour/similar-tour/:tourId?limit=${6}`,
+
     getCities: `${BASE_URL}/city`,
+
     getThemes: `${BASE_URL}/theme`,
+
     search: `${BASE_URL}/tour`,
+
+    faq: {
+
+      getSchema :  (tourId : string) => `${BASE_URL}/faq/${tourId}/schema`,
+
+    },
   },
 
   travelGuide: {
@@ -46,7 +57,7 @@ export const endPoints = {
     create: `${BASE_URL}${USER_PATH}/contact-us-query`,
   },
 
-  tourQuery : {
-    create : `${BASE_URL}${USER_PATH}/tour-query`
-  }
+  tourQuery: {
+    create: `${BASE_URL}${USER_PATH}/tour-query`,
+  },
 };

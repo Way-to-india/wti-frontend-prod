@@ -1,338 +1,279 @@
-'use client';
+import { FiPhone, FiMail, FiClock } from 'react-icons/fi';
+import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from 'react-icons/fa';
+import ContactForm from '@/components/contact-us/ContactForm';
+import { Metadata } from 'next';
 
-import { useState } from 'react';
-import { FiSend } from 'react-icons/fi';
-import { useMutation } from '@tanstack/react-query';
-import { useAuthStore } from '@/store/AuthStore';
-import { useRouter } from 'next/navigation';
-import toast from 'react-hot-toast';
-import axios from 'axios';
-import { endPoints } from '@/constants/endpoints';
-
-type FormData = {
-  fullName: string;
-  email: string;
-  phone: string;
-  subject: string;
-  message: string;
+export const metadata: Metadata = {
+  title: 'Contact Us - Way to India',
+  description: 'Get in touch with our travel experts. We are here to help you plan your perfect journey.',
 };
 
-type FormErrors = {
-  [K in keyof FormData]?: string;
-};
-
-export default function ContactForm() {
-  const router = useRouter();
-  const { token, isAuthenticated, user } = useAuthStore();
-
-  const [formData, setFormData] = useState<FormData>({
-    fullName: user?.name || '',
-    email: user?.email || '',
-    phone: '',
-    subject: '',
-    message: '',
-  });
-
-  const [errors, setErrors] = useState<FormErrors>({});
-
-  // Mutation for creating contact query
-  const createContactMutation = useMutation({
-    mutationFn: async (data: FormData) => {
-      if (!token) {
-        throw new Error('Authentication required');
-      }
-
-      const response = await axios.post(
-        endPoints.contactUsQuery.create,
-        data,
-        {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      return response.data;
-    },
-    onSuccess: (res) => {
-      toast.success(res.message || 'Message sent successfully! We will contact you soon.');
-      // console.log('Contact query created:', res);
-
-      // Reset form
-      setFormData({
-        fullName: user?.name || '',
-        email: user?.email || '',
-        phone: '',
-        subject: '',
-        message: '',
-      });
-      setErrors({});
-    },
-    onError: (error) => {
-      if (axios.isAxiosError(error)) {
-        const errorMessage = error.response?.data?.message || 'Failed to send message';
-        toast.error(errorMessage);
-
-        // If unauthorized, redirect to login
-        if (error.response?.status === 401) {
-          toast.error('Please login to continue');
-          router.push('/login');
-        }
-      } else {
-        toast.error('Something went wrong');
-      }
-      console.error('Error creating contact query:', error);
-    },
-  });
-
-  const validateForm = (): boolean => {
-    const newErrors: FormErrors = {};
-
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Full name is required';
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
-    }
-
-    if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone number is required';
-    } else if (!/^\+?[\d\s-]{10,}$/.test(formData.phone)) {
-      newErrors.phone = 'Please enter a valid phone number';
-    }
-
-    if (!formData.subject) {
-      newErrors.subject = 'Please select a topic';
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Check if user is authenticated
-    if (!isAuthenticated) {
-      toast.error('Please login to send a message');
-      router.push('/login');
-      return;
-    }
-
-    if (!validateForm()) return;
-
-    // Submit the query
-    createContactMutation.mutate(formData);
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-
-    // Clear error when user starts typing
-    if (errors[name as keyof FormData]) {
-      setErrors(prev => ({ ...prev, [name]: undefined }));
-    }
-  };
-
-  const isSubmitting = createContactMutation.isPending;
-
+export default function ContactPage() {
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border border-gray-100">
-      {/* Header */}
-      <div className="mb-6">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="text-3xl">💬</div>
-          <h2 className="text-2xl font-bold text-gray-900">Drop us a line</h2>
+    <main className="min-h-screen bg-linear-to-b from-orange-50 to-white">
+
+      <section className="pt-12 pb-8 px-4 text-center">
+        <div className="max-w-4xl mx-auto">
+          <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <span>🎯</span>
+            <span>We&apos;re Here to Help 24/7</span>
+          </div>
+
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-orange-600 mb-4">
+            Let&apos;s Connect
+          </h1>
+
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Your next adventure is just a message away. Our travel experts are ready to craft your perfect journey.
+          </p>
         </div>
-        <p className="text-gray-600">
-          We&apos;d love to hear from you. Send us a message and we&apos;ll respond as soon as possible.
-        </p>
-      </div>
+      </section>
 
-      {/* Form */}
-      <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {/* Full Name */}
-          <div>
-            <label
-              htmlFor="fullName"
-              className="block text-sm font-medium text-gray-700 mb-2"
-            >
-              Full Name <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              id="fullName"
-              name="fullName"
-              value={formData.fullName}
-              onChange={handleChange}
-              placeholder="Rajesh Kumar"
-              disabled={isSubmitting}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition disabled:opacity-50 disabled:cursor-not-allowed ${errors.fullName ? 'border-red-500' : 'border-gray-300'
-                }`}
-              aria-invalid={!!errors.fullName}
-              aria-describedby={errors.fullName ? 'fullName-error' : undefined}
-            />
-            {errors.fullName && (
-              <p id="fullName-error" className="mt-1 text-sm text-red-500">
-                {errors.fullName}
-              </p>
-            )}
-          </div>
 
-          {/* Email */}
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700 mb-2"
-            >
-              Email Address <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="john@example.com"
-              disabled={isSubmitting}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition disabled:opacity-50 disabled:cursor-not-allowed ${errors.email ? 'border-red-500' : 'border-gray-300'
-                }`}
-              aria-invalid={!!errors.email}
-              aria-describedby={errors.email ? 'email-error' : undefined}
-            />
-            {errors.email && (
-              <p id="email-error" className="mt-1 text-sm text-red-500">
-                {errors.email}
-              </p>
-            )}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {/* Phone */}
-          <div>
-            <label
-              htmlFor="phone"
-              className="block text-sm font-medium text-gray-700 mb-2"
-            >
-              Phone Number <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder="+91 98765 43210"
-              disabled={isSubmitting}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition disabled:opacity-50 disabled:cursor-not-allowed ${errors.phone ? 'border-red-500' : 'border-gray-300'
-                }`}
-              aria-invalid={!!errors.phone}
-              aria-describedby={errors.phone ? 'phone-error' : undefined}
-            />
-            {errors.phone && (
-              <p id="phone-error" className="mt-1 text-sm text-red-500">
-                {errors.phone}
-              </p>
-            )}
-          </div>
-
-          {/* Subject */}
-          <div>
-            <label
-              htmlFor="subject"
-              className="block text-sm font-medium text-gray-700 mb-2"
-            >
-              Subject <span className="text-red-500">*</span>
-            </label>
-            <select
-              id="subject"
-              name="subject"
-              value={formData.subject}
-              onChange={handleChange}
-              disabled={isSubmitting}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition appearance-none bg-white disabled:opacity-50 disabled:cursor-not-allowed ${errors.subject ? 'border-red-500' : 'border-gray-300'
-                }`}
-              aria-invalid={!!errors.subject}
-              aria-describedby={errors.subject ? 'subject-error' : undefined}
-            >
-              <option value="">Choose a topic</option>
-              <option value="tour-inquiry">Tour Inquiry</option>
-              <option value="booking">Booking Assistance</option>
-              <option value="customization">Tour Customization</option>
-              <option value="group-booking">Group Booking</option>
-              <option value="general">General Question</option>
-              <option value="feedback">Feedback</option>
-            </select>
-            {errors.subject && (
-              <p id="subject-error" className="mt-1 text-sm text-red-500">
-                {errors.subject}
-              </p>
-            )}
-          </div>
-        </div>
-
-        {/* Message */}
-        <div>
-          <label
-            htmlFor="message"
-            className="block text-sm font-medium text-gray-700 mb-2"
-          >
-            Your Message <span className="text-red-500">*</span>
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            rows={5}
-            placeholder="Tell us about your travel plans, questions, or how we can help you..."
-            disabled={isSubmitting}
-            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition resize-none disabled:opacity-50 disabled:cursor-not-allowed ${errors.message ? 'border-red-500' : 'border-gray-300'
-              }`}
-            aria-invalid={!!errors.message}
-            aria-describedby={errors.message ? 'message-error' : undefined}
+      <section className="py-8 px-4" aria-label="Company statistics">
+        <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <StatCard
+            number="10K+"
+            label="Happy Travelers"
+            icon="👥"
           />
-          {errors.message && (
-            <p id="message-error" className="mt-1 text-sm text-red-500">
-              {errors.message}
-            </p>
-          )}
+          <StatCard
+            number="24/7"
+            label="Customer Support"
+            icon="💬"
+          />
+          <StatCard
+            number="4.9★"
+            label="Average Rating"
+            icon="⭐"
+          />
         </div>
+      </section>
 
-        {/* Submit Button */}
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full sm:w-auto px-8 py-3 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
-          aria-label="Send message"
-        >
-          {isSubmitting ? (
-            <>
-              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-              <span>Sending...</span>
-            </>
-          ) : (
-            <>
-              <span>Send Message</span>
-              <FiSend className="w-4 h-4" aria-hidden="true" />
-            </>
-          )}
-        </button>
-      </form>
+
+      <section className="py-12 px-4">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+
+          <aside className="lg:col-span-1 space-y-6">
+
+
+            <ContactInfoCard
+              icon={<FiPhone className="w-5 h-5" />}
+              title="Call Us"
+              subtitle="Available Mon-Sat, 9 AM - 8 PM"
+              content={
+                <div className="space-y-2">
+                  <a
+                    href="tel:+918527255995"
+                    className="block text-orange-600 font-semibold hover:text-orange-700 transition"
+                    aria-label="Call us at +91 8527255995"
+                  >
+                    +91 8527255995
+                  </a>
+                  <a
+                    href="tel:+918527255995"
+                    className="block text-orange-600 font-semibold hover:text-orange-700 transition"
+                    aria-label="Alternative number +91 8527255995"
+                  >
+                    +91 8527255995
+                  </a>
+                </div>
+              }
+            />
+
+
+            <ContactInfoCard
+              icon={<FiMail className="w-5 h-5" />}
+              title="Email Us"
+              subtitle="Reply within 24 hours"
+              content={
+                <a
+                  href="mailto:info@waytoindia.com"
+                  className="text-orange-600 font-semibold hover:text-orange-700 transition break-all"
+                  aria-label="Email us at info@waytoindia.com"
+                >
+                  info@waytoindia.com
+                </a>
+              }
+            />
+
+
+            <div className="bg-linear-to-br from-orange-500 to-orange-600 rounded-2xl p-6 text-white shadow-lg">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="bg-white/20 p-2 rounded-lg">
+                  <FiClock className="w-5 h-5" aria-hidden="true" />
+                </div>
+                <h2 className="text-xl font-bold">Business Hours</h2>
+              </div>
+
+              <div className="space-y-3">
+                <BusinessHour day="Mon - Fri" time="9 AM - 8 PM" />
+                <BusinessHour day="Saturday" time="10 AM - 6 PM" />
+                <BusinessHour day="Sunday" time="Closed" />
+              </div>
+            </div>
+
+
+            <div className="bg-gray-900 rounded-2xl p-6 text-white">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-xl">✨</span>
+                <h2 className="text-lg font-bold">Follow Our Journey</h2>
+              </div>
+
+              <div className="flex gap-3">
+                <SocialLink
+                  href="https://facebook.com"
+                  icon={<FaFacebookF />}
+                  label="Facebook"
+                />
+                <SocialLink
+                  href="https://instagram.com"
+                  icon={<FaInstagram />}
+                  label="Instagram"
+                />
+                <SocialLink
+                  href="https://twitter.com"
+                  icon={<FaTwitter />}
+                  label="Twitter"
+                />
+                <SocialLink
+                  href="https://linkedin.com"
+                  icon={<FaLinkedinIn />}
+                  label="LinkedIn"
+                />
+              </div>
+            </div>
+          </aside>
+
+
+          <div className="lg:col-span-2">
+            <ContactForm />
+          </div>
+        </div>
+      </section>
+
+
+      <section className="py-12 px-4 bg-gray-50" aria-labelledby="quick-answers">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center gap-2 mb-8">
+            <span className="text-2xl">⚡</span>
+            <h2 id="quick-answers" className="text-3xl font-bold text-gray-900">
+              Quick Answers
+            </h2>
+          </div>
+
+          <div className="space-y-4">
+            <QuickAnswerCard
+              icon="⚡"
+              question="How fast do you respond?"
+              answer="Within 24 hours on business days. Urgent? Call us directly!"
+            />
+            <QuickAnswerCard
+              icon="📅"
+              question="Can I change my booking?"
+              answer="Absolutely! Share your booking ID and we'll help you modify it."
+            />
+            <QuickAnswerCard
+              icon="👥"
+              question="Group discounts available?"
+              answer="Yes! Special rates for groups of 10+ travelers. Let's talk!"
+            />
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+// Server Components (No 'use client' needed)
+
+function StatCard({ number, label, icon }: { number: string; label: string; icon: string }) {
+  return (
+    <div className="bg-white rounded-2xl p-6 shadow-md text-center border border-gray-100">
+      <div className="text-3xl mb-2">{icon}</div>
+      <div className="text-3xl font-bold text-orange-600 mb-1">{number}</div>
+      <div className="text-sm text-gray-600">{label}</div>
+    </div>
+  );
+}
+
+function ContactInfoCard({
+  icon,
+  title,
+  subtitle,
+  content
+}: {
+  icon: React.ReactNode;
+  title: string;
+  subtitle: string;
+  content: React.ReactNode;
+}) {
+  return (
+    <div className="bg-white rounded-2xl p-6 shadow-md border border-gray-100">
+      <div className="flex items-center gap-3 mb-3">
+        <div className="bg-orange-100 p-2 rounded-lg text-orange-600">
+          {icon}
+        </div>
+        <div>
+          <h2 className="font-bold text-gray-900">{title}</h2>
+          <p className="text-xs text-gray-500">{subtitle}</p>
+        </div>
+      </div>
+      <div>{content}</div>
+    </div>
+  );
+}
+
+function BusinessHour({ day, time }: { day: string; time: string }) {
+  return (
+    <div className="flex justify-between items-center py-2 border-b border-white/20">
+      <span className="font-medium">{day}</span>
+      <span className="font-semibold">{time}</span>
+    </div>
+  );
+}
+
+function SocialLink({
+  href,
+  icon,
+  label
+}: {
+  href: string;
+  icon: React.ReactNode;
+  label: string;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="bg-white/10 hover:bg-white/20 p-3 rounded-lg transition-colors"
+      aria-label={label}
+    >
+      <div className="w-5 h-5">{icon}</div>
+    </a>
+  );
+}
+
+function QuickAnswerCard({
+  icon,
+  question,
+  answer
+}: {
+  icon: string;
+  question: string;
+  answer: string;
+}) {
+  return (
+    <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+      <div className="flex items-start gap-3">
+        <div className="text-2xl">{icon}</div>
+        <div className="flex-1">
+          <h3 className="font-semibold text-orange-600 mb-1">{question}</h3>
+          <p className="text-gray-700 text-sm">{answer}</p>
+        </div>
+      </div>
     </div>
   );
 }
