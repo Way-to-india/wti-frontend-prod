@@ -8,7 +8,7 @@ export const endPoints = {
   },
 
   user: {
-    profile: `${BASE_URL}${USER_PATH}/user/profile`,
+    profile: `${BASE_URL}${USER_PATH}/user-routes/profile`,
   },
 
   tour: {
