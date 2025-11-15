@@ -69,19 +69,17 @@ export default function TourQuery() {
                 {[1, 2, 3, 4].map((num) => (
                   <div key={num} className="flex items-center flex-1">
                     <div
-                      className={`flex items-center justify-center w-8 h-8 rounded-full font-semibold text-sm transition-all ${
-                        step >= num
+                      className={`flex items-center justify-center w-8 h-8 rounded-full font-semibold text-sm transition-all ${step >= num
                           ? "bg-white text-orange-600"
                           : "bg-white/20 text-white"
-                      }`}
+                        }`}
                     >
                       {num}
                     </div>
                     {num < 4 && (
                       <div
-                        className={`flex-1 h-1 mx-2 rounded transition-all ${
-                          step > num ? "bg-white" : "bg-white/20"
-                        }`}
+                        className={`flex-1 h-1 mx-2 rounded transition-all ${step > num ? "bg-white" : "bg-white/20"
+                          }`}
                       />
                     )}
                   </div>
@@ -119,7 +117,7 @@ export default function TourQuery() {
 
               {step === 4 && <Step4 formData={formData} />}
 
-              {/* Captcha Verification Status */}
+
               {isVerifyingCaptcha && (
                 <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg flex items-center gap-3">
                   <div className="relative">
@@ -150,9 +148,8 @@ export default function TourQuery() {
                     type="button"
                     onClick={() => setStep(step - 1)}
                     disabled={isLoading}
-                    className={`cursor-pointer flex-1 px-6 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition ${
-                      isLoading ? "opacity-50 cursor-not-allowed" : ""
-                    }`}
+                    className={`cursor-pointer flex-1 px-6 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition ${isLoading ? "opacity-50 cursor-not-allowed" : ""
+                      }`}
                   >
                     Back
                   </button>
@@ -162,19 +159,18 @@ export default function TourQuery() {
                   type="button"
                   onClick={handleSubmit}
                   disabled={!canProceed() || isLoading}
-                  className={`cursor-pointer flex-1 px-6 py-3 font-semibold rounded-lg transition ${
-                    canProceed() && !isLoading
+                  className={`cursor-pointer flex-1 px-6 py-3 font-semibold rounded-lg transition ${canProceed() && !isLoading
                       ? "bg-linear-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg"
                       : "bg-gray-200 text-gray-400 cursor-not-allowed"
-                  }`}
+                    }`}
                 >
                   {isVerifyingCaptcha
                     ? "Validating CAPTCHA..."
                     : createQueryMutation.isPending
-                    ? "Submitting..."
-                    : step === 4
-                    ? "Submit Enquiry"
-                    : "Continue"}
+                      ? "Submitting..."
+                      : step === 4
+                        ? "Submit Enquiry"
+                        : "Continue"}
                 </button>
               </div>
             </div>
