@@ -16,7 +16,6 @@ import {
   ChevronDown,
   User,
   LogOut,
-  Settings,
   MapPin,
   Compass,
   Lightbulb,
@@ -95,7 +94,8 @@ const MobileMenu: React.FC = () => {
       {/* Hamburger Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2.5 rounded-xl hover:bg-orange-50 transition-all duration-200 active:scale-95 z-50 relative"
+        className="p-2.5 rounded-xl hover:bg-orange-50 transition-all duration-200 active:scale-95 relative"
+        style={{ zIndex: 9999 }}
         aria-label="Toggle menu"
       >
         {isOpen ? (
@@ -108,7 +108,8 @@ const MobileMenu: React.FC = () => {
       {/* Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-9998 lg:hidden"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm lg:hidden"
+          style={{ zIndex: 9998 }}
           onClick={() => setIsOpen(false)}
         />
       )}
@@ -117,11 +118,12 @@ const MobileMenu: React.FC = () => {
       <div
         className={`
           fixed top-0 right-0 h-screen w-[320px] max-w-[85vw] 
-          bg-white shadow-2xl z-9999 
+          bg-white shadow-2xl
           transform transition-transform duration-300 ease-out 
           lg:hidden overflow-hidden
           ${isOpen ? 'translate-x-0' : 'translate-x-full'}
         `}
+        style={{ zIndex: 9999 }}
       >
         <div className="flex flex-col h-full">
           {/* Header */}
@@ -188,7 +190,15 @@ const MobileMenu: React.FC = () => {
           )}
 
           {/* Navigation Links - FIXED SCROLLING */}
-          <nav className="flex-1 overflow-y-auto py-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+          <nav className="flex-1 overflow-y-auto py-2" style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
+          }}>
+            <style jsx>{`
+              nav::-webkit-scrollbar {
+                display: none;
+              }
+            `}</style>
             <div className="px-2">
               {navLinks.map((link) => {
                 const Icon = link.icon;
@@ -200,8 +210,8 @@ const MobileMenu: React.FC = () => {
                       <button
                         onClick={() => handleDropdownToggle(link.name)}
                         className={`flex items-center justify-between w-full px-4 py-3 text-sm font-medium transition-all duration-200 rounded-xl ${active || openDropdown === link.name
-                            ? 'text-orange-600 bg-orange-50'
-                            : 'text-gray-700 hover:bg-gray-50'
+                          ? 'text-orange-600 bg-orange-50'
+                          : 'text-gray-700 hover:bg-gray-50'
                           }`}
                       >
                         <div className="flex items-center gap-3">
@@ -245,8 +255,8 @@ const MobileMenu: React.FC = () => {
                     href={link.redirect}
                     onClick={() => setIsOpen(false)}
                     className={`flex items-center gap-3 px-4 py-3 text-sm font-medium transition-all duration-200 rounded-xl mb-1 ${active
-                        ? 'text-orange-600 bg-orange-50'
-                        : 'text-gray-700 hover:bg-gray-50'
+                      ? 'text-orange-600 bg-orange-50'
+                      : 'text-gray-700 hover:bg-gray-50'
                       }`}
                   >
                     <Icon className="w-5 h-5" />
@@ -282,6 +292,6 @@ const MobileMenu: React.FC = () => {
       </div>
     </>
   );
-}; 
+};
 
 export default MobileMenu;
