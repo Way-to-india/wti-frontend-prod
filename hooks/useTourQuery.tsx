@@ -5,9 +5,11 @@ import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { INDIAN_CITIES } from "@/constants/cities";
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 export const useTourQuery = () => {
     const { token, isAuthenticated, user } = useAuthStore();
+    const { executeRecaptcha } = useGoogleReCaptcha();
 
     const [isOpen, setIsOpen] = useState(false);
     const [step, setStep] = useState(1);
@@ -53,6 +55,13 @@ export const useTourQuery = () => {
 
     const createQueryMutation = useMutation({
         mutationFn: async (data: typeof formData) => {
+            // Get reCAPTCHA token
+            if (!executeRecaptcha) {
+                throw new Error('reCAPTCHA not available');
+            }
+
+            const recaptchaToken = await executeRecaptcha('tour_query_submit');
+
             const payload = {
                 fullName: data.fullName,
                 email: data.email,
@@ -61,6 +70,7 @@ export const useTourQuery = () => {
                 travelDate: data.travelDate,
                 departureCity: data.departureCity.trim(),
                 specialRequests: data.specialRequests || "",
+                recaptchaToken, // Add reCAPTCHA token to payload
             };
 
             const headers: Record<string, string> = {
@@ -106,7 +116,7 @@ export const useTourQuery = () => {
         },
     });
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (step < 4) {
             setStep(step + 1);
             return;
@@ -118,6 +128,12 @@ export const useTourQuery = () => {
 
         if (travelDate < today) {
             toast.error("Travel date cannot be in the past");
+            return;
+        }
+
+        // Check if reCAPTCHA is available
+        if (!executeRecaptcha) {
+            toast.error("reCAPTCHA not loaded. Please refresh the page.");
             return;
         }
 
