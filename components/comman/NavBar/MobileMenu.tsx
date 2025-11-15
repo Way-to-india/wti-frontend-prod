@@ -282,6 +282,6 @@ const MobileMenu: React.FC = () => {
       </div>
     </>
   );
-};
+}; 
 
 export default MobileMenu;
