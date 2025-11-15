@@ -49,7 +49,7 @@ export async function getSimilarTours(slug: string) {
 
     if (!response.ok) {
       if (response.status === 404) return [];
-      throw new Error(`Failed to fetch similar tours: ${response.statusText}`);
+      console.log(`Failed to fetch similar tours:, ${slug} ${response.statusText}`);
     }
 
     return await response.json();
@@ -148,8 +148,6 @@ export async function getTourThemes() {
   }
 }
 
-
-
 export async function searchTours(params: {
   cityId?: string;
   themeId?: string;
@@ -163,7 +161,6 @@ export async function searchTours(params: {
   try {
     const queryParams = new URLSearchParams();
 
-    
     if (params.cityId) queryParams.append('cityId', params.cityId);
     if (params.themeId) queryParams.append('themeId', params.themeId);
     queryParams.append('page', (params.page || 1).toString());
@@ -171,7 +168,7 @@ export async function searchTours(params: {
 
     const url = `${endPoints.tour.search}?${queryParams.toString()}`;
 
-    console.log('Fetching tours from:', url); 
+    console.log('Fetching tours from:', url);
 
     const response = await fetch(url, {
       headers: { 'Content-Type': 'application/json' },
@@ -200,21 +197,22 @@ export async function searchTours(params: {
   }
 }
 
-
 // Tour FAQSchema
-
 export async function getTourFAQSchema(tourId: string) {
+  
   'use cache';
   cacheTag('tours', `faq-schema-${tourId}`);
   cacheLife('hours');
 
+  const url = endPoints.tour.faq.getSchema(tourId);
+
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tour/faq/schema/${tourId}`, {
+    const response = await fetch(url, {
       headers: {
         'Content-Type': 'application/json',
       },
       next: {
-        revalidate: 3600, 
+        revalidate: 3600,
         tags: [`faq-${tourId}`],
       },
     });
@@ -230,6 +228,6 @@ export async function getTourFAQSchema(tourId: string) {
     return data;
   } catch (error) {
     console.error('Error fetching FAQ schema:', error);
-    return null; 
+    return null;
   }
 }

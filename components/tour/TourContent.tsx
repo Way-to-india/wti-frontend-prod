@@ -2,7 +2,7 @@ import { FiClock, FiMapPin, FiUsers, FiHome, FiShare2 } from 'react-icons/fi'
 import { FaStar } from 'react-icons/fa'
 import { CityItem, ThemeItem, Tour } from '@/types/comman';
 import TourDescription from './TourDescription';
-import TourQuery from './TourQuery';
+import TourQuery from './TourQuery/TourQuery';
 
 type TourContentProps = {
   title: string;

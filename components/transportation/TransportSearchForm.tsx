@@ -50,7 +50,7 @@ export default function TransportSearchForm() {
         throw new Error('Authentication required');
       }
 
-      
+
       let hour = parseInt(data.pickupTime.split(':')[0]);
       const minute = data.pickupTime.split(':')[1];
 
@@ -62,7 +62,7 @@ export default function TransportSearchForm() {
 
       const pickupTime24 = `${hour.toString().padStart(2, '0')}:${minute}`;
 
-      
+
       const payload = {
         from: data.from,
         to: data.to,
@@ -86,15 +86,15 @@ export default function TransportSearchForm() {
     onSuccess: (res) => {
       toast.success(res.message || 'Transport query sent successfully!');
       console.log('Transport query created:', res);
-      
-      
+
+
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
         const errorMessage = error.response?.data?.message || 'Failed to send query';
         toast.error(errorMessage);
 
-        
+
         if (error.response?.status === 401) {
           toast.error('Please login to continue');
           router.push('/login');
@@ -109,20 +109,20 @@ export default function TransportSearchForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    
+
     if (!isAuthenticated) {
       toast.error('Please login to search transport');
       router.push('/login');
       return;
     }
 
-    
+
     if (formData.from === formData.to) {
       toast.error('From and To locations cannot be the same');
       return;
     }
 
-    
+
     const departure = new Date(formData.departure);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -132,7 +132,7 @@ export default function TransportSearchForm() {
       return;
     }
 
-    
+
     if (formData.return) {
       const returnDate = new Date(formData.return);
       if (returnDate < departure) {
@@ -141,7 +141,7 @@ export default function TransportSearchForm() {
       }
     }
 
-    
+
     createQueryMutation.mutate(formData);
   };
 
@@ -171,7 +171,7 @@ export default function TransportSearchForm() {
     }));
   };
 
-  
+
   const formatDate = (dateString: string) => {
     if (!dateString) return null;
     const date = new Date(dateString);
@@ -189,9 +189,9 @@ export default function TransportSearchForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {/* From and To */}
+
       <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 items-start">
-        {/* From */}
+
         <div>
           <label htmlFor="from" className="block text-sm text-gray-600 mb-2 font-medium">
             From
@@ -212,7 +212,7 @@ export default function TransportSearchForm() {
           </div>
         </div>
 
-        {/* Swap Button */}
+
         <div className="flex items-end justify-center pb-2 md:pb-4">
           <button
             type="button"
@@ -226,7 +226,7 @@ export default function TransportSearchForm() {
           </button>
         </div>
 
-        {/* To */}
+
         <div>
           <label htmlFor="to" className="block text-sm text-gray-600 mb-2 font-medium">
             To
@@ -248,7 +248,7 @@ export default function TransportSearchForm() {
         </div>
       </div>
 
-      {/* Add Stops Feature */}
+
       <div>
         <button
           type="button"
@@ -263,9 +263,9 @@ export default function TransportSearchForm() {
         </button>
       </div>
 
-      {/* Departure, Return, Pickup Time */}
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {/* Departure */}
+
         <div>
           <label htmlFor="departure" className="block text-sm text-gray-600 mb-2 font-medium">
             Departure 📅
@@ -278,7 +278,7 @@ export default function TransportSearchForm() {
             onChange={(e) => handleChange('departure', e.target.value)}
             disabled={isSubmitting}
             className="hidden"
-            min={getTomorrow()}   
+            min={getTomorrow()}
           />
           <button
             type="button"
@@ -300,7 +300,7 @@ export default function TransportSearchForm() {
           </button>
         </div>
 
-        {/* Return */}
+
         <div>
           <label htmlFor="return" className="block text-sm text-gray-600 mb-2 font-medium">
             Return 📅
@@ -313,7 +313,7 @@ export default function TransportSearchForm() {
             onChange={(e) => handleChange('return', e.target.value)}
             disabled={isSubmitting}
             className="hidden"
-            min={formData.departure} 
+            min={formData.departure}
           />
           <button
             type="button"
@@ -337,7 +337,7 @@ export default function TransportSearchForm() {
           </button>
         </div>
 
-        {/* Pickup Time */}
+
         <div>
           <label htmlFor="pickupTime" className="block text-sm text-gray-600 mb-2 font-medium">
             Pickup Time ⏰
@@ -382,21 +382,19 @@ export default function TransportSearchForm() {
           </div>
         </div>
       </div>
-
-      {/* Submit Button */}
       <div className="flex justify-center pt-2">
         <button
           type="submit"
           disabled={isSubmitting}
           className={cn(
             "px-16 py-4 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-full transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed text-lg",
-            "transform hover:scale-105 active:scale-95"
+            "transform hover:scale-105 active:scale-95 cursor-pointer"
           )}
           aria-label="Send search query"
         >
           {isSubmitting ? (
             <span className="flex items-center gap-3">
-              <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin cursor-pointer" />
               Sending Query...
             </span>
           ) : (

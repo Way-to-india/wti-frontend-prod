@@ -6,11 +6,9 @@ import { TourReview, TourReviewImage } from "@/types/comman"
 export default async function TourReviews({ tourId }: { tourId: string }) {
   const data = await getTourReview(tourId);
   const reviews = data?.payload ?? [];
-  console.log(reviews);
   if (reviews.length === 0) {
     return <p className="text-gray-500 text-center py-6">No reviews available yet.</p>;
   }
-
   return (
     <div className="space-y-6 mt-6">
       {reviews.map((r : TourReview, idx: number) => (

@@ -1,13 +1,9 @@
 "use client";
 
+import { handleWhatsAppRedirect } from '@/utils/WhatsappRedirect';
+
 const ContactSupport = ({title} : {title : string}) => {
-    const handleWhatsAppRedirect = () => {
-        const whatsappNumber = '918527255995';
-        const message = `Hello! I'm interested in learning more about the tour: ${title || 'your tour'}.`;
-        const encodedMessage = encodeURIComponent(message);
-        const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`;
-        window.open(whatsappUrl, '_blank');
-    };
+    
     return (
         <div className="mt-10 bg-linear-to-r from-gray-50 to-gray-100 rounded-lg p-6 border border-gray-200">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
@@ -19,7 +15,7 @@ const ContactSupport = ({title} : {title : string}) => {
                 </div>
                 <button
                     className="px-6 py-3 bg-orange-500 text-white font-medium rounded-lg hover:bg-orange-600 transition-colors whitespace-nowrap"
-                    onClick={handleWhatsAppRedirect}
+                    onClick={() => handleWhatsAppRedirect(title)}
                 >
                     Whatsapp Support
                 </button>
