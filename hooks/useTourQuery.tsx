@@ -13,6 +13,7 @@ export const useTourQuery = () => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [step, setStep] = useState(1);
+    const [isVerifyingCaptcha, setIsVerifyingCaptcha] = useState(false);
 
     const [formData, setFormData] = useState({
         fullName: "",
@@ -60,32 +61,38 @@ export const useTourQuery = () => {
                 throw new Error('reCAPTCHA not available');
             }
 
-            const recaptchaToken = await executeRecaptcha('tour_query_submit');
+            setIsVerifyingCaptcha(true);
 
-            const payload = {
-                fullName: data.fullName,
-                email: data.email,
-                phone: data.phone,
-                travelers: data.travelers === "7+" ? 7 : parseInt(data.travelers),
-                travelDate: data.travelDate,
-                departureCity: data.departureCity.trim(),
-                specialRequests: data.specialRequests || "",
-                recaptchaToken, // Add reCAPTCHA token to payload
-            };
+            try {
+                const recaptchaToken = await executeRecaptcha('tour_query_submit');
 
-            const headers: Record<string, string> = {
-                "Content-Type": "application/json",
-            };
+                const payload = {
+                    fullName: data.fullName,
+                    email: data.email,
+                    phone: data.phone,
+                    travelers: data.travelers === "7+" ? 7 : parseInt(data.travelers),
+                    travelDate: data.travelDate,
+                    departureCity: data.departureCity.trim(),
+                    specialRequests: data.specialRequests || "",
+                    recaptchaToken, // Add reCAPTCHA token to payload
+                };
 
-            if (token) {
-                headers["Authorization"] = `Bearer ${token}`;
+                const headers: Record<string, string> = {
+                    "Content-Type": "application/json",
+                };
+
+                if (token) {
+                    headers["Authorization"] = `Bearer ${token}`;
+                }
+
+                const response = await axios.post(endPoints.tourQuery.create, payload, {
+                    headers,
+                });
+
+                return response.data;
+            } finally {
+                setIsVerifyingCaptcha(false);
             }
-
-            const response = await axios.post(endPoints.tourQuery.create, payload, {
-                headers,
-            });
-
-            return response.data;
         },
 
         onSuccess: (res) => {
@@ -225,6 +232,7 @@ export const useTourQuery = () => {
         cityInputRef,
         suggestionsRef,
         createQueryMutation,
+        isVerifyingCaptcha,
         handleModalOpen,
         handleSubmit,
         handleChange,

@@ -1,6 +1,6 @@
 "use client";
 
-import { X, MessageSquare } from "lucide-react";
+import { X, MessageSquare, Shield } from "lucide-react";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import Step3 from "./Step3";
@@ -19,6 +19,7 @@ export default function TourQuery() {
     cityInputRef,
     suggestionsRef,
     createQueryMutation,
+    isVerifyingCaptcha,
     handleModalOpen,
     handleSubmit,
     handleChange,
@@ -28,6 +29,8 @@ export default function TourQuery() {
     setIsOpen,
     setStep,
   } = useTourQuery();
+
+  const isLoading = createQueryMutation.isPending || isVerifyingCaptcha;
 
   return (
     <>
@@ -42,8 +45,6 @@ export default function TourQuery() {
       {isOpen && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-
-
             <div className="sticky top-0 bg-linear-to-r from-orange-500 to-orange-600 text-white p-6 rounded-t-2xl z-10">
               <div className="flex items-center justify-between">
                 <div>
@@ -58,6 +59,7 @@ export default function TourQuery() {
                     setStep(1);
                   }}
                   className="bg-white/20 hover:bg-white/30 rounded-full p-2 transition"
+                  disabled={isLoading}
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -67,24 +69,25 @@ export default function TourQuery() {
                 {[1, 2, 3, 4].map((num) => (
                   <div key={num} className="flex items-center flex-1">
                     <div
-                      className={`flex items-center justify-center w-8 h-8 rounded-full font-semibold text-sm transition-all ${step >= num
-                        ? "bg-white text-orange-600"
-                        : "bg-white/20 text-white"
-                        }`}
+                      className={`flex items-center justify-center w-8 h-8 rounded-full font-semibold text-sm transition-all ${
+                        step >= num
+                          ? "bg-white text-orange-600"
+                          : "bg-white/20 text-white"
+                      }`}
                     >
                       {num}
                     </div>
                     {num < 4 && (
                       <div
-                        className={`flex-1 h-1 mx-2 rounded transition-all ${step > num ? "bg-white" : "bg-white/20"
-                          }`}
+                        className={`flex-1 h-1 mx-2 rounded transition-all ${
+                          step > num ? "bg-white" : "bg-white/20"
+                        }`}
                       />
                     )}
                   </div>
                 ))}
               </div>
             </div>
-
 
             <div className="p-6">
               {step === 1 && (
@@ -116,13 +119,40 @@ export default function TourQuery() {
 
               {step === 4 && <Step4 formData={formData} />}
 
+              {/* Captcha Verification Status */}
+              {isVerifyingCaptcha && (
+                <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg flex items-center gap-3">
+                  <div className="relative">
+                    <Shield className="w-5 h-5 text-blue-600 animate-pulse" />
+                    <div className="absolute inset-0 animate-ping">
+                      <Shield className="w-5 h-5 text-blue-400 opacity-75" />
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-blue-900">
+                      Validating CAPTCHA...
+                    </p>
+                    <p className="text-xs text-blue-600 mt-0.5">
+                      Verifying you &apos; re human
+                    </p>
+                  </div>
+                  <div className="flex gap-1">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                  </div>
+                </div>
+              )}
 
               <div className="flex gap-3 mt-6 pt-6 border-t border-gray-200">
                 {step > 1 && (
                   <button
                     type="button"
                     onClick={() => setStep(step - 1)}
-                    className="cursor-pointer flex-1 px-6 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition"
+                    disabled={isLoading}
+                    className={`cursor-pointer flex-1 px-6 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition ${
+                      isLoading ? "opacity-50 cursor-not-allowed" : ""
+                    }`}
                   >
                     Back
                   </button>
@@ -131,17 +161,20 @@ export default function TourQuery() {
                 <button
                   type="button"
                   onClick={handleSubmit}
-                  disabled={!canProceed() || createQueryMutation.isPending}
-                  className={`cursor-pointer flex-1 px-6 py-3 font-semibold rounded-lg transition ${canProceed() && !createQueryMutation.isPending
-                    ? "bg-linear-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg"
-                    : "bg-gray-200 text-gray-400 cursor-not-allowed"
-                    }`}
+                  disabled={!canProceed() || isLoading}
+                  className={`cursor-pointer flex-1 px-6 py-3 font-semibold rounded-lg transition ${
+                    canProceed() && !isLoading
+                      ? "bg-linear-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg"
+                      : "bg-gray-200 text-gray-400 cursor-not-allowed"
+                  }`}
                 >
-                  {createQueryMutation.isPending
+                  {isVerifyingCaptcha
+                    ? "Validating CAPTCHA..."
+                    : createQueryMutation.isPending
                     ? "Submitting..."
                     : step === 4
-                      ? "Submit Enquiry"
-                      : "Continue"}
+                    ? "Submit Enquiry"
+                    : "Continue"}
                 </button>
               </div>
             </div>

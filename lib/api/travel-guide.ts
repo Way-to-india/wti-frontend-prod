@@ -3,7 +3,7 @@ import { endPoints } from '@/constants/endpoints';
 
 export async function getTravelGuide() {
   'use cache';
-  cacheTag('travel-guide',);
+  cacheTag('travel-guide');
   cacheLife('hours');
 
   try {
