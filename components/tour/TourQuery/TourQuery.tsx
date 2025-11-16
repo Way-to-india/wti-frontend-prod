@@ -6,6 +6,7 @@ import Step2 from "./Step2";
 import Step3 from "./Step3";
 import Step4 from "./Step4";
 import CitySuggestions from "./CitySuggestion";
+import SuccessModal from "./SuccessModal";
 import { useTourQuery } from "@/hooks/useTourQuery";
 
 export default function TourQuery() {
@@ -20,6 +21,8 @@ export default function TourQuery() {
     suggestionsRef,
     createQueryMutation,
     isVerifyingCaptcha,
+    showSuccessModal,
+    successMessage,
     handleModalOpen,
     handleSubmit,
     handleChange,
@@ -28,6 +31,7 @@ export default function TourQuery() {
     canProceed,
     setIsOpen,
     setStep,
+    setShowSuccessModal,
   } = useTourQuery();
 
   const isLoading = createQueryMutation.isPending || isVerifyingCaptcha;
@@ -70,8 +74,8 @@ export default function TourQuery() {
                   <div key={num} className="flex items-center flex-1">
                     <div
                       className={`flex items-center justify-center w-8 h-8 rounded-full font-semibold text-sm transition-all ${step >= num
-                          ? "bg-white text-orange-600"
-                          : "bg-white/20 text-white"
+                        ? "bg-white text-orange-600"
+                        : "bg-white/20 text-white"
                         }`}
                     >
                       {num}
@@ -131,7 +135,7 @@ export default function TourQuery() {
                       Validating CAPTCHA...
                     </p>
                     <p className="text-xs text-blue-600 mt-0.5">
-                      Verifying you &apos; re human
+                      Verifying you&apos;re human
                     </p>
                   </div>
                   <div className="flex gap-1">
@@ -160,8 +164,8 @@ export default function TourQuery() {
                   onClick={handleSubmit}
                   disabled={!canProceed() || isLoading}
                   className={`cursor-pointer flex-1 px-6 py-3 font-semibold rounded-lg transition ${canProceed() && !isLoading
-                      ? "bg-linear-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg"
-                      : "bg-gray-200 text-gray-400 cursor-not-allowed"
+                    ? "bg-linear-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg"
+                    : "bg-gray-200 text-gray-400 cursor-not-allowed"
                     }`}
                 >
                   {isVerifyingCaptcha
@@ -177,6 +181,13 @@ export default function TourQuery() {
           </div>
         </div>
       )}
+
+      {/* Success Modal */}
+      <SuccessModal
+        isOpen={showSuccessModal}
+        message={successMessage}
+        onClose={() => setShowSuccessModal(false)}
+      />
     </>
   );
 }

@@ -14,6 +14,8 @@ export const useTourQuery = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [step, setStep] = useState(1);
     const [isVerifyingCaptcha, setIsVerifyingCaptcha] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [successMessage, setSuccessMessage] = useState("");
 
     const [formData, setFormData] = useState({
         fullName: "",
@@ -74,7 +76,8 @@ export const useTourQuery = () => {
                     travelDate: data.travelDate,
                     departureCity: data.departureCity.trim(),
                     specialRequests: data.specialRequests || "",
-                    recaptchaToken, // Add reCAPTCHA token to payload
+                    recaptchaToken,
+                    currentUrl: window.location.href,
                 };
 
                 const headers: Record<string, string> = {
@@ -96,7 +99,9 @@ export const useTourQuery = () => {
         },
 
         onSuccess: (res) => {
-            toast.success(res.message || "Tour query sent successfully!");
+            // Show success modal instead of toast
+            setSuccessMessage(res.message || "Tour query sent successfully!");
+            setShowSuccessModal(true);
 
             setFormData({
                 fullName: "",
@@ -233,6 +238,8 @@ export const useTourQuery = () => {
         suggestionsRef,
         createQueryMutation,
         isVerifyingCaptcha,
+        showSuccessModal,
+        successMessage,
         handleModalOpen,
         handleSubmit,
         handleChange,
@@ -241,5 +248,6 @@ export const useTourQuery = () => {
         canProceed,
         setIsOpen,
         setStep,
+        setShowSuccessModal,
     };
 };

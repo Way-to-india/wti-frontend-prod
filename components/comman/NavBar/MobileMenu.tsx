@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/AuthStore';
 import {
   Menu,
-  X,
+  X,  
   Home,
   TramFront,
   Hotel,
