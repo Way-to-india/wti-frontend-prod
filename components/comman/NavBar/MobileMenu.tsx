@@ -140,7 +140,7 @@ const MobileMenu: React.FC = () => {
             </Link>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-2 rounded-lg hover:bg-white transition-colors"
+              className="p-2 rounded-lg hover:bg-white transition-colors cursor-pointer"
               aria-label="Close menu"
             >
               <X className="w-5 h-5 text-gray-600" />

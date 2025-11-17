@@ -1,6 +1,3 @@
-// For App Router (Next.js 13+)
-// File: app/not-found.tsx
-
 'use client';
 
 import { Home, ArrowLeft, Compass } from 'lucide-react';

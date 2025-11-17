@@ -1,4 +1,3 @@
-// components/layout/UserAuth.tsx
 'use client';
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
@@ -138,4 +137,4 @@ const UserAuth: React.FC = () => {
   );
 };
 
-export default UserAuth;
+export default UserAuth

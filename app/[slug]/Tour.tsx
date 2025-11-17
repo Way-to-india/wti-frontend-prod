@@ -150,7 +150,7 @@ async function SingleTour({ params }: Props) {
           termsAndConditions={[]}
         />
 
-        <ContactSupport title={tour.title} />
+        <ContactSupport title={tourDetails.title} />
 
         <SimilarTours tourId={slug} />
       </main>
