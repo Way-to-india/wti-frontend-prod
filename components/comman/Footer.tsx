@@ -5,7 +5,7 @@ import { Mail, Instagram } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
-      <footer className="bg-[#1a1d29] text-white">
+    <footer className="bg-[#1a1d29] text-white">
       <div className="border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
@@ -26,10 +26,10 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          
+
           <div className="space-y-6">
             <div className="w-48">
               <Image
@@ -44,11 +44,11 @@ const Footer: React.FC = () => {
               Way to India has created a niche for itself in the travel industry in India by providing customized tour options to discerning tourists.
             </p>
             <p className="text-gray-400 text-xs">
-              © 2014 - 2024 WaytoIndia. All Rights Reserved.
+              © 2025 WaytoIndia. All Rights Reserved.
             </p>
           </div>
 
-          
+
           <div>
             <h3 className="text-lg font-semibold mb-6">Resources</h3>
             <ul className="space-y-4">
@@ -80,7 +80,7 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          
+
           <div>
             <h3 className="text-lg font-semibold mb-6">About</h3>
             <ul className="space-y-4">
@@ -112,7 +112,7 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          
+
           <div>
             <h3 className="text-lg font-semibold mb-6">Get Involved</h3>
             <ul className="space-y-4 mb-8">
@@ -138,14 +138,13 @@ const Footer: React.FC = () => {
               </li>
             </ul>
 
-            
             <div className="flex items-center gap-4">
-              <Link href="https://twitter.com" target="_blank" className="text-gray-300 hover:text-orange-500 transition-colors">
+              <Link href="https://x.com/way_to_india" target="_blank" className="text-gray-300 hover:text-orange-500 transition-colors">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
               </Link>
-              <Link href="https://instagram.com" target="_blank" className="text-gray-300 hover:text-orange-500 transition-colors">
+              <Link href="https://www.instagram.com/waytoindia" target="_blank" className="text-gray-300 hover:text-orange-500 transition-colors">
                 <Instagram className="w-6 h-6" />
               </Link>
               <Link href="mailto:contact@waytoindia.com" className="text-gray-300 hover:text-orange-500 transition-colors">

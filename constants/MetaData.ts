@@ -6,13 +6,13 @@ export interface TourMeta {
 }
 
 export const tourMetaData: Record<string, TourMeta> = {
-  'golden-triangle-with-ranthambore': {
-    title: 'Golden Triangle With Ranthambore | Waytoindia.com',
-    description:
-      'Get best deals on Golden Triangle With Ranthambore.Stay in best of the wildlife hotels and  resorts in Ranthambore.Enjoy Jungle Safaris and see Tigers.',
-    keywords: '',
-    canonicalPath: '/golden-triangle-with-ranthambore',
-  },
+  // 'golden-triangle-with-ranthambore': {
+  //   title: 'Golden Triangle With Ranthambore | Waytoindia.com',
+  //   description:
+  //     'Get best deals on Golden Triangle With Ranthambore.Stay in best of the wildlife hotels and  resorts in Ranthambore.Enjoy Jungle Safaris and see Tigers.',
+  //   keywords: '',
+  //   canonicalPath: '/golden-triangle-with-ranthambore',
+  // },
   'kashmir-holiday-package': {
     title: 'Kashmir Package | Waytoindia.com',
     description:
@@ -34,13 +34,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/ooty-kodaikanal-munnar-tour-package',
   },
-  'beach-honeymoon-tour-@-resort': {
-    title: 'Goa Beach Honeymoon Tour | Waytoindia.com',
-    description:
-      'Planning your Goa beach honeymoon tour ? Get best deals on selected beach resorts at Goa.Visit us and send enquiry now !',
-    keywords: '',
-    canonicalPath: '/beach-honeymoon-tour-@-resort',
-  },
+  // 'beach-honeymoon-tour-@-resort': {
+  //   title: 'Goa Beach Honeymoon Tour | Waytoindia.com',
+  //   description:
+  //     'Planning your Goa beach honeymoon tour ? Get best deals on selected beach resorts at Goa.Visit us and send enquiry now !',
+  //   keywords: '',
+  //   canonicalPath: '/beach-honeymoon-tour-@-resort',
+  // },
   'golden-triangle-tour-with-goa': {
     title: 'Golden Triangle Tour With Goa | Waytoindia.com',
     description:
@@ -125,13 +125,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/golden-triangle-tour-with-haridwar',
   },
-  'vaishno-devi-yatra-with-helicopter': {
-    title: 'Vaishno Devi Yatra | Waytoindia.com',
-    description:
-      'Vaishno Devi Yatra by Waytoindia.com takes you to the pilgrimage of Mata Vaishno Devi Shrine in the Trikuta hills near Katra in Jammu & Kashmir.',
-    keywords: '',
-    canonicalPath: '/vaishno-devi-yatra-with-helicopter',
-  },
+  // 'vaishno-devi-yatra-with-helicopter': {
+  //   title: 'Vaishno Devi Yatra | Waytoindia.com',
+  //   description:
+  //     'Vaishno Devi Yatra by Waytoindia.com takes you to the pilgrimage of Mata Vaishno Devi Shrine in the Trikuta hills near Katra in Jammu & Kashmir.',
+  //   keywords: '',
+  //   canonicalPath: '/vaishno-devi-yatra-with-helicopter',
+  // },
   'chardham-yatra-tour-package': {
     title: 'Chardham Yatra Tour Package | Waytoindia.com',
     description:
@@ -139,13 +139,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/chardham-yatra-tour-package',
   },
-  'trip-to-golden-temple': {
-    title: 'Trip To Golden Temple | Golden Temple Trip | Waytoindia.com',
-    description:
-      'Plan your trip to Golden Temple in Amritsar.Visit the famous Harmandir Sahib, Jalianwala Bagh and Wagah Border near Amritsar.Stay at best hotels and enjoy...',
-    keywords: '',
-    canonicalPath: '/trip-to-golden-temple',
-  },
+  // 'trip-to-golden-temple': {
+  //   title: 'Trip To Golden Temple | Golden Temple Trip | Waytoindia.com',
+  //   description:
+  //     'Plan your trip to Golden Temple in Amritsar.Visit the famous Harmandir Sahib, Jalianwala Bagh and Wagah Border near Amritsar.Stay at best hotels and enjoy...',
+  //   keywords: '',
+  //   canonicalPath: '/trip-to-golden-temple',
+  // },
   'gurudwara-in-punjab-tour': {
     title: 'Gurudwara In Punjab Tour | Waytoindia.com',
     description:
@@ -160,13 +160,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/corbett-national-park-tour',
   },
-  'ranthambore-from-delhi': {
-    title: 'Ranthambore From Delhi | Waytoindia.com',
-    description:
-      "Visit Ranthambore from Delhi.Enjoy wildlife safaris at Ranthambore,in one of the best weekend trips from Delhi to the Tiger's habitat in Rajasthan.",
-    keywords: '',
-    canonicalPath: '/ranthambore-from-delhi',
-  },
+  // 'ranthambore-from-delhi': {
+  //   title: 'Ranthambore From Delhi | Waytoindia.com',
+  //   description:
+  //     "Visit Ranthambore from Delhi.Enjoy wildlife safaris at Ranthambore,in one of the best weekend trips from Delhi to the Tiger's habitat in Rajasthan.",
+  //   keywords: '',
+  //   canonicalPath: '/ranthambore-from-delhi',
+  // },
   'india-wildlife-tour': {
     title: 'India Wildlife Tour | Waytoindia.com',
     description:
@@ -223,13 +223,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/south-india-tour',
   },
-  'eravikulam-national-park-tour': {
-    title: 'Eravikulam National Park Tour | Waytoindia.com',
-    description:
-      'Book your Eravikulam National Park Tour with Waytoindia.com. Get special prices for your tour package.Stay in comfortable resorts at Munnar.',
-    keywords: '',
-    canonicalPath: '/eravikulam-national-park-tour',
-  },
+  // 'eravikulam-national-park-tour': {
+  //   title: 'Eravikulam National Park Tour | Waytoindia.com',
+  //   description:
+  //     'Book your Eravikulam National Park Tour with Waytoindia.com. Get special prices for your tour package.Stay in comfortable resorts at Munnar.',
+  //   keywords: '',
+  //   canonicalPath: '/eravikulam-national-park-tour',
+  // },
   'gujarat-wildlife-tour': {
     title: 'Gujarat Wildlife Tour | Waytoindia.com',
     description:
@@ -279,13 +279,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/majestic-ladakh-tour',
   },
-  'best-of-leh-ladakh': {
-    title: 'Leh Ladakh | Leh Ladakh Trip | Waytoindia.com',
-    description:
-      'Plan your Leh Ladakh tour by sending enquiry on Waytoindia.com.Get the best deals on Leh Ladakh Trip only at Waytoindia.com, a Government recognised company.',
-    keywords: '',
-    canonicalPath: '/best-of-leh-ladakh',
-  },
+  // 'best-of-leh-ladakh': {
+  //   title: 'Leh Ladakh | Leh Ladakh Trip | Waytoindia.com',
+  //   description:
+  //     'Plan your Leh Ladakh tour by sending enquiry on Waytoindia.com.Get the best deals on Leh Ladakh Trip only at Waytoindia.com, a Government recognised company.',
+  //   keywords: '',
+  //   canonicalPath: '/best-of-leh-ladakh',
+  // },
   'ladakh-tour': {
     title: 'Ladakh Tour | Waytoindia.com',
     description:
@@ -307,27 +307,27 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/nainital-tour-package',
   },
-  'trip-to-dehradun': {
-    title: 'Trip to Dehradun | Waytoindia.com',
-    description:
-      'Plan your trip to Dehradun, the capital of Uttarakhand state and gateway to the Garhwal hills in Uttarakhand.Stay in best hotels and resorts at Dehradun.',
-    keywords: '',
-    canonicalPath: '/trip-to-dehradun',
-  },
-  'trip-to-shimla': {
-    title: 'Trip to Shimla | Waytoindia.com',
-    description:
-      'Trip to Shimla can be the best trip of your life.Book your Shimla tour with Waytoindia.com.Stay at best hotels in Shimla.Visit Kufri,Chail and Fagu.',
-    keywords: '',
-    canonicalPath: '/trip-to-shimla',
-  },
-  'udaipur-and-mount-abu-tour-package': {
-    title: 'Udaipur Mount Abu Tour Package | Waytoindia.com',
-    description:
-      'Udaipur Mount Abu Tour Package takes you to Udaipur - the City of Lakes & Mount Abu, the  hill station of Rajasthan famous for its Dilwara Temples.',
-    keywords: '',
-    canonicalPath: '/udaipur-and-mount-abu-tour-package',
-  },
+  // 'trip-to-dehradun': {
+  //   title: 'Trip to Dehradun | Waytoindia.com',
+  //   description:
+  //     'Plan your trip to Dehradun, the capital of Uttarakhand state and gateway to the Garhwal hills in Uttarakhand.Stay in best hotels and resorts at Dehradun.',
+  //   keywords: '',
+  //   canonicalPath: '/trip-to-dehradun',
+  // },
+  // 'trip-to-shimla': {
+  //   title: 'Trip to Shimla | Waytoindia.com',
+  //   description:
+  //     'Trip to Shimla can be the best trip of your life.Book your Shimla tour with Waytoindia.com.Stay at best hotels in Shimla.Visit Kufri,Chail and Fagu.',
+  //   keywords: '',
+  //   canonicalPath: '/trip-to-shimla',
+  // },
+  // 'udaipur-and-mount-abu-tour-package': {
+  //   title: 'Udaipur Mount Abu Tour Package | Waytoindia.com',
+  //   description:
+  //     'Udaipur Mount Abu Tour Package takes you to Udaipur - the City of Lakes & Mount Abu, the  hill station of Rajasthan famous for its Dilwara Temples.',
+  //   keywords: '',
+  //   canonicalPath: '/udaipur-and-mount-abu-tour-package',
+  // },
   'tirupati-package-tour': {
     title: 'Tirupati Package Tour | Waytoindia.com',
     description:
@@ -384,13 +384,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/kaudiyala-river-rafting-package',
   },
-  'jim-corbett-park-weekend-tour-package-[by-rail]': {
-    title: 'Tour To Jim Corbett National Park | Waytoindia.com',
-    description:
-      'Tour To Jim Corbett National Park takes you to the tiger land of Uttarakhand.Enjoy a stay in a resort and safari inside the Jim Corbett Park.',
-    keywords: '',
-    canonicalPath: '/jim-corbett-park-weekend-tour-package-[by-rail]',
-  },
+  // 'jim-corbett-park-weekend-tour-package-[by-rail]': {
+  //   title: 'Tour To Jim Corbett National Park | Waytoindia.com',
+  //   description:
+  //     'Tour To Jim Corbett National Park takes you to the tiger land of Uttarakhand.Enjoy a stay in a resort and safari inside the Jim Corbett Park.',
+  //   keywords: '',
+  //   canonicalPath: '/jim-corbett-park-weekend-tour-package-[by-rail]',
+  // },
   'golden-triangle-tour-with-jim-corbett-national-park': {
     title: 'Golden Triangle Tour With Jim Corbett National Park',
     description:
@@ -426,13 +426,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/corbett-dhikala-tour-package',
   },
-  'bird-watching-in-jim-corbett-park': {
-    title: 'Bird Watching In Jim Corbett Park | Waytoindia.com',
-    description:
-      'If you are planning a trip for bird watching in Jim Corbett Park, this tour will take you to Corbett National Park which has a very rich bird life.',
-    keywords: '',
-    canonicalPath: '/bird-watching-in-jim-corbett-park',
-  },
+  // 'bird-watching-in-jim-corbett-park': {
+  //   title: 'Bird Watching In Jim Corbett Park | Waytoindia.com',
+  //   description:
+  //     'If you are planning a trip for bird watching in Jim Corbett Park, this tour will take you to Corbett National Park which has a very rich bird life.',
+  //   keywords: '',
+  //   canonicalPath: '/bird-watching-in-jim-corbett-park',
+  // },
   'mussoorie-hill-station-tour': {
     title: 'Mussoorie Hill Station Tour | Waytoindia.com',
     description:
@@ -476,13 +476,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/ooty-kodaikanal-tour-package',
   },
-  'uttarakhand-tour-package': {
-    title: 'Uttarakhand Tour Package | Waytoindia.com',
-    description:
-      'Uttarakhand Tour Package takes you to some of the most scenic places in Uttarakhand like Mussoorie, Ranikhet, Almora and Nainital.',
-    keywords: '',
-    canonicalPath: '/uttarakhand-tour-package',
-  },
+  // 'uttarakhand-tour-package': {
+  //   title: 'Uttarakhand Tour Package | Waytoindia.com',
+  //   description:
+  //     'Uttarakhand Tour Package takes you to some of the most scenic places in Uttarakhand like Mussoorie, Ranikhet, Almora and Nainital.',
+  //   keywords: '',
+  //   canonicalPath: '/uttarakhand-tour-package',
+  // },
   'best-of-kumaon-hill-tour': {
     title: 'Kumaon Tour Package | Kumaon Hill Tour | Waytoindia.com',
     description:
@@ -504,13 +504,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/badrinath-kedarnath-yatra',
   },
-  'best-of-kashmir': {
-    title: 'Best of Kashmir Tour Package | Waytoindia.com',
-    description:
-      'Best of Kashmir tour package takes you to Kashmir, the paradise on Earth. Enjoy your holidays in Srinagar & Gulmarg. Stay in comfortable Houseboat at Nigeen...',
-    keywords: '',
-    canonicalPath: '/best-of-kashmir',
-  },
+  // 'best-of-kashmir': {
+  //   title: 'Best of Kashmir Tour Package | Waytoindia.com',
+  //   description:
+  //     'Best of Kashmir tour package takes you to Kashmir, the paradise on Earth. Enjoy your holidays in Srinagar & Gulmarg. Stay in comfortable Houseboat at Nigeen...',
+  //   keywords: '',
+  //   canonicalPath: '/best-of-kashmir',
+  // },
   'darjeeling-sikkim-tour-package': {
     title: 'Darjeeling Sikkim Tour | Darjeeling And Sikkim Tour | Waytoindia.com',
     description:
@@ -525,13 +525,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/kashmir-tour-package',
   },
-  'ladakh-with-pangong-lake': {
-    title: 'Ladakh Pangong Lake Tour | waytoindia.com',
-    description:
-      'Ladakh Pangong Lake Tour takes you through picturesque terrain of Ladakh and the crystal clear blue waters of Pangong lake.Book Ladakh Pangong Lake Tour.',
-    keywords: '',
-    canonicalPath: '/ladakh-with-pangong-lake',
-  },
+  // 'ladakh-with-pangong-lake': {
+  //   title: 'Ladakh Pangong Lake Tour | waytoindia.com',
+  //   description:
+  //     'Ladakh Pangong Lake Tour takes you through picturesque terrain of Ladakh and the crystal clear blue waters of Pangong lake.Book Ladakh Pangong Lake Tour.',
+  //   keywords: '',
+  //   canonicalPath: '/ladakh-with-pangong-lake',
+  // },
   'manali-leh-tour': {
     title: 'Manali Leh Tour | Waytoindia.com',
     description:
@@ -553,13 +553,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/haridwar-tour',
   },
-  'udaipur-mount-abu-tour': {
-    title: 'Udaipur Mount Abu Tour | Waytoindia.com',
-    description:
-      "Udaipur Mount Abu tour takes the travellers to Udaipur, the city of lakes and to Mount Abu, Rajasthan's Hill Station famous for Dilwara Temples.",
-    keywords: '',
-    canonicalPath: '/udaipur-mount-abu-tour',
-  },
+  // 'udaipur-mount-abu-tour': {
+  //   title: 'Udaipur Mount Abu Tour | Waytoindia.com',
+  //   description:
+  //     "Udaipur Mount Abu tour takes the travellers to Udaipur, the city of lakes and to Mount Abu, Rajasthan's Hill Station famous for Dilwara Temples.",
+  //   keywords: '',
+  //   canonicalPath: '/udaipur-mount-abu-tour',
+  // },
   'nainital-ranikhet-tour': {
     title: 'Nainital Ranikhet Tour | Waytoindia.com',
     description:
@@ -721,13 +721,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/assam-tour-package',
   },
-  'north-east-vacation': {
-    title: 'North East Vacation | Waytoindia.com',
-    description:
-      'Book North East Vacation with Waytoindia.com and visit Guwahati, Kaziranga National Park and Shillong.Stay in best hotels and resorts.',
-    keywords: '',
-    canonicalPath: '/north-east-vacation',
-  },
+  // 'north-east-vacation': {
+  //   title: 'North East Vacation | Waytoindia.com',
+  //   description:
+  //     'Book North East Vacation with Waytoindia.com and visit Guwahati, Kaziranga National Park and Shillong.Stay in best hotels and resorts.',
+  //   keywords: '',
+  //   canonicalPath: '/north-east-vacation',
+  // },
   'darjeeling-gangtok-kalimpong-tour-package': {
     title: 'Darjeeling Gangtok Kalimpong Tour Package | Waytoindia.com',
     description:
@@ -826,13 +826,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/andaman-nicobar-tour',
   },
-  'best-of-kerala': {
-    title: 'Best Of Kerala | Waytoindia.com',
-    description:
-      "Book 6 Nights and 7 Days Best of Kerala package with Waytoindia.com and enjoy a visit to God's own country.Get best rates on Kerala Tours.",
-    keywords: '',
-    canonicalPath: '/best-of-kerala',
-  },
+  // 'best-of-kerala': {
+  //   title: 'Best Of Kerala | Waytoindia.com',
+  //   description:
+  //     "Book 6 Nights and 7 Days Best of Kerala package with Waytoindia.com and enjoy a visit to God's own country.Get best rates on Kerala Tours.",
+  //   keywords: '',
+  //   canonicalPath: '/best-of-kerala',
+  // },
   'kerala-tour-package': {
     title: 'Kerala Tour Package | Waytoindia.com',
     description:
@@ -840,13 +840,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/kerala-tour-package',
   },
-  'kerala-nature-trails': {
-    title: 'Kerala Nature Trails | Kerala Nature Tour | Waytoindia.com',
-    description:
-      'Enjoy your Kerala nature trails by booking Kerala nature tour with Waytoindia.com, a company recognised by Ministry of Tourism, Government of India.',
-    keywords: '',
-    canonicalPath: '/kerala-nature-trails',
-  },
+  // 'kerala-nature-trails': {
+  //   title: 'Kerala Nature Trails | Kerala Nature Tour | Waytoindia.com',
+  //   description:
+  //     'Enjoy your Kerala nature trails by booking Kerala nature tour with Waytoindia.com, a company recognised by Ministry of Tourism, Government of India.',
+  //   keywords: '',
+  //   canonicalPath: '/kerala-nature-trails',
+  // },
   'kerala-trip-honeymoon-package': {
     title: 'Kerala Trip Honeymoon Package | Waytoindia.com',
     description:
@@ -994,13 +994,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/sundarbans-national-park-tour-packages',
   },
-  'bandhavgarh-national-park-tour-package': {
-    title: 'Bandhavgarh Safari Package | Waytoindia.com',
-    description:
-      'Book your Bandhavgarh Safari Package with Waytoindia.com.Stay in the best resorts and enjoy tiger safari at Bandhavgarh.',
-    keywords: '',
-    canonicalPath: '/bandhavgarh-national-park-tour-package',
-  },
+  // 'bandhavgarh-national-park-tour-package': {
+  //   title: 'Bandhavgarh Safari Package | Waytoindia.com',
+  //   description:
+  //     'Book your Bandhavgarh Safari Package with Waytoindia.com.Stay in the best resorts and enjoy tiger safari at Bandhavgarh.',
+  //   keywords: '',
+  //   canonicalPath: '/bandhavgarh-national-park-tour-package',
+  // },
   'sariska-tour': {
     title: 'Sariska Tour | Waytoindia.com',
     description:
@@ -1022,13 +1022,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/kovalam-beach-tour',
   },
-  'beaches-of-kerala': {
-    title: 'Beaches Of Kerala | Waytoindia.com',
-    description:
-      'Planning a trip Beaches of Kerala ? Click and send an enquiry to get best deals Kovalam, Kanyakumari and Varkala Tour Packages.',
-    keywords: '',
-    canonicalPath: '/beaches-of-kerala',
-  },
+  // 'beaches-of-kerala': {
+  //   title: 'Beaches Of Kerala | Waytoindia.com',
+  //   description:
+  //     'Planning a trip Beaches of Kerala ? Click and send an enquiry to get best deals Kovalam, Kanyakumari and Varkala Tour Packages.',
+  //   keywords: '',
+  //   canonicalPath: '/beaches-of-kerala',
+  // },
   'tirupati-tour-package-from-chennai': {
     title: 'Tirupati Tour Package From Chennai | Waytoindia.com',
     description:
@@ -1043,13 +1043,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/bangalore-mysore-ooty-tour-package',
   },
-  'mumbai---goa-tour': {
-    title: 'Mumbai Goa Tour | Waytoindia.com',
-    description:
-      'Get best deals and discounts on Mumbai Goa Tour. Click now to get lowest prices on Mumbai & Goa Tour Packages.',
-    keywords: '',
-    canonicalPath: '/mumbai---goa-tour',
-  },
+  // 'mumbai---goa-tour': {
+  //   title: 'Mumbai Goa Tour | Waytoindia.com',
+  //   description:
+  //     'Get best deals and discounts on Mumbai Goa Tour. Click now to get lowest prices on Mumbai & Goa Tour Packages.',
+  //   keywords: '',
+  //   canonicalPath: '/mumbai---goa-tour',
+  // },
   'orissa-golden-triangle-tour': {
     title: 'Orissa Golden Triangle Tour | Odisha Golden Triangle | Waytoindia.com',
     description:
@@ -1092,13 +1092,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/sai-baba-of-puttaparthi-tour',
   },
-  'mumbai---goa-beach-tour': {
-    title: 'Mumbai Goa Beach Tour | Waytoindia.com',
-    description:
-      'Get best discounted deals on Mumbai Goa Beach Tour.Click to know more and send us an enquiry on Mumbai & Goa Tour Packages',
-    keywords: '',
-    canonicalPath: '/mumbai---goa-beach-tour',
-  },
+  // 'mumbai---goa-beach-tour': {
+  //   title: 'Mumbai Goa Beach Tour | Waytoindia.com',
+  //   description:
+  //     'Get best discounted deals on Mumbai Goa Beach Tour.Click to know more and send us an enquiry on Mumbai & Goa Tour Packages',
+  //   keywords: '',
+  //   canonicalPath: '/mumbai---goa-beach-tour',
+  // },
   'muslim-pilgrimage-tour': {
     title: 'Muslim Pilgrimage Tour India | Waytoindia.com',
     description:
@@ -1218,20 +1218,20 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/golden-triangle-tour-with-khajuraho',
   },
-  'konark-dance-festival': {
-    title: 'Konark Dance Festival  | Waytoindia.com',
-    description:
-      'Plan a tour to Konark Dance Festival with Waytoindia.com and experience India like never before.Send enquiry now !',
-    keywords: '',
-    canonicalPath: '/konark-dance-festival',
-  },
-  'golden-triangle--khajuraho-dance-festival-tour': {
-    title: 'Golden Triangle & Khajuraho Dance Festival Tour | Waytoindia.com',
-    description:
-      'Golden Triangle and Khajuraho Dance Festival Tour takes the travellers to most sought after destinations in India - Delhi,Agra,Jaipur and Khajuraho.',
-    keywords: '',
-    canonicalPath: '/golden-triangle--khajuraho-dance-festival-tour',
-  },
+  // 'konark-dance-festival': {
+  //   title: 'Konark Dance Festival  | Waytoindia.com',
+  //   description:
+  //     'Plan a tour to Konark Dance Festival with Waytoindia.com and experience India like never before.Send enquiry now !',
+  //   keywords: '',
+  //   canonicalPath: '/konark-dance-festival',
+  // },
+  // 'golden-triangle--khajuraho-dance-festival-tour': {
+  //   title: 'Golden Triangle & Khajuraho Dance Festival Tour | Waytoindia.com',
+  //   description:
+  //     'Golden Triangle and Khajuraho Dance Festival Tour takes the travellers to most sought after destinations in India - Delhi,Agra,Jaipur and Khajuraho.',
+  //   keywords: '',
+  //   canonicalPath: '/golden-triangle--khajuraho-dance-festival-tour',
+  // },
   'elephant-festival-tour': {
     title: 'Elephant Festival Tour Jaipur | Waytoindia.com',
     description:
@@ -1239,13 +1239,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/elephant-festival-tour',
   },
-  'thrissur-elephant-festival-kerala': {
-    title: 'Thrissur Elephant Festival Tour | Waytoindia.com',
-    description:
-      'Thrissur Elephant Festival Tour takes the tourists to one of the most celebrated events in Kerala.A spectacular festival with decorated elephants attract...',
-    keywords: '',
-    canonicalPath: '/thrissur-elephant-festival-kerala',
-  },
+  // 'thrissur-elephant-festival-kerala': {
+  //   title: 'Thrissur Elephant Festival Tour | Waytoindia.com',
+  //   description:
+  //     'Thrissur Elephant Festival Tour takes the tourists to one of the most celebrated events in Kerala.A spectacular festival with decorated elephants attract...',
+  //   keywords: '',
+  //   canonicalPath: '/thrissur-elephant-festival-kerala',
+  // },
   'golden-triangle-and-gangaur-festival-tour': {
     title: 'Golden Triangle And Gangaur Festival Tour | Waytoindia.com',
     description:
@@ -1253,13 +1253,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/golden-triangle-and-gangaur-festival-tour',
   },
-  'dussehra-festival-kullu': {
-    title: 'Dussehra Festival Kullu | Waytoindia.com',
-    description:
-      'Dussehra Festival Kullu Tour takes the tourists to the scenic Kullu in Himachal Pradesh at the time of festival of Dussehra , for which Kullu is famous.',
-    keywords: '',
-    canonicalPath: '/dussehra-festival-kullu',
-  },
+  // 'dussehra-festival-kullu': {
+  //   title: 'Dussehra Festival Kullu | Waytoindia.com',
+  //   description:
+  //     'Dussehra Festival Kullu Tour takes the tourists to the scenic Kullu in Himachal Pradesh at the time of festival of Dussehra , for which Kullu is famous.',
+  //   keywords: '',
+  //   canonicalPath: '/dussehra-festival-kullu',
+  // },
   'kovalam-kanyakumari-tour': {
     title: 'Kovalam Kanyakumari Tour | Waytoindia.com',
     description:
@@ -1316,20 +1316,20 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/kerala-houseboat-tour',
   },
-  'varanasi-tour-by-air': {
-    title: 'Varanasi Tour | Varanasi Trip | Waytoindia.com',
-    description:
-      'Varanasi tour takes you to one of the oldest living cities of the world.Walk along Ghats of Ganges as you capture the cultural essence of India.',
-    keywords: '',
-    canonicalPath: '/varanasi-tour-by-air',
-  },
-  'udaipur-tour-package': {
-    title: 'Udaipur Tour Package | Waytoindia.com',
-    description:
-      'Book your Udaipur Tour Package with Waytoindia.com.Enjoy Udaipur day tour with boating at Pichola Lake and a visit to Kumbhalgarh & Eklingji Temple.',
-    keywords: '',
-    canonicalPath: '/udaipur-tour-package',
-  },
+  // 'varanasi-tour-by-air': {
+  //   title: 'Varanasi Tour | Varanasi Trip | Waytoindia.com',
+  //   description:
+  //     'Varanasi tour takes you to one of the oldest living cities of the world.Walk along Ghats of Ganges as you capture the cultural essence of India.',
+  //   keywords: '',
+  //   canonicalPath: '/varanasi-tour-by-air',
+  // },
+  // 'udaipur-tour-package': {
+  //   title: 'Udaipur Tour Package | Waytoindia.com',
+  //   description:
+  //     'Book your Udaipur Tour Package with Waytoindia.com.Enjoy Udaipur day tour with boating at Pichola Lake and a visit to Kumbhalgarh & Eklingji Temple.',
+  //   keywords: '',
+  //   canonicalPath: '/udaipur-tour-package',
+  // },
   'ajanta-ellora-tour': {
     title: 'Ajanta Ellora Tour | Ajanta Ellora | Waytoindia.com',
     description:
@@ -1358,20 +1358,20 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/tamil-nadu-temples-tour',
   },
-  'delhi--neemrana-tour': {
-    title: 'Delhi Neemrana Tour Package | Waytoindia.com',
-    description:
-      'Delhi Neemrana Tour Package takes you through one of the most fantastic weekend destinations near Delhi.Also enjoy a full day sightseeing of Delhi as a part...',
-    keywords: '',
-    canonicalPath: '/delhi--neemrana-tour',
-  },
-  'delhi---sultanpur-tour': {
-    title: 'Delhi Sultanpur Bird Sanctuary Tour | Waytoindia.com',
-    description:
-      'Book Delhi Sultanpur Bird Sanctuary Tour with Waytoindia.com.Visit Sultanpur Birdsactuary near Delhi.',
-    keywords: '',
-    canonicalPath: '/delhi---sultanpur-tour',
-  },
+  // 'delhi--neemrana-tour': {
+  //   title: 'Delhi Neemrana Tour Package | Waytoindia.com',
+  //   description:
+  //     'Delhi Neemrana Tour Package takes you through one of the most fantastic weekend destinations near Delhi.Also enjoy a full day sightseeing of Delhi as a part...',
+  //   keywords: '',
+  //   canonicalPath: '/delhi--neemrana-tour',
+  // },
+  // 'delhi---sultanpur-tour': {
+  //   title: 'Delhi Sultanpur Bird Sanctuary Tour | Waytoindia.com',
+  //   description:
+  //     'Book Delhi Sultanpur Bird Sanctuary Tour with Waytoindia.com.Visit Sultanpur Birdsactuary near Delhi.',
+  //   keywords: '',
+  //   canonicalPath: '/delhi---sultanpur-tour',
+  // },
   'mumbai-with-karla-caves-tour': {
     title: 'Mumbai Karla Caves Tour | Waytoindia.com',
     description:
@@ -1393,13 +1393,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/mani-mahesh-yatra-by-helicopter',
   },
-  'desert-festival-jaisalmer': {
-    title: 'Desert Festival Jaisalmer | Waytoindia.com',
-    description:
-      "Desert Festival Jaisalmer tour by Waytoindia makes travellers explore Jaisalmer during Jaisalmer's desert festival.Book Jaisalmer desert festival tour.",
-    keywords: '',
-    canonicalPath: '/desert-festival-jaisalmer',
-  },
+    // 'desert-festival-jaisalmer': {
+  //   title: 'Desert Festival Jaisalmer | Waytoindia.com',
+  //   description:
+  //     "Desert Festival Jaisalmer tour by Waytoindia makes travellers explore Jaisalmer during Jaisalmer's desert festival.Book Jaisalmer desert festival tour.",
+  //   keywords: '',
+  //   canonicalPath: '/desert-festival-jaisalmer',
+  // },
   'bhopal-sanchi-bhimbetka-tour-package': {
     title: 'Bhopal Sanchi Bhimbetka | Sanchi Tour Package | Waytoindia.com',
     description:
@@ -1421,13 +1421,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/golden-triangle-luxury-tour',
   },
-  'golden-triangle-with-ranthambore--bharatpur-luxury-group-tour': {
-    title: 'Golden Triangle Tour With Ranthambore & Bharatpur',
-    description:
-      'Book Golden Triangle Tour With Ranthambore & Bharatpur to experience wildlife of Rajasthan.Stay in best wildlife resorts and see tigers in habitat.',
-    keywords: '',
-    canonicalPath: '/golden-triangle-with-ranthambore--bharatpur-luxury-group-tour',
-  },
+  // 'golden-triangle-with-ranthambore--bharatpur-luxury-group-tour': {
+  //   title: 'Golden Triangle Tour With Ranthambore & Bharatpur',
+  //   description:
+  //     'Book Golden Triangle Tour With Ranthambore & Bharatpur to experience wildlife of Rajasthan.Stay in best wildlife resorts and see tigers in habitat.',
+  //   keywords: '',
+  //   canonicalPath: '/golden-triangle-with-ranthambore--bharatpur-luxury-group-tour',
+  // },
   'jaipur-ajmer-pushkar-tour-packages-from-delhi': {
     title: 'Jaipur Ajmer Pushkar Tour Packages From Delhi | Waytoindia.com',
     description:
@@ -1478,20 +1478,20 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/rajasthan-luxury-tour-package',
   },
-  'jaisalmer-desert-festival': {
-    title: 'Jaisalmer Desert Festival | Waytoindia.com',
-    description:
-      'Visit Jaisalmer Desert Festival .Live in desert camps at Sam Sand Dunes.Experience colourful winter festival of Jaisalmer.',
-    keywords: '',
-    canonicalPath: '/jaisalmer-desert-festival',
-  },
-  'kashmir-ltc-tour': {
-    title: 'Kashmir LTC Tour | Waytoindia.com',
-    description:
-      'Book Kashmir LTC tour and visit the paradise on Earth with Waytoindia.com.Stay in best resorts and enjoy your stay close to nature.',
-    keywords: '',
-    canonicalPath: '/kashmir-ltc-tour',
-  },
+  // 'jaisalmer-desert-festival': {
+  //   title: 'Jaisalmer Desert Festival | Waytoindia.com',
+  //   description:
+  //     'Visit Jaisalmer Desert Festival .Live in desert camps at Sam Sand Dunes.Experience colourful winter festival of Jaisalmer.',
+  //   keywords: '',
+  //   canonicalPath: '/jaisalmer-desert-festival',
+  // },
+  // 'kashmir-ltc-tour': {
+  //   title: 'Kashmir LTC Tour | Waytoindia.com',
+  //   description:
+  //     'Book Kashmir LTC tour and visit the paradise on Earth with Waytoindia.com.Stay in best resorts and enjoy your stay close to nature.',
+  //   keywords: '',
+  //   canonicalPath: '/kashmir-ltc-tour',
+  // },
   'kerala-ltc-tour': {
     title: 'Kerala LTC Tour | Waytoindia.com',
     description:
@@ -1506,13 +1506,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/goa-houseboat-tour-package',
   },
-  'uttarakhand-holidays': {
-    title: 'Uttarakhand Holidays | Waytoindia.com',
-    description:
-      'Uttarakhand Holidays take you to some of the most scenic places in Uttarakhand - Lansdowne, Ranikhet, Almora, Nainital and Jim Corbett National Park.',
-    keywords: '',
-    canonicalPath: '/uttarakhand-holidays',
-  },
+  // 'uttarakhand-holidays': {
+  //   title: 'Uttarakhand Holidays | Waytoindia.com',
+  //   description:
+  //     'Uttarakhand Holidays take you to some of the most scenic places in Uttarakhand - Lansdowne, Ranikhet, Almora, Nainital and Jim Corbett National Park.',
+  //   keywords: '',
+  //   canonicalPath: '/uttarakhand-holidays',
+  // },
   'bangalore-mysore-ooty-package': {
     title: 'Bangalore Mysore Ooty Package | Waytoindia.com',
     description:
@@ -1541,13 +1541,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/charismatic-kashmir-tour',
   },
-  'leh-ladakh-by-air': {
-    title: 'Leh Ladakh By Air  | Waytoindia.com',
-    description:
-      'Book your Leh Ladakh By Air package with Waytoindia.com.Visit Leh, Pangong Lake, Nubra Valley & Sham.',
-    keywords: '',
-    canonicalPath: '/leh-ladakh-by-air',
-  },
+  // 'leh-ladakh-by-air': {
+  //   title: 'Leh Ladakh By Air  | Waytoindia.com',
+  //   description:
+  //     'Book your Leh Ladakh By Air package with Waytoindia.com.Visit Leh, Pangong Lake, Nubra Valley & Sham.',
+  //   keywords: '',
+  //   canonicalPath: '/leh-ladakh-by-air',
+  // },
   'bandhavgarh-wildlife-safari-tour-from-bangalore': {
     title: 'Bandhavgarh Safari Tour From Bangalore | Waytoindia.com',
     description:
@@ -1674,13 +1674,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/bandhavgarh-national-park',
   },
-  'manas-national-park': {
-    title: 'Manas National Park | Wildlife Safari | Waytoindia.com',
-    description:
-      'Book your tour package to Manas National Park.Enjoy Manas National Park Safari packages.',
-    keywords: '',
-    canonicalPath: '/manas-national-park',
-  },
+  // 'manas-national-park': {
+  //   title: 'Manas National Park | Wildlife Safari | Waytoindia.com',
+  //   description:
+  //     'Book your tour package to Manas National Park.Enjoy Manas National Park Safari packages.',
+  //   keywords: '',
+  //   canonicalPath: '/manas-national-park',
+  // },
   'rafting-in-rishikesh-with-trekking-in-himalayas': {
     title: 'Rafting in Rishikesh | Waytoindia.com',
     description:
@@ -1688,27 +1688,27 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/rafting-in-rishikesh-with-trekking-in-himalayas',
   },
-  'kaziranga-national-park-tour': {
-    title: 'Kaziranga National Park Tour | Waytoindia.com',
-    description:
-      'Book your Kaziranga National Park Tour with Waytoindia.com.Stay at the best resorts and enjoy safari in Kaziranga famous for its One horned Rhinos.',
-    keywords: '',
-    canonicalPath: '/kaziranga-national-park-tour',
-  },
-  'nameri-national-park-tour': {
-    title: 'Nameri National Park Tour | Waytoindia.com',
-    description:
-      'Book Nameri National Park tour at Waytoindia.com and stay in the best jungle camps and resorts in Nameri.Enjoy wildlife safari at Nameri National Park.',
-    keywords: '',
-    canonicalPath: '/nameri-national-park-tour',
-  },
-  'bandipur-national-park-tour': {
-    title: 'Bandipur National Park Tour | Waytoindia.com',
-    description:
-      'Book your Bandipur National Park Tour with Waytoindia.com and get the best rates for resorts and safari.',
-    keywords: '',
-    canonicalPath: '/bandipur-national-park-tour',
-  },
+  // 'kaziranga-national-park-tour': {
+  //   title: 'Kaziranga National Park Tour | Waytoindia.com',
+  //   description:
+  //     'Book your Kaziranga National Park Tour with Waytoindia.com.Stay at the best resorts and enjoy safari in Kaziranga famous for its One horned Rhinos.',
+  //   keywords: '',
+  //   canonicalPath: '/kaziranga-national-park-tour',
+  // },
+  // 'nameri-national-park-tour': {
+  //   title: 'Nameri National Park Tour | Waytoindia.com',
+  //   description:
+  //     'Book Nameri National Park tour at Waytoindia.com and stay in the best jungle camps and resorts in Nameri.Enjoy wildlife safari at Nameri National Park.',
+  //   keywords: '',
+  //   canonicalPath: '/nameri-national-park-tour',
+  // },
+  // 'bandipur-national-park-tour': {
+  //   title: 'Bandipur National Park Tour | Waytoindia.com',
+  //   description:
+  //     'Book your Bandipur National Park Tour with Waytoindia.com and get the best rates for resorts and safari.',
+  //   keywords: '',
+  //   canonicalPath: '/bandipur-national-park-tour',
+  // },
   'eravikulam-national-park': {
     title: 'Eravikulam National Park | Waytoindia.com',
     description:
@@ -1716,104 +1716,104 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/eravikulam-national-park',
   },
-  'periyar-national-park-tour': {
-    title: 'Periyar National Park Tour | Waytoindia.com',
-    description:
-      'Pench Narional Park Tour takes the wildlife lovers to the land of Elephants.Enjoy Periyar National Park Safari and stay at best forest resorts.',
-    keywords: '',
-    canonicalPath: '/periyar-national-park-tour',
-  },
-  'pench-national-park-tour': {
-    title: 'Pench National park Tour | Waytoindia.com',
-    description:
-      'Pench Narional Park Tour takes the wildlife lovers to the land of Tigers.Enjoy Pench National Park Safari and stay at best forest resorts.',
-    keywords: '',
-    canonicalPath: '/pench-national-park-tour',
-  },
-  'panna-national-park-tour': {
-    title: 'Panna National Park Tour | Waytoindia.com',
-    description:
-      'Book Panna National Park Tour with Waytoindia and stay at the best jungle resorts.Enjoy Panna National Park Safari.',
-    keywords: '',
-    canonicalPath: '/panna-national-park-tour',
-  },
-  'nagarhole-national-park-tour': {
-    title: 'Nagarhole National Park Tour Package | Waytoindia.com',
-    description:
-      'Book your Nagarhole National Park Tour Package and enjoy wildlife safari inside Nagarhole National Park.',
-    keywords: '',
-    canonicalPath: '/nagarhole-national-park-tour',
-  },
-  'ranthambore-wildlife-safari-tour': {
-    title: 'Ranthambore Wildlife Safari Tour | Waytoindia.com',
-    description:
-      'Book your Ranthambore Wildlife Safari Tour with Waytoindia.com.Stay at the best resorts and enjoy Tiger safaris in Ranthambore National Park.',
-    keywords: '',
-    canonicalPath: '/ranthambore-wildlife-safari-tour',
-  },
-  'jim-corbett-national-park': {
-    title: 'Corbett National Park Safari | Corbett National Park Tour Packages',
-    description:
-      'Plan Corbett National Park tour packages with Waytoindia.com.Enjoy Corbett National Park Safari and stay in best resorts.',
-    keywords: '',
-    canonicalPath: '/jim-corbett-national-park',
-  },
-  'bharatpur-tour': {
-    title: 'Bharatpur Tour | Keoladeo National Park Tour | Waytoindia.com',
-    description:
-      'Enjoy sighting migratory birds.Book Bharatpur Tour and visit Keoladeo National Park to sight the rare birds in India.',
-    keywords: '',
-    canonicalPath: '/bharatpur-tour',
-  },
-  'mudumalai-national-park-tour': {
-    title: 'Madumalai Tour Packages | Madumalai National Park Tour | Waytoindia.com',
-    description:
-      'Book your Madumalai Tour Packages with Waytoindia.com and enjoy wildlife safaris in Madumalai National Park.',
-    keywords: '',
-    canonicalPath: '/mudumalai-national-park-tour',
-  },
-  'rajaji-national-park-safari': {
-    title: 'Rajaji National Park Safari | Waytoindia.com',
-    description:
-      'Enjoy Rajaji National Park Safari with Waytoindia.com.Stay at best resorts near Rajaji National Park.',
-    keywords: '',
-    canonicalPath: '/rajaji-national-park-safari',
-  },
-  'sariska-national-park-tour': {
-    title: 'Sariska National Park Tour | Waytoindia.com',
-    description:
-      'Book Sariska National Park Tour with Waytoindia.com.Stay in best resorts and enjoy wildlife safari in Sariska National Park.',
-    keywords: '',
-    canonicalPath: '/sariska-national-park-tour',
-  },
-  'gir-national-park-tour': {
-    title: 'Gir National Park Tour  |  Waytoindia.com',
-    description:
-      'Gir National Park Tour takes you to the land of Asiatic Lions in Gujarat. Stay in the most comfortable resorts near Gir National Park & enjoy Safaris.',
-    keywords: '',
-    canonicalPath: '/gir-national-park-tour',
-  },
-  'kanha-national-park-tour': {
-    title: 'Kanha National Park Tour | Waytoindia.com',
-    description:
-      'Book Kanha National Park Tour and visit the jungles of Kanha, famous for their tigers and other wild animals.Stay at best resorts and enjoy safari.',
-    keywords: '',
-    canonicalPath: '/kanha-national-park-tour',
-  },
-  'tadoba-national-park-tour-package': {
-    title: 'Tadoba National Park Tour Package | Waytoindia.com',
-    description:
-      'Tadoba National Park Tour Package by Waytoindia.com takes wildlife lovers to Tiger habitat in Tadoba Andhari tiger reserve.Enjoy wildlife safari at Tadoba.',
-    keywords: '',
-    canonicalPath: '/tadoba-national-park-tour-package',
-  },
-  'sundarbans-tour': {
-    title: 'Sundarban Tour | Waytoindia.com',
-    description:
-      'Sundarban tour takes you to the land of Royal Bengal Tigers in Sundarban Biosphere Reserve, West Bengal.Cruise along Sundarban Mangroves on Tiger Safari.',
-    keywords: '',
-    canonicalPath: '/sundarbans-tour',
-  },
+  // 'periyar-national-park-tour': {
+  //   title: 'Periyar National Park Tour | Waytoindia.com',
+  //   description:
+  //     'Pench Narional Park Tour takes the wildlife lovers to the land of Elephants.Enjoy Periyar National Park Safari and stay at best forest resorts.',
+  //   keywords: '',
+  //   canonicalPath: '/periyar-national-park-tour',
+  // },
+  // 'pench-national-park-tour': {
+  //   title: 'Pench National park Tour | Waytoindia.com',
+  //   description:
+  //     'Pench Narional Park Tour takes the wildlife lovers to the land of Tigers.Enjoy Pench National Park Safari and stay at best forest resorts.',
+  //   keywords: '',
+  //   canonicalPath: '/pench-national-park-tour',
+  // },
+  // 'panna-national-park-tour': {
+  //   title: 'Panna National Park Tour | Waytoindia.com',
+  //   description:
+  //     'Book Panna National Park Tour with Waytoindia and stay at the best jungle resorts.Enjoy Panna National Park Safari.',
+  //   keywords: '',
+  //   canonicalPath: '/panna-national-park-tour',
+  // },
+  // 'nagarhole-national-park-tour': {
+  //   title: 'Nagarhole National Park Tour Package | Waytoindia.com',
+  //   description:
+  //     'Book your Nagarhole National Park Tour Package and enjoy wildlife safari inside Nagarhole National Park.',
+  //   keywords: '',
+  //   canonicalPath: '/nagarhole-national-park-tour',
+  // },
+  // 'ranthambore-wildlife-safari-tour': {
+  //   title: 'Ranthambore Wildlife Safari Tour | Waytoindia.com',
+  //   description:
+  //     'Book your Ranthambore Wildlife Safari Tour with Waytoindia.com.Stay at the best resorts and enjoy Tiger safaris in Ranthambore National Park.',
+  //   keywords: '',
+  //   canonicalPath: '/ranthambore-wildlife-safari-tour',
+  // },
+  // 'jim-corbett-national-park': {
+  //   title: 'Corbett National Park Safari | Corbett National Park Tour Packages',
+  //   description:
+  //     'Plan Corbett National Park tour packages with Waytoindia.com.Enjoy Corbett National Park Safari and stay in best resorts.',
+  //   keywords: '',
+  //   canonicalPath: '/jim-corbett-national-park',
+  // },
+  // 'bharatpur-tour': {
+  //   title: 'Bharatpur Tour | Keoladeo National Park Tour | Waytoindia.com',
+  //   description:
+  //     'Enjoy sighting migratory birds.Book Bharatpur Tour and visit Keoladeo National Park to sight the rare birds in India.',
+  //   keywords: '',
+  //   canonicalPath: '/bharatpur-tour',
+  // },
+  // 'mudumalai-national-park-tour': {
+  //   title: 'Madumalai Tour Packages | Madumalai National Park Tour | Waytoindia.com',
+  //   description:
+  //     'Book your Madumalai Tour Packages with Waytoindia.com and enjoy wildlife safaris in Madumalai National Park.',
+  //   keywords: '',
+  //   canonicalPath: '/mudumalai-national-park-tour',
+  // },
+  // 'rajaji-national-park-safari': {
+  //   title: 'Rajaji National Park Safari | Waytoindia.com',
+  //   description:
+  //     'Enjoy Rajaji National Park Safari with Waytoindia.com.Stay at best resorts near Rajaji National Park.',
+  //   keywords: '',
+  //   canonicalPath: '/rajaji-national-park-safari',
+  // },
+  // 'sariska-national-park-tour': {
+  //   title: 'Sariska National Park Tour | Waytoindia.com',
+  //   description:
+  //     'Book Sariska National Park Tour with Waytoindia.com.Stay in best resorts and enjoy wildlife safari in Sariska National Park.',
+  //   keywords: '',
+  //   canonicalPath: '/sariska-national-park-tour',
+  // },
+  // 'gir-national-park-tour': {
+  //   title: 'Gir National Park Tour  |  Waytoindia.com',
+  //   description:
+  //     'Gir National Park Tour takes you to the land of Asiatic Lions in Gujarat. Stay in the most comfortable resorts near Gir National Park & enjoy Safaris.',
+  //   keywords: '',
+  //   canonicalPath: '/gir-national-park-tour',
+  // },
+  // 'kanha-national-park-tour': {
+  //   title: 'Kanha National Park Tour | Waytoindia.com',
+  //   description:
+  //     'Book Kanha National Park Tour and visit the jungles of Kanha, famous for their tigers and other wild animals.Stay at best resorts and enjoy safari.',
+  //   keywords: '',
+  //   canonicalPath: '/kanha-national-park-tour',
+  // },
+  // 'tadoba-national-park-tour-package': {
+  //   title: 'Tadoba National Park Tour Package | Waytoindia.com',
+  //   description:
+  //     'Tadoba National Park Tour Package by Waytoindia.com takes wildlife lovers to Tiger habitat in Tadoba Andhari tiger reserve.Enjoy wildlife safari at Tadoba.',
+  //   keywords: '',
+  //   canonicalPath: '/tadoba-national-park-tour-package',
+  // },
+  // 'sundarbans-tour': {
+  //   title: 'Sundarban Tour | Waytoindia.com',
+  //   description:
+  //     'Sundarban tour takes you to the land of Royal Bengal Tigers in Sundarban Biosphere Reserve, West Bengal.Cruise along Sundarban Mangroves on Tiger Safari.',
+  //   keywords: '',
+  //   canonicalPath: '/sundarbans-tour',
+  // },
   'gujarat-holiday-packages': {
     title: 'Gujarat Holiday Packages | Waytoindia.com',
     description:
@@ -1919,13 +1919,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/kumaon-tour',
   },
-  'pancha-bootha-sthalam-tour': {
-    title: 'Pancha Bootha Sthalam Tour | Waytoindia.com',
-    description:
-      'Pancha Bootha Sthalam Tour ,also called 5 Elements Tour, takes you to 5 Temples of Lord Shiva relating to 5 cosmic elements -Earth, Water, Fire, Air & Sky.',
-    keywords: '',
-    canonicalPath: '/pancha-bootha-sthalam-tour',
-  },
+  // 'pancha-bootha-sthalam-tour': {
+  //   title: 'Pancha Bootha Sthalam Tour | Waytoindia.com',
+  //   description:
+  //     'Pancha Bootha Sthalam Tour ,also called 5 Elements Tour, takes you to 5 Temples of Lord Shiva relating to 5 cosmic elements -Earth, Water, Fire, Air & Sky.',
+  //   keywords: '',
+  //   canonicalPath: '/pancha-bootha-sthalam-tour',
+  // },
   'arupadai-veedu-tour': {
     title: 'Arupadai Veedu Tour Package | Aarupadai Veedu Tour | Waytoindia.com',
     description:
@@ -2010,13 +2010,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/amritsar-dalhousie-dharamshala-tour',
   },
-  'srinagar-to-amarnath-helicopter': {
-    title: 'Srinagar To Amarnath Helicopter | Waytoindia.com',
-    description:
-      'Book Srinagar to Amarnath Helicopter with Waytoindia.com.Fly to Panjtarni from Srinagar Airport and back on the same day.Book one Day Amarnath Yatra Tour.',
-    keywords: '',
-    canonicalPath: '/srinagar-to-amarnath-helicopter',
-  },
+  // 'srinagar-to-amarnath-helicopter': {
+  //   title: 'Srinagar To Amarnath Helicopter | Waytoindia.com',
+  //   description:
+  //     'Book Srinagar to Amarnath Helicopter with Waytoindia.com.Fly to Panjtarni from Srinagar Airport and back on the same day.Book one Day Amarnath Yatra Tour.',
+  //   keywords: '',
+  //   canonicalPath: '/srinagar-to-amarnath-helicopter',
+  // },
   'amarnath-yatra-by-helicopter': {
     title: 'Amarnath Yatra By Helicopter | Waytoindia.com',
     description:
@@ -2073,13 +2073,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/kedarnath-jyotirlinga-tour-package',
   },
-  'trimbakeshwar-grishneshwar-bhimashankar-jyotirlinga-tour': {
-    title: 'Trimbakeshwar Grishneshwar Bhimashankar Jyotirlinga Tour | Waytoindia.com',
-    description:
-      'Trimbakeshwar Grishneshwar Bhimashankar Jyotirlinga Tour package takes the pilgrims to 3 of the abodes of lord shiva in Maharashtra state of India.',
-    keywords: '',
-    canonicalPath: '/trimbakeshwar-grishneshwar-bhimashankar-jyotirlinga-tour',
-  },
+  // 'trimbakeshwar-grishneshwar-bhimashankar-jyotirlinga-tour': {
+  //   title: 'Trimbakeshwar Grishneshwar Bhimashankar Jyotirlinga Tour | Waytoindia.com',
+  //   description:
+  //     'Trimbakeshwar Grishneshwar Bhimashankar Jyotirlinga Tour package takes the pilgrims to 3 of the abodes of lord shiva in Maharashtra state of India.',
+  //   keywords: '',
+  //   canonicalPath: '/trimbakeshwar-grishneshwar-bhimashankar-jyotirlinga-tour',
+  // },
   'bangalore-mysore-coorg-tour-package': {
     title: 'Bangalore Mysore Coorg Tour Package | Mysore Coorg Tour Package',
     description:
@@ -2143,13 +2143,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/kagbhusandi-lake-trek',
   },
-  'valley-of-flowers-trekking-tour': {
-    title: 'Valley of Flowers Trek | Waytoindia.com',
-    description:
-      'Valley of Flowers Trek is a trekking tour for adventure lovers who wish to traverse of the most beautiful valley dotted with flowers, waterfalls and scenic...',
-    keywords: '',
-    canonicalPath: '/valley-of-flowers-trekking-tour',
-  },
+  // 'valley-of-flowers-trekking-tour': {
+  //   title: 'Valley of Flowers Trek | Waytoindia.com',
+  //   description:
+  //     'Valley of Flowers Trek is a trekking tour for adventure lovers who wish to traverse of the most beautiful valley dotted with flowers, waterfalls and scenic...',
+  //   keywords: '',
+  //   canonicalPath: '/valley-of-flowers-trekking-tour',
+  // },
   'satopanth-trek': {
     title: 'Satopanth Trek | Satopanth Tal Trek | Waytoindia.com',
     description:
@@ -2220,13 +2220,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/konkan-beach-resorts-tour',
   },
-  'udaipur-city-tour-package': {
-    title: 'Udaipur City Tour Package | Waytoindia.com',
-    description:
-      'Book Udaipur city tour package and explore the beautiful Udaipur, the city of lakes.This 3 Nights & 4 Days package takes you to City Palace, Doodh Talai,...',
-    keywords: '',
-    canonicalPath: '/udaipur-city-tour-package',
-  },
+  // 'udaipur-city-tour-package': {
+  //   title: 'Udaipur City Tour Package | Waytoindia.com',
+  //   description:
+  //     'Book Udaipur city tour package and explore the beautiful Udaipur, the city of lakes.This 3 Nights & 4 Days package takes you to City Palace, Doodh Talai,...',
+  //   keywords: '',
+  //   canonicalPath: '/udaipur-city-tour-package',
+  // },
   'delhi-agra-jaipur-udaipur-tour-package': {
     title: 'Delhi Agra Jaipur Udaipur Tour Package | Waytoindia.com',
     description:
@@ -2332,13 +2332,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/hyderabad-to-araku-tour-packages',
   },
-  'udaipur-tour-package-for-couples': {
-    title: 'Udaipur Tour Package For Couple | Waytoindia.com',
-    description:
-      'Way to India brings to you luxurious yet affordable Udaipur tour package for couples. View our in-depth 5 days/4 nights itinerary and speak to our travel...',
-    keywords: '',
-    canonicalPath: '/udaipur-tour-package-for-couples',
-  },
+  // 'udaipur-tour-package-for-couples': {
+  //   title: 'Udaipur Tour Package For Couple | Waytoindia.com',
+  //   description:
+  //     'Way to India brings to you luxurious yet affordable Udaipur tour package for couples. View our in-depth 5 days/4 nights itinerary and speak to our travel...',
+  //   keywords: '',
+  //   canonicalPath: '/udaipur-tour-package-for-couples',
+  // },
   'srinagar-leh-ladakh-tour-package': {
     title: 'Srinagar Leh Ladakh Tour Package | Waytoindia.com',
     description:
@@ -2388,13 +2388,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/golden-triangle-tour-with-pushkar',
   },
-  'valley-of-flowers-uttarakhand-package': {
-    title: 'Valley Of Flowers Uttarakhand Package | Waytoindia.com',
-    description:
-      'Stride into the couch of flowers while you head out for this one of a kind valley of flowers Uttarakhand package. It gives you an opportunity to enjoy the...',
-    keywords: '',
-    canonicalPath: '/valley-of-flowers-uttarakhand-package',
-  },
+  // 'valley-of-flowers-uttarakhand-package': {
+  //   title: 'Valley Of Flowers Uttarakhand Package | Waytoindia.com',
+  //   description:
+  //     'Stride into the couch of flowers while you head out for this one of a kind valley of flowers Uttarakhand package. It gives you an opportunity to enjoy the...',
+  //   keywords: '',
+  //   canonicalPath: '/valley-of-flowers-uttarakhand-package',
+  // },
   'leh-ladakh-road-trip': {
     title: 'Leh Ladakh Road Trip | Road Trip To Ladakh By Car | Waytoindia.com',
     description:
