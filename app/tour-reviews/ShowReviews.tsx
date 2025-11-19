@@ -4,14 +4,13 @@ import { TourReview, TourReviewImage } from "@/types/comman"
 import { endPoints } from '@/constants/endpoints';
 
 export default async function ShowTourReviews({ tourId }: { tourId: string }) {
-    
+
   async function getTourReviewData() {
     try {
       const url = endPoints.tour.reviews.getReview(tourId);
-      console.log(url);
       const response = await fetch(url, {
         headers: { 'Content-Type': 'application/json' },
-        next: { revalidate: 60 }, 
+        next: { revalidate: 60 },
       });
       if (!response.ok) {
         if (response.status === 404) return null;

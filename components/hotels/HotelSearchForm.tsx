@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
-import { FiMapPin, FiChevronDown } from 'react-icons/fi';
+import { useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { endPoints } from '@/constants/endpoints';
 import { useAuthStore } from '@/store/AuthStore';
@@ -9,7 +8,11 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { topIndianCities } from '@/utils/IndianCities';
+
+import CitySelector from './CitySelector';
+import DateSelector from './DateSelector';
+import RoomsGuestsSelector from './RoomsGuestsSelector';
+import PriceRange from './PriceRange';
 
 type FormData = {
   location: string;
@@ -45,15 +48,10 @@ export default function HotelSearchForm() {
     priceRange: 'all',
   });
 
-  const [showGuestsDropdown, setShowGuestsDropdown] = useState(false);
-  const checkInRef = useRef<HTMLInputElement>(null);
-  const checkOutRef = useRef<HTMLInputElement>(null);
+  const isDateChanging = useRef(false);
 
-  
   const createQueryMutation = useMutation({
     mutationFn: async (data: FormData) => {
-      if (!token) throw new Error('Authentication required');
-
       const payload = {
         location: data.location,
         checkInDate: data.checkIn,
@@ -76,24 +74,18 @@ export default function HotelSearchForm() {
 
     onSuccess: (res) => {
       toast.success(res.message || 'Query sent successfully!');
-      console.log('Query created:', res);
     },
 
     onError: (error) => {
       if (axios.isAxiosError(error)) {
-        const errorMessage =
-          error.response?.data?.message || 'Failed to send query';
-        toast.error(errorMessage);
+        toast.error(error.response?.data?.message || 'Failed to send query');
 
         if (error.response?.status === 401) {
-          toast.error('Please login to continue');
           router.push('/login');
         }
       } else {
         toast.error('Something went wrong');
       }
-
-      console.error('Error creating query:', error);
     },
   });
 
@@ -126,256 +118,55 @@ export default function HotelSearchForm() {
 
   const handleChange = (field: keyof FormData, value: string | number) => {
     setFormData((prev) => {
-      const newData = { ...prev, [field]: value };
+      const updated = { ...prev, [field]: value };
 
-      if (field === 'checkIn') {
+      if (field === 'checkIn' && !isDateChanging.current) {
         const newCheckIn = new Date(value as string);
-        const newCheckOut = new Date(newData.checkOut);
+        const newCheckOut = new Date(updated.checkOut);
 
         if (newCheckOut <= newCheckIn) {
           newCheckOut.setDate(newCheckIn.getDate() + 1);
-          newData.checkOut = newCheckOut.toISOString().split('T')[0];
+          updated.checkOut = newCheckOut.toISOString().split('T')[0];
         }
       }
 
-      return newData;
+      return updated;
     });
   };
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return {
-      day: date.getDate(),
-      month: date.toLocaleDateString('en-US', { month: 'short' }),
-      year: date.getFullYear().toString().slice(-2),
-      dayName: date.toLocaleDateString('en-US', { weekday: 'long' }),
-    };
-  };
-
-  const checkInDate = formatDate(formData.checkIn);
-  const checkOutDate = formatDate(formData.checkOut);
   const isSubmitting = createQueryMutation.isPending;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
-        <div className="relative">
-          <label className="block text-xs text-gray-500 mb-2 font-medium">
-            City, Property Name Or Location
-          </label>
-
-          <div className="relative">
-            <FiMapPin className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-
-            <select
-              value={formData.location}
-              onChange={(e) => handleChange('location', e.target.value)}
-              disabled={isSubmitting}
-              className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 appearance-none bg-white cursor-pointer disabled:opacity-50"
-            >
-              {topIndianCities.map((city) => (
-                <option key={city} value={city}>
-                  {city}
-                </option>
-              ))}
-            </select>
-
-            <FiChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
-          </div>
-
-          <p className="text-xs text-gray-500 mt-1">India</p>
-        </div>
-
-
-        <div>
-          <label className="block text-xs text-gray-500 mb-2 font-medium">
-            Check-In 📅
-          </label>
-
-          <input
-            type="date"
-            ref={checkInRef}
-            value={formData.checkIn}
-            onChange={(e) => handleChange('checkIn', e.target.value)}
-            disabled={isSubmitting}
-            className="sr-only"
-            tabIndex={-1}
-          />
-
-          <button
-            type="button"
-            onClick={() => checkInRef.current?.showPicker?.()}
-            disabled={isSubmitting}
-            className="w-full text-left px-4 py-3 border border-gray-300 rounded-xl bg-white hover:border-orange-400 focus:ring-2 focus:ring-orange-500 disabled:opacity-50"
-          >
-            <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold">{checkInDate.day}</span>
-              <span className="text-sm">
-                {checkInDate.month}&apos;{checkInDate.year}
-              </span>
-            </div>
-            <p className="text-xs text-gray-500">{checkInDate.dayName}</p>
-          </button>
-        </div>
-
-
-        <div>
-          <label className="block text-xs text-gray-500 mb-2 font-medium">
-            Check-Out 📅
-          </label>
-
-          <input
-            type="date"
-            ref={checkOutRef}
-            value={formData.checkOut}
-            onChange={(e) => handleChange('checkOut', e.target.value)}
-            disabled={isSubmitting}
-            className="sr-only"
-            tabIndex={-1}
-          />
-
-          <button
-            type="button"
-            onClick={() => checkOutRef.current?.showPicker?.()}
-            disabled={isSubmitting}
-            className="w-full text-left px-4 py-3 border border-gray-300 rounded-xl bg-white hover:border-orange-400 focus:ring-2 focus:ring-orange-500 disabled:opacity-50"
-          >
-            <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold">{checkOutDate.day}</span>
-              <span className="text-sm">
-                {checkOutDate.month}&apos;{checkOutDate.year}
-              </span>
-            </div>
-            <p className="text-xs text-gray-500">{checkOutDate.dayName}</p>
-          </button>
-        </div>
-
-
-        <div className="relative">
-          <label className="block text-xs text-gray-500 mb-2 font-medium">
-            Rooms & Guests 👥
-          </label>
-
-          <button
-            type="button"
-            onClick={() => setShowGuestsDropdown(!showGuestsDropdown)}
-            disabled={isSubmitting}
-            className="w-full text-left px-4 py-3 border border-gray-300 rounded-xl bg-white hover:border-orange-400 focus:ring-2 focus:ring-orange-500 disabled:opacity-50"
-          >
-            <div className="flex items-baseline gap-3">
-              <div>
-                <span className="text-3xl font-bold">{formData.rooms}</span>
-                <span className="text-sm ml-1">
-                  Room{formData.rooms > 1 ? 's' : ''}
-                </span>
-              </div>
-
-              <div>
-                <span className="text-3xl font-bold">{formData.guests}</span>
-                <span className="text-sm ml-1">
-                  Guest{formData.guests > 1 ? 's' : ''}
-                </span>
-              </div>
-            </div>
-          </button>
-
-          {showGuestsDropdown && (
-            <div className="absolute top-full mt-2 w-full bg-white border border-gray-200 rounded-xl shadow-xl p-4 z-50">
-              <div className="space-y-4">
-
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium">Rooms</span>
-
-                  <div className="flex items-center gap-3">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        handleChange('rooms', Math.max(1, formData.rooms - 1))
-                      }
-                      className="w-8 h-8 bg-gray-100 rounded-full hover:bg-gray-200 transition"
-                    >
-                      −
-                    </button>
-
-                    <span className="w-8 text-center font-semibold">
-                      {formData.rooms}
-                    </span>
-
-                    <button
-                      type="button"
-                      onClick={() =>
-                        handleChange('rooms', Math.min(10, formData.rooms + 1))
-                      }
-                      className="w-8 h-8 bg-gray-100 rounded-full hover:bg-gray-200 transition"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-
-
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium">Guests</span>
-
-                  <div className="flex items-center gap-3">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        handleChange('guests', Math.max(1, formData.guests - 1))
-                      }
-                      className="w-8 h-8 bg-gray-100 rounded-full hover:bg-gray-200 transition"
-                    >
-                      −
-                    </button>
-
-                    <span className="w-8 text-center font-semibold">
-                      {formData.guests}
-                    </span>
-
-                    <button
-                      type="button"
-                      onClick={() =>
-                        handleChange('guests', Math.min(20, formData.guests + 1))
-                      }
-                      className="w-8 h-8 bg-gray-100 rounded-full hover:bg-gray-200 transition"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => setShowGuestsDropdown(false)}
-                className="w-full mt-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition"
-              >
-                Done
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-
-
-      <div className="flex justify-end items-center">
-        <label className="text-sm mr-3 text-gray-700">Price Per Night</label>
-
-        <select
-          value={formData.priceRange}
-          onChange={(e) => handleChange('priceRange', e.target.value)}
+        <CitySelector
+          location={formData.location}
+          onSelect={(city) => handleChange('location', city)}
           disabled={isSubmitting}
-          className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 disabled:opacity-50"
-        >
-          <option value="all">All Prices</option>
-          <option value="budget">Under ₹2,000</option>
-          <option value="mid">₹2,000 - ₹5,000</option>
-          <option value="luxury">₹5,000+</option>
-        </select>
+        />
+
+        <DateSelector
+          checkIn={formData.checkIn}
+          checkOut={formData.checkOut}
+          onChange={handleChange}
+          disable={isSubmitting}
+        />
+
+        <RoomsGuestsSelector
+          rooms={formData.rooms}
+          guests={formData.guests}
+          onChange={handleChange}
+          disabled={isSubmitting}
+        />
+
       </div>
 
+      <PriceRange
+        value={formData.priceRange}
+        onChange={(v) => handleChange('priceRange', v)}
+        disabled={isSubmitting}
+      />
 
       <div className="flex justify-center pt-2">
         <button

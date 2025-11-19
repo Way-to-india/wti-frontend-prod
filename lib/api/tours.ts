@@ -66,7 +66,6 @@ export async function getTourCities() {
 
   try {
     const url = endPoints.tour.getCities;
-    console.log(url);
     const response = await fetch(url, {
       headers: {
         'Content-Type': 'application/json',

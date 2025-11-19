@@ -8,7 +8,6 @@ export async function getTravelGuide() {
 
   try {
     const url = endPoints.travelGuide.getAll;
-    console.log(url);
     const response = await fetch(url, {
       headers: {
         'Content-Type': 'application/json',
