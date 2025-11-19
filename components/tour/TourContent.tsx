@@ -1,8 +1,9 @@
-import { FiClock, FiMapPin, FiUsers, FiHome, FiShare2 } from 'react-icons/fi'
+import { FiClock, FiMapPin, FiUsers, FiHome } from 'react-icons/fi'
 import { FaStar } from 'react-icons/fa'
 import { CityItem, ThemeItem, Tour } from '@/types/comman';
 import TourDescription from './TourDescription';
 import TourQuery from './TourQuery/TourQuery';
+import ShareTour from './ShareTour';
 
 type TourContentProps = {
   title: string;
@@ -43,14 +44,7 @@ const TourContent = (tour: TourContentProps) => {
             <span className="text-sm text-gray-600">(4 Ratings)</span>
           </div>
         </div>
-
-        <button
-          className="bg-orange-600 text-white p-2 rounded-full hover:bg-orange-700 transition focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
-          aria-label="Share this tour"
-          title="Share this tour"
-        >
-          <FiShare2 className="w-4 h-4" aria-hidden="true" />
-        </button>
+        <ShareTour tour={{title : tour.title,duration : tour.duration}} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-6">

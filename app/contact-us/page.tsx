@@ -65,18 +65,18 @@ export default function ContactPage() {
               content={
                 <div className="space-y-2">
                   <a
-                    href="tel:+918527255995"
+                    href="tel:+918527255991"
                     className="block text-orange-600 font-semibold hover:text-orange-700 transition"
-                    aria-label="Call us at +91 8527255995"
+                    aria-label="Call us at +918527255991"
                   >
-                    +91 8527255995
+                    +918527255991
                   </a>
                   <a
                     href="tel:+918527255995"
                     className="block text-orange-600 font-semibold hover:text-orange-700 transition"
                     aria-label="Alternative number +91 8527255995"
                   >
-                    +91 8527255995
+                    +918527255991
                   </a>
                 </div>
               }

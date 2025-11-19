@@ -630,13 +630,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/srinagar-houseboat-packages',
   },
-  'trip-to-dalhousie-from-delhi': {
-    title: 'Trip To Dalhousie From Delhi | Dalhousie Trip From Delhi Waytoindia.com',
-    description:
-      'Searching for the best deals on Dharamshala Dalhousie from Delhi ? Get lowest quotes on Trip to Dalhousie from Delhi.Book Dalhousie Trip From Delhi',
-    keywords: '',
-    canonicalPath: '/trip-to-dalhousie-from-delhi',
-  },
+  // 'trip-to-dalhousie-from-delhi': {
+  //   title: 'Trip To Dalhousie From Delhi | Dalhousie Trip From Delhi Waytoindia.com',
+  //   description:
+  //     'Searching for the best deals on Dharamshala Dalhousie from Delhi ? Get lowest quotes on Trip to Dalhousie from Delhi.Book Dalhousie Trip From Delhi',
+  //   keywords: '',
+  //   canonicalPath: '/trip-to-dalhousie-from-delhi',
+  // },
   'dalhousie-tour': {
     title: 'Dalhousie Tour | Waytoindia.com',
     description:
@@ -1190,13 +1190,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/goa-carnival-festival-tour',
   },
-  'pushkar-camel-fair': {
-    title: 'Pushkar Camel Fair | Waytoindia.com',
-    description:
-      'Pushkar Camel Fair takes you to the most awaited cultural festivals of Rajasthan -Pushkar Camel Festival.Travellers from across globe come to enjoy this fair',
-    keywords: '',
-    canonicalPath: '/pushkar-camel-fair',
-  },
+  // 'pushkar-camel-fair': {
+  //   title: 'Pushkar Camel Fair | Waytoindia.com',
+  //   description:
+  //     'Pushkar Camel Fair takes you to the most awaited cultural festivals of Rajasthan -Pushkar Camel Festival.Travellers from across globe come to enjoy this fair',
+  //   keywords: '',
+  //   canonicalPath: '/pushkar-camel-fair',
+  // },
   'bikaner-camel-festival-tour': {
     title: 'Bikaner Camel Festival | Waytoindia.com',
     description:
@@ -1653,13 +1653,13 @@ export const tourMetaData: Record<string, TourMeta> = {
     keywords: '',
     canonicalPath: '/romantic-tour-of-kerala',
   },
-  'bandhavgarh-national-park-tour': {
-    title: 'Bandhavgarh National Park Tour | Waytoindia.com',
-    description:
-      'Bandhavgarh National Park Tour takes the wildlife lovers & wildlife photography lovers right into the tiger habitat.Enjoy Jungle Safari at Bandhavgarh.',
-    keywords: '',
-    canonicalPath: '/bandhavgarh-national-park-tour',
-  },
+  // 'bandhavgarh-national-park-tour': {
+  //   title: 'Bandhavgarh National Park Tour | Waytoindia.com',
+  //   description:
+  //     'Bandhavgarh National Park Tour takes the wildlife lovers & wildlife photography lovers right into the tiger habitat.Enjoy Jungle Safari at Bandhavgarh.',
+  //   keywords: '',
+  //   canonicalPath: '/bandhavgarh-national-park-tour',
+  // },
   'bandhavgarh-safari': {
     title: 'Bandhavgarh Safari | Bandhavgarh Safari Package | Waytoindia.com',
     description:
@@ -1709,13 +1709,13 @@ export const tourMetaData: Record<string, TourMeta> = {
   //   keywords: '',
   //   canonicalPath: '/bandipur-national-park-tour',
   // },
-  'eravikulam-national-park': {
-    title: 'Eravikulam National Park | Waytoindia.com',
-    description:
-      'Book a tour package to Eravikulam National Park, see the endangered Nilgiri Tahr in its natural habitat.',
-    keywords: '',
-    canonicalPath: '/eravikulam-national-park',
-  },
+  // 'eravikulam-national-park': {
+  //   title: 'Eravikulam National Park | Waytoindia.com',
+  //   description:
+  //     'Book a tour package to Eravikulam National Park, see the endangered Nilgiri Tahr in its natural habitat.',
+  //   keywords: '',
+  //   canonicalPath: '/eravikulam-national-park',
+  // },
   // 'periyar-national-park-tour': {
   //   title: 'Periyar National Park Tour | Waytoindia.com',
   //   description:

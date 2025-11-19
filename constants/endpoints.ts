@@ -15,7 +15,8 @@ export const endPoints = {
     id: `${BASE_URL}/tour`,
 
     reviews: {
-      getReview: `${BASE_URL}${USER_PATH}/review/tours/:tourId/reviews`,
+      getReview: (tourId : string) => `${BASE_URL}${USER_PATH}/review/tours/${tourId}/reviews`,
+      createReview : (tourId : string) => `${BASE_URL}${USER_PATH}/review/tours/${tourId}/reviews`
     },
 
     similarTour: `${BASE_URL}/tour/similar-tour/:tourId?limit=${6}`,

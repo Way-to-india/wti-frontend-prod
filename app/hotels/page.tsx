@@ -110,13 +110,13 @@ export default function HotelsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <DestinationCard
               image="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=800"
-              city="Goa"
+              city="Taj Mahal, Agra"
               country="India"
               properties={245}
             />
             <DestinationCard
               image="https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=800"
-              city="Jaipur"
+              city="India Gate, New Delhi"
               country="India"
               properties={189}
             />
