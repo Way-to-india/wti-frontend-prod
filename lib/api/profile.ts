@@ -6,7 +6,7 @@ export async function getTourReview(tourId: string) {
   cacheTag('user-profile', `profile-${tourId}-reviews`);
   cacheLife('hours');
   try {
-    const url = endPoints.tour.reviews.getReview.replace(':tourId', tourId);
+    const url = endPoints.tour.reviews.getReview(tourId);
     const response = await fetch(url, {
       headers: { 'Content-Type': 'application/json' },
       next: { revalidate: 3600 },
