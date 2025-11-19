@@ -2,7 +2,7 @@ import { endPoints } from '@/constants/endpoints';
 
 export async function getTourReview(tourId: string) {
   try {
-    const url = endPoints.tour.reviews.getReview.replace(':tourId', tourId);
+    const url = endPoints.tour.reviews.getReview(tourId);
     const response = await fetch(url, {
       headers: { 'Content-Type': 'application/json' },
       next: { revalidate: 3600 },
