@@ -9,6 +9,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { topIndianCities } from '@/utils/IndianCities';
 
 type FormData = {
   location: string;
@@ -174,12 +175,11 @@ export default function HotelSearchForm() {
               disabled={isSubmitting}
               className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 appearance-none bg-white cursor-pointer disabled:opacity-50"
             >
-              <option value="Goa">Goa</option>
-              <option value="Mumbai">Mumbai</option>
-              <option value="Delhi">Delhi</option>
-              <option value="Bangalore">Bangalore</option>
-              <option value="Jaipur">Jaipur</option>
-              <option value="Kerala">Kerala</option>
+              {topIndianCities.map((city) => (
+                <option key={city} value={city}>
+                  {city}
+                </option>
+              ))}
             </select>
 
             <FiChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
